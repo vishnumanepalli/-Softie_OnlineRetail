@@ -1,10 +1,10 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import '../App.css';
+import '../css/App.css';
 import Img1 from './img.png';
 import Img2 from './android-chrome-192x192.png';
-import SearchBar from '../searchbar';
+import SearchBar from './searchbar';
 
 function Navb() {
   return (
