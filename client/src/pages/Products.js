@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../App.css';
+import Filters from '../filters';
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -21,7 +22,7 @@ const Products = () => {
 
   return (
     <div>
-      <h1>Products</h1>
+        <Filters />
       <br/>
       <div className='product-list'>
         {products.map(product => (

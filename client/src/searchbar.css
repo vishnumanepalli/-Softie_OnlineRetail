@@ -1,0 +1,26 @@
+.search-bar-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-bar-input {
+    display: flex;
+    align-items: center;
+    background-color: #f0f0f0;
+    padding: 6px 12px;
+    border-radius: 4px;
+    width: 250px;
+    
+  }
+  
+  .search-bar-button {
+    background-color: #2a3138;
+    border-color: #272a2d;
+  }
+  
+  .search-bar-button:hover {
+    background-color: #030d1d;
+    border-color: #010915;
+  }
+  
+  

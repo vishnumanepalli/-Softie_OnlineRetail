@@ -13,14 +13,14 @@
   background-color: #FBC252;
   height: 70px;
   font-size: 18px;
-  box-shadow: 0 5px 5px rgba(245, 231, 104, 0.2);
-  /* border-bottom: 1.5px solid #0d1016 ; */
+  /* border-bottom: 2px solid #090909; */
+  box-shadow: 0 5px 5px rgba(54, 9, 217, 0.2);
 }
 .custom-navbar .navbar-brand {
   color: #212A3E;
   font-size: 40px;
   font-family:Lucida Handwriting ;
-  margin-right: 470px;
+  margin-right: 230px;
   margin-left: 5px;
 }
 .custom-navbar .nav-link {
@@ -30,12 +30,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  
 }
-
-.custom-nav-link {
-  margin-right: 20px;
-}
-
 .shopping-cart-icon {
   width: 30px;
   height: auto;
