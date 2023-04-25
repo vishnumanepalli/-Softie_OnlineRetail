@@ -3,12 +3,12 @@ var router = express.Router();
 
 const pool = require("./db");
 
-router.post("/get_products",async function(req,res){
+router.post("/get_users",async function(req,res){
     try {
         // the data we get from request , just printing it 
         console.log(req.body);
         
-        var db_res3 = await pool.query("SELECT * from Products");
+        var db_res3 = await pool.query("SELECT * from Users");
         //returning all the row that were inserted
         res.json(db_res3.rows);
         console.log(db_res3.rows)
