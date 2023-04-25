@@ -9,11 +9,11 @@ const Filters = ({ products, setFilteredProducts }) => {
     filterProducts();
   };
 
-  const filterProducts = () => {
-    const filtered = products && products.filter(
-      (product) => product.price >= priceRange[0] && product.price <= priceRange[1]
-    );
-    setFilteredProducts(filtered);
+  const filterProducts = (category) => {
+    if (products) {
+      const filtered = products.filter((product) => product.category === category);
+      setFilteredProducts(filtered);
+    }
   };
 
 

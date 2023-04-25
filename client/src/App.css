@@ -20,7 +20,7 @@
   color: #212A3E;
   font-size: 40px;
   font-family:Lucida Handwriting ;
-  margin-right: 250px;
+  margin-right: 230px;
   margin-left: 5px;
 }
 .custom-navbar .nav-link {
@@ -30,13 +30,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-right: 100px;
+  
 }
-
-.custom-nav-link {
-  margin-right: 20px;
-}
-
 .shopping-cart-icon {
   width: 30px;
   height: auto;

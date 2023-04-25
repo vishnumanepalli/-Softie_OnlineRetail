@@ -1,9 +1,10 @@
 import React from 'react';
 import '../App.css';
+import Filters from '../filters';
 const Products= () => {
   return (
     <div className='home'>
-      <h1>Products</h1>
+        <Filters />
     </div>
   );
 };

@@ -14,7 +14,7 @@ function Navb() {
         <img src={Img2} alt="cart"  style={{ width: "50px", height: "auto" }}/>
         <Navbar.Brand href="/">GroceryStore</Navbar.Brand>
         <Nav className="me-auto custom-nav-links">
-        <SearchBar />
+        <SearchBar/>
           <Nav.Link href="/Products" className="custom-nav-link">Products</Nav.Link>
           <Nav.Link href="/Login" className="custom-nav-link">Login</Nav.Link>
           <Nav.Link href="/cart" className="custom-nav-link">
