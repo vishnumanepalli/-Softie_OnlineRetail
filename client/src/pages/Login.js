@@ -8,6 +8,7 @@ import { Button, IconButton,
   DialogTitle,
   DialogContent,
   DialogActions, } from "@mui/material";
+import { FaGoogle } from "react-icons/fa";
 export default function Home() {
   const [email,setemail]=useState("");
   const [Passward,setPassward]=useState("");
@@ -34,8 +35,8 @@ export default function Home() {
  
   return (
     <>
-      <div className='homeClass text-center' style={{ minHeight: '150vh', backgroundColor: '#FFF9DE'}}>
-        <div className='homeText dangle'>
+      <div className='homeClass text-center' style={{ minHeight: '150vh'}}>
+        <div className='homeText dangle' style={{ borderColor:"ABD5AB" }}>
           
           <br />
           <Paper elevation={3} style={{ padding: '24px', maxWidth: '500px', maxHeight: 'auto', margin: '0 auto',marginTop: '70px' }}>
@@ -61,7 +62,7 @@ export default function Home() {
             />
             <Button
               variant='contained'
-              style={{ backgroundColor: "#F7D060",color: "black", width: "100%" }}
+              style={{ backgroundColor: "#00AD83",color: "black", width: "100%" }}
               onClick={handleContinueClick}
             >
               <Typography variant="button" style={{ fontFamily: "Calibri" }}>
@@ -69,15 +70,19 @@ export default function Home() {
               </Typography>
             </Button>
             <Button
-              variant='contained'
-              color='primary'
-              style={{  backgroundColor: "#F7D060",color: "black", width: "100%",marginTop: '10px' }}
-              onClick={handleContinueClick}
+            variant="contained"
+            style={{ backgroundColor: "#00AD83",color: "black", width: "100%",marginTop: '10px', height:'35px'}}
+            onClick={handleContinueClick}
+          >
+            <IconButton
+              color="inherit"
             >
-              <Typography variant="button" style={{ fontFamily: "Calibri" }}>
-              Login with google
+              <FaGoogle /> {/* Add Google icon */}
+            </IconButton>
+            <Typography variant="button" style={{ marginLeft: "8px",fontFamily: "Calibri"  }}>
+                Login with Google
               </Typography>
-            </Button>
+          </Button>
           </Paper>
         </div>
       </div>
