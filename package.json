@@ -1,0 +1,23 @@
+{
+  "name": "-softie_onlineretail",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vishnumanepalli/-Softie_OnlineRetail.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vishnumanepalli/-Softie_OnlineRetail/issues"
+  },
+  "homepage": "https://github.com/vishnumanepalli/-Softie_OnlineRetail#readme",
+  "dependencies": {
+    "concurrently": "^8.0.1"
+  }
+}
