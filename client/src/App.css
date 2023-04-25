@@ -5,14 +5,14 @@
   background-color: #FBC252;
   height: 70px;
   font-size: 18px;
-  border-bottom: 2px solid #090909;
+  /* border-bottom: 2px solid #090909; */
   box-shadow: 0 5px 5px rgba(54, 9, 217, 0.2);
 }
 .custom-navbar .navbar-brand {
   color: #212A3E;
   font-size: 40px;
   font-family:Lucida Handwriting ;
-  margin-right: 470px;
+  margin-right: 250px;
   margin-left: 5px;
 }
 .custom-navbar .nav-link {
@@ -22,6 +22,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-right: 100px;
 }
 
 .custom-nav-link {
