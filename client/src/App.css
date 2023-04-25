@@ -1,6 +1,20 @@
 .App {
   text-align: center;
 }
+.custom-navbar {
+  background-color: #FBC252;
+  height: 70px;
+  font-size: 18px;
+  
+}
+.custom-navbar .navbar-brand {
+  color: #212A3E;
+  font-size: 40px;
+  font-family:Lucida Handwriting ;
+}
+.custom-navbar .nav-link {
+  color: #212A3E;
+}
 
 .App-logo {
   height: 40vmin;
