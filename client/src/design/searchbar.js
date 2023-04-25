@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import './searchbar.css';
+import '../css/searchbar.css';
 
 const SearchBar = ({ onSearch }) => {
   const [query, setQuery] = useState('');

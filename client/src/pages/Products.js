@@ -1,6 +1,5 @@
 import React from 'react';
-import '../App.css';
-import Filters from '../filters';
+import Filters from '../design/filters';
 const Products= () => {
   return (
     <div className='home'>
