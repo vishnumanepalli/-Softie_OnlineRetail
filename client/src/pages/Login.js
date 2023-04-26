@@ -11,7 +11,7 @@ import { Button, IconButton,
 import { FaGoogle } from "react-icons/fa";
 export default function Home() {
   const [email,setemail]=useState("");
-  const [Passward,setPassward]=useState("");
+  const [Password,setPassword]=useState("");
   const [otpDialogOpen, setOtpDialogOpen] = useState(false);
   const [otp, setOtp] = useState("");
 
@@ -52,11 +52,11 @@ export default function Home() {
             />
             <TextField
               id='outlined-basic'
-              label='Passward'
+              label='Password'
               variant='outlined'
-              value={Passward}
+              value={Password}
               onChange={(event) => {
-                setPassward(event.target.value);
+                setPassword(event.target.value);
               }}
               style={{ marginBottom: '10px', width: '100%' }}
             />
