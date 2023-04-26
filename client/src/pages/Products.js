@@ -22,7 +22,7 @@ const Products = () => {
 
   return (
     <div>
-        <Filters />
+      <Filters />
       <br/>
       <div className='product-list'>
         {products.map(product => (
