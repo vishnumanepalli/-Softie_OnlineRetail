@@ -36,10 +36,10 @@ export default function Home() {
   return (
     <>
       <div className='homeClass text-center' style={{ minHeight: '150vh'}}>
-        <div className='homeText dangle' style={{ borderColor:"ABD5AB" }}>
+        <div className='homeText dangle' style={{ borderColor:"#ABD5AB" }}>
           
           <br />
-          <Paper elevation={3} style={{ padding: '24px', maxWidth: '500px', maxHeight: 'auto', margin: '0 auto',marginTop: '70px' }}>
+          <Paper elevation={3} style={{ padding: '24px', maxWidth: '500px', maxHeight: 'auto', margin: '0 auto',marginTop: '150px' }}>
             <TextField
               id='outlined-basic'
               label='Login with Email'
