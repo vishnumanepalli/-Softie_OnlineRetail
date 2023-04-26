@@ -22,6 +22,8 @@ app.use(require('./components/getProducts'));
 app.use(require('./components/getUsers'));
 app.use(require('./components/addUser'));
 app.use(require('./components/delUser'));
+app.use(require('./components/addCart'));
+app.use(require('./components/getCart'));
 app.listen(PORT,function(){
     console.log("Listening ");
 })

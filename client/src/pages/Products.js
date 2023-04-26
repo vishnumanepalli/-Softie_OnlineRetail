@@ -12,9 +12,23 @@ const Products = () => {
     setProducts(response.data);
   }
 
-  const addToCart = async (productId) => {
-    const response = await axios.post('http://localhost:5000/cart', { product_id: productId });
-    console.log(response.data);
+  const addToCart = async (productId,productname) => {
+    console.log(1)
+
+    var server_address = 'http://localhost:5000/cart';
+    const resp2 = await fetch(server_address, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", 
+      "jwt-token" : localStorage.getItem("token"), },
+      body: JSON.stringify({ 
+        product_id:productId,
+        title : productname
+       }),
+    });
+
+    const response = await resp2.json();
+    console.log("Server response", response);
+
   }
   const navigateToProductdetails = (productId) => {
     console.log(productId);
@@ -32,11 +46,11 @@ const Products = () => {
       <br/>
       <div className='product-list'>
         {products.map(product => (
-          <div className='product-card' key={product.product_id} onClick={() => navigateToProductdetails(product.product_id)}>
-            <img src={product.image_url} alt={product.name} className='product-image-hp' />
-            <h2>{product.name}</h2>
-            <p>₹{product.price}</p>
-            <button className='add-to-cart-button' onClick={() => addToCart(product.product_id)}>Add to Cart</button>
+          <div className='product-card' key={product.product_id}>
+            <img src={product.image_url} alt={product.name} className='product-image-hp'  onClick={() => navigateToProductdetails(product.product_id)} />
+            <h2  onClick={() => navigateToProductdetails(product.product_id)}>{product.name}</h2>
+            <p  onClick={() => navigateToProductdetails(product.product_id)}>₹{product.price}</p>
+            <button className='add-to-cart-button' onClick={() => addToCart(product.product_id,product.name)}>Add to Cart</button>
           </div>
         ))}
       </div>

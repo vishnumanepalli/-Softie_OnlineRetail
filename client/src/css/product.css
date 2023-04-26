@@ -2,10 +2,10 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    max-width: 150px;
-    height: 225px; /* Set the desired height */
+    max-width: 180px;
+    height: 280px; /* Set the desired height */
     padding: 1em;
-    margin: 1em;
+    margin: 0.5em;
     overflow: hidden;
   }
   
@@ -25,6 +25,8 @@
   }
   
   .add-to-cart-button{
+    /* font-size: 2px; */
+    font-size: medium;
     background-color: rgb(106, 217, 186);
     color: black;
   }
