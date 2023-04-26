@@ -1,6 +1,7 @@
 import Filters from '../design/filters';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import '../css/product.css';
 
 
 const Products = () => {

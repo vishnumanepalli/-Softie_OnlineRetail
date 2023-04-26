@@ -1,14 +1,27 @@
 .filters-container {
   width: 250px;
-  border: 1px solid #ccc;
   padding: 10px;
+  position: sticky;
+  top: 0;
+  border: 1px solid #ccc;
   float: left;
   margin-right: 20px;
-  height: 530px;
+  height: 600px;
+  background-color: #d0f9e9; 
 }
 
 h4 {
   margin-top: 0;
+}
+
+.filters-container h4:first-child {
+  border-bottom: 1px solid #818080;
+  padding-bottom: 10px;
+}
+
+.price-range-container h6:first-child {
+  border-bottom: 1px solid #626161;
+  padding-bottom: 10px;
 }
 
 .category-container {
@@ -33,7 +46,7 @@ h4 {
 }
 
 .category-list li span:hover {
-  background-color: #ccc;
+  background-color: #a8d7c6;
 }
 
 .price-range-container {
@@ -52,3 +65,4 @@ h4 {
 .price-range-display p {
   margin: 0;
 }
+
