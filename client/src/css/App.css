@@ -28,11 +28,11 @@
   color: #212A3E;
   font-size: 40px;
   font-family:Lucida Handwriting ;
-  margin-right: 300px;
-  margin-left: 5px;
+  margin-right: 200px;
 }
 .custom-navbar .nav-link {
   color: #212A3E;
+  margin-left: 5px;
 }
 .custom-nav-links {
   display: flex;
