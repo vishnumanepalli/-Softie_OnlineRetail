@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  
 }
 .home{
   /* background-color: rgb(220, 155, 201); */
@@ -15,6 +16,7 @@
   font-size: 18px;
   /* border-bottom: 2px solid #090909; */
   box-shadow: 0 5px 5px rgba(54, 9, 217, 0.2);
+  position: static;
 }
 .custom-navbar .navbar-brand {
   color: #212A3E;
