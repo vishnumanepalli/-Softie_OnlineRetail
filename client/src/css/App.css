@@ -9,20 +9,26 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 70px;
 }
+
 .custom-navbar {
+  /* position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;  */
   background: linear-gradient(135deg, 		#00AD83 47%, 	#a8d7c6 70%);
   height: 70px;
   font-size: 18px;
   /* border-bottom: 2px solid #090909; */
   box-shadow: 0 5px 5px rgba(54, 9, 217, 0.2);
-  position: static;
+  /* z-index: 1;  */
 }
 .custom-navbar .navbar-brand {
   color: #212A3E;
   font-size: 40px;
   font-family:Lucida Handwriting ;
-  margin-right: 230px;
+  margin-right: 300px;
   margin-left: 5px;
 }
 .custom-navbar .nav-link {
@@ -36,6 +42,12 @@
 }
 .shopping-cart-icon {
   width: 30px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.wishlist-icon {
+  width: 25px;
   height: auto;
   margin-right: 10px;
 }
