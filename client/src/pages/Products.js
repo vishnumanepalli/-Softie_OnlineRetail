@@ -32,10 +32,10 @@ const Products = () => {
       <br/>
       <div className='product-list'>
         {products.map(product => (
-          <div className='product-card' key={product.product_id} onClick={() => navigateToProductdetails(product.product_id)}>
-            <img src={product.image_url} alt={product.name} className='product-image-hp' />
-            <h2>{product.name}</h2>
-            <p>₹{product.price}</p>
+          <div className='product-card' key={product.product_id}>
+            <img src={product.image_url} alt={product.name} className='product-image-hp'  onClick={() => navigateToProductdetails(product.product_id)} />
+            <h2  onClick={() => navigateToProductdetails(product.product_id)}>{product.name}</h2>
+            <p  onClick={() => navigateToProductdetails(product.product_id)}>₹{product.price}</p>
             <button className='add-to-cart-button' onClick={() => addToCart(product.product_id)}>Add to Cart</button>
           </div>
         ))}
