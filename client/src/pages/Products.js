@@ -30,7 +30,7 @@ const Products = () => {
           <div className='product-card' key={product.product_id}>
             <img src={product.image_url} alt={product.name} className='product-image' />
             <h2>{product.name}</h2>
-            <p>{product.price}</p>
+            <p>₹{product.price}</p>
             <button onClick={() => addToCart(product.product_id)}>Add to Cart</button>
           </div>
         ))}
