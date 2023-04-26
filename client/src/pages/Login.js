@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios';
 import  { useState } from "react";
 import { Button, IconButton,
   Typography,
@@ -9,15 +10,23 @@ import { Button, IconButton,
   DialogContent,
   DialogActions, } from "@mui/material";
 import { FaGoogle } from "react-icons/fa";
+
+
 export default function Home() {
   const [email,setemail]=useState("");
   const [Password,setPassword]=useState("");
   const [otpDialogOpen, setOtpDialogOpen] = useState(false);
   const [otp, setOtp] = useState("");
 
-  const handleContinueClick = async () => {
-    setemail("")
-  };
+  // const handleContinueClick = async () => {
+  //   // setemail("")
+
+  // };
+
+  const handleContinueClick = async (productId) => {
+    const response = await axios.post('http://localhost:5000/user', { username: "123", password:Password,email:email,role:1});
+    console.log(response.data);
+  }
 
   const handleCloseDialog = () => {
     setOtp("")
