@@ -106,7 +106,7 @@
 }
 
 .product-image-hp {
-  width: 100%;
+  width: 75%;
   height: 15rem;
   object-fit: cover;
   border-radius: 0.5rem;

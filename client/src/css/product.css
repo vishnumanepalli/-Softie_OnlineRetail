@@ -24,5 +24,9 @@
     padding: 0.5em 1em;
   }
   
+  .add-to-cart-button{
+    background-color: rgb(106, 217, 186);
+    color: black;
+  }
   
   
