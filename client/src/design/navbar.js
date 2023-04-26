@@ -2,8 +2,8 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import '../css/App.css';
-import Img1 from './img.png';
-import Img2 from './android-chrome-192x192.png';
+import Img1 from '../images/img.png';
+import Img2 from '../images/android-chrome-192x192.png';
 import SearchBar from './searchbar';
 
 function Navb() {
