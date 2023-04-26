@@ -10,7 +10,7 @@ const Home = () => {
 
         <p style={{ fontSize: '18px', fontFamily: 'Lucida Sans Typewriter' }}>Shop now from anywhere with best discounts.</p>
         <p style={{ fontSize: '28px', fontFamily: 'Lucida Sans Typewriter' }}>Fresh Grocery </p>
-        <p style={{ fontSize: '28px', fontFamily: 'Lucida Sans Typewriter' }}>Fastest Deliver </p>
+        <p style={{ fontSize: '28px', fontFamily: 'Lucida Sans Typewriter' }}>Fastest Delivery </p>
       </div>
       <div style={{ flex: 1 }}>
         <img src={Img2} alt="your-image" style={{ width: '100%', height: '530px' }} />
