@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import '../css/viewproduct.css';
 
 const Viewproduct = () => {
   const { id } = useParams();
@@ -22,12 +23,14 @@ const Viewproduct = () => {
   }
   
   return (
-    <div>
-      <h1>{product.name}</h1>
-      <p>{product.description}</p>
-      <p>Price: {product.price}</p>
+    <div className="view-product">
       <img src={product.image_url} alt={product.name} className='product-image' />
-      <button onClick={() => addToCart(product.product_id)}>Add to Cart</button>
+      <div className="product-details">
+        <h1 className="product-title">{product.name}</h1>
+        <p className="product-description">{product.description}</p>
+        <p className="product-price">Price: ₹{product.price}</p>
+        <button className="add-to-cart" onClick={() => addToCart(product.product_id)}>Add to Cart</button>
+      </div>
     </div>
   );
 };
