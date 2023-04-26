@@ -18,7 +18,7 @@ function App() {
       <Routes>
         <Route index element={<Home/>} />
         <Route exact path="/Products" element={<Products/>} />
-        <Route exact path="/Products/:id/" element={<Viewproduct/>} />
+        <Route exact path="/Products/:id" element={<Viewproduct/>} />
         <Route path="/Login" element={<Login/>} />
         <Route path="/Cart" element={<Cart/>} />
         <Route path="*" element={<h1>404 Error Found</h1>}></Route>

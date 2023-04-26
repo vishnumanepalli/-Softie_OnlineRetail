@@ -17,6 +17,7 @@ app.use(express.static('public'));
 //Routes
   
 app.use(require('./components/getProductDetails'));
+app.use(require('./components/getCartIems'));
 app.use(require('./components/getProducts'));
 app.use(require('./components/getUsers'));
 app.use(require('./components/addUser'));

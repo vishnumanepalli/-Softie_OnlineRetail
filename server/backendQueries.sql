@@ -65,3 +65,27 @@ CREATE TABLE CartItems
     PRIMARY KEY (id),
     UNIQUE (cart_id, product_id)
 );
+
+ALTER TABLE Cart
+ADD CONSTRAINT fk_cart_user
+FOREIGN KEY (user_id)
+REFERENCES Users(user_id);
+
+INSERT INTO Users (password, email, fullname, username, google_id, roles, address, city, state, country) VALUES ('password123', 'example@gmail.com', 'John Doe', 'johndoe', NULL, '{customer}', '123 Main St', 'New York City', 'NY', 'USA');
+INSERT INTO Cart (user_id) VALUES (1);
+INSERT INTO CartItems (cart_id, product_id, quantity)VALUES (1, 2, 3);
+INSERT INTO CartItems (cart_id, product_id, quantity)VALUES (1, 1, 3);
+INSERT INTO CartItems (cart_id, product_id, quantity)VALUES (1, 3, 3);
+
+-- Add foreign key constraint on cart_id column referencing id column in Cart table
+ALTER TABLE CartItems
+ADD CONSTRAINT fk_cartitems_cart_id
+FOREIGN KEY (cart_id)
+REFERENCES Cart (id)
+ON DELETE CASCADE;
+
+-- Add foreign key constraint on product_id column referencing product_id column in Products table
+ALTER TABLE CartItems
+ADD CONSTRAINT fk_cartitems_product_id
+FOREIGN KEY (product_id)
+REFERENCES Products (product_id);

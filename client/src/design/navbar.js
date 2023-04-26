@@ -19,7 +19,7 @@ function Navb() {
         <SearchBar/>
           <Nav.Link href="/Products" className="custom-nav-link">Products</Nav.Link>
           <Nav.Link href="/Login" className="custom-nav-link">Login</Nav.Link>
-          <Nav.Link href="/cart" className="custom-nav-link">
+          <Nav.Link href="/Cart" className="custom-nav-link">
             <img src={Img1} alt="cart" className="shopping-cart-icon" />
           </Nav.Link>
           <Nav.Link href="/wishlist" className="custom-nav-link">

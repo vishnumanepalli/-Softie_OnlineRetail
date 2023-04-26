@@ -1,3 +1,35 @@
+
+  
+.cart-container1 {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  
+  
+  
+  .cart-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .cart-table th {
+    background-color: green;
+    color: white;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .cart-table td, .cart-table th {
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+  
+  .cart-image {
+    max-width: 50px;
+    height: auto;
+  }
+
 .cart-container {
     padding: 40px;
   }
