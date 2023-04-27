@@ -1,5 +1,6 @@
 var express = require("express");
 var app = express();
+const router = express.Router();
 
 // cors allows communication from differnt domains(requests to our server) 
 const cors = require("cors");
@@ -15,15 +16,14 @@ app.use(express.json());
 app.use(express.static('public'));
  
 //Routes
-  
-app.use(require('./components/getProductDetails'));
-app.use(require('./components/getCartIems'));
+const signUp = require('./components/auth');
+router.post('/signup', signUp);
+
 app.use(require('./components/getProducts'));
 app.use(require('./components/getUsers'));
 app.use(require('./components/addUser'));
 app.use(require('./components/delUser'));
-app.use(require('./components/addCart'));
-app.use(require('./components/getCart'));
+app.use(require('./components/auth'));
 app.listen(PORT,function(){
     console.log("Listening ");
 })

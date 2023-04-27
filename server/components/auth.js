@@ -1,94 +1,197 @@
-const bcrypt = require('bcrypt');
-const { ErrorHandler } = require('../helpers/error');
-const { createUserDb, getUserByEmailDb, getUserByUsernameDb, createCartDb, createUserGoogleDb } = require('../repositories/userRepository');
+const bcrypt = require("bcrypt");
+const { ErrorHandler } = require('./error');
+var express = require('express');
+var router = express.Router();
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+//const { getUserByEmailDb, createUserDb } = require('./helper');
 
-async function signUp({ password, email, fullname, username }) {
-  try {
-    if (!email || !password || !fullname || !username) {
-      throw new ErrorHandler(401, "This fields required");
-    }
+const { createUserDb, getUserByEmailDb, getUserByUsernameDb, createCartDb, createUserGoogleDb } = require('./helper');
+const { OAuth2Client } = require('google-auth-library');
 
-    if (validateUser(email, password)) {
-      const hashedPassword = await encryptPassword(password);
+//const { getUserByEmailDb} = require('./helper');
+// app.use(passport.initialize());
+// app.use(passport.session());
 
-      const userByEmail = await getUserByEmailDb(email);
-      const userByUsername = await getUserByUsernameDb(username);
-
-      if (userByEmail) {
-        throw new ErrorHandler(401, "email taken already");
+router.post('/signup', async (req, res) => {
+    try {
+      const { password, email, fullname, username } = req.body;
+  
+      if (!email || !password || !fullname || !username) {
+        throw new ErrorHandler(401, "This fields required");
       }
-
-      if (userByUsername) {
-        throw new ErrorHandler(401, "username taken already");
+  
+      if (validateUser(email, password)) {
+        const hashedPassword = await encryptPassword(password);
+  
+        const userByEmail = await getUserByEmailDb(email);
+        const userByUsername = await getUserByUsernameDb(username);
+  
+        if (userByEmail) {
+          throw new ErrorHandler(401, "email taken already");
+        }
+  
+        if (userByUsername) {
+          throw new ErrorHandler(401, "username taken already");
+        }
+  
+        const newUser = await createUserDb({
+          password: hashedPassword,
+          email,
+          fullname,
+          username,
+        });
+  
+        const { id: cart_id } = await createCartDb(newUser.user_id);
+  
+        res.status(201).json({
+          user: {
+            user_id: newUser.user_id,
+            fullname: newUser.fullname,
+            username: newUser.username,
+            email: newUser.email,
+          },
+        });
+      } else {
+        throw new ErrorHandler(401, "Input validation error");
       }
-
-      const newUser = await createUserDb({
-        password: hashedPassword,
-        email,
-        fullname,
-        username,
-      });
-
-      const { id: cart_id } = await createCartDb(newUser.user_id);
-
-      return {
-        user: {
-          user_id: newUser.user_id,
-          fullname: newUser.fullname,
-          username: newUser.username,
-          email: newUser.email,
-        },
-      };
-    } else {
-      throw new ErrorHandler(401, "Input validation error");
+    } catch (error) {
+      console.error(error);
+      res.status(error.statusCode || 500).json({ message: error.message });
     }
-  } catch (error) {
-    throw new ErrorHandler(error.statusCode, error.message);
-  }
-}
+  });
 
-async function login(email, password) {
+router.post('/googleLogin', async (req, res) => {
+    console.log("hi");
+  const token = req.body.token;
+  const client = new OAuth2Client(
+    '84294184491-o1l9lief27ng4qak7b5hb0rd180ptr9k.apps.googleusercontent.com'
+  );
+
   try {
-    if (!validateUser(email, password)) {
-      throw new ErrorHandler(403, "Invalid login");
-    }
+    const ticket = await client.verifyIdToken({
+      idToken: token,
+      audience:
+        '84294184491-o1l9lief27ng4qak7b5hb0rd180ptr9k.apps.googleusercontent.com',
+    });
 
+    const payload = ticket.getPayload();
+    const email = payload.email;
+    const name = payload.name;
+
+    // Check if the user exists in the database
     const user = await getUserByEmailDb(email);
-
-    if (!user) {
-      throw new ErrorHandler(403, "Email or password incorrect.");
+    if (user) {
+        console.log("hi2");
+      return res.json({ user: user });
+    } else {
+        console.log("hi1");
+      // Create a new user if the user does not exist in the database
+      const newUser = await createUserDb({
+        email: email,
+        fullname: name,
+        username: name,
+      });
+      return res.json({ user: newUser });
     }
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({ error: 'Invalid token' });
+  }
+});
+  
+//   router.post('/googleLogin', passport.authenticate('google', { scope: ['profile', 'email'] }), (req, res) => {
+//     res.redirect('/');
+//   });
+  
+//   passport.use(new GoogleStrategy({
+//     clientID: '84294184491-o1l9lief27ng4qak7b5hb0rd180ptr9k.apps.googleusercontent.com',
+//     clientSecret: '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',
+//     callbackURL: 'http://localhost:5000/googleLogin/callback'
+//   }, async (accessToken, refreshToken, profile, done) => {
+//     try {
+//         console.log("hi");
+//       // Check if the user exists in the database
+//       const user = await getUserByEmailDb(profile.emails[0].value);
+//       if (user) {
+//         return done(null, user);
+//       } else {
+//         // Create a new user if the user does not exist in the database
+//         const newUser = await createUserDb({
+//           email: profile.emails[0].value,
+//           fullname: profile.displayName,
+//           username: profile.displayName,
+//         });
+//         return done(null, newUser);
+//       }
+//     } catch (error) {
+//       return done(error, null);
+//     }
+//   }));
+  
+//   // Serialize and deserialize the user
+//   passport.serializeUser((user, done) => {
+//     done(null, user.user_id);
+//   });
+  
+//   passport.deserializeUser(async (id, done) => {
+//     try {
+//       const user = await getUserByIdDb(id);
+//       done(null, user);
+//     } catch (error) {
+//       done(error, null);
+//     }
+//   });
+  
 
-    if (user.google_id && !user.password) {
-      throw new ErrorHandler(403, "Login in with Google");
-    }
-
-    const {
-      password: dbPassword,
-      user_id,
-      roles,
-      cart_id,
-      fullname,
-      username,
-    } = user;
-
-    const isCorrectPassword = await comparePassword(password, dbPassword);
-
-    if (!isCorrectPassword) {
-      throw new ErrorHandler(403, "Email or password incorrect.");
-    }
-
-    return {
-      user: {
+router.post('/login', async (req, res) => {
+    try {
+      const { email, password } = req.body;
+  
+      if (!validateUser(email, password)) {
+        throw new ErrorHandler(403, "Invalid login");
+      }
+  
+      const user = await getUserByEmailDb(email);
+  
+      if (!user) {
+        throw new ErrorHandler(403, "Email or password incorrect.");
+      }
+  
+      if (user.google_id && !user.password) {
+        throw new ErrorHandler(403, "Login in with Google");
+      }
+  
+      const {
+        password: dbPassword,
         user_id,
+        roles,
+        cart_id,
         fullname,
         username,
-      },
-    };
-  } catch (error) {
-    throw new ErrorHandler(error.statusCode, error.message);
-  }
-}
+      } = user;
+  
+      const isCorrectPassword = await comparePassword(password, dbPassword);
+  
+      if (!isCorrectPassword) {
+        throw new ErrorHandler(403, "Email or password incorrect.");
+      }
+  
+      res.json({
+        user: {
+          user_id,
+          fullname,
+          username,
+        },
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(error.statusCode || 500).json({
+        message: error.message || "Internal Server Error",
+      });
+    }
+  });
+  
 
 async function googleLogin(code) {
   try {
@@ -122,8 +225,9 @@ async function googleLogin(code) {
       throw new ErrorHandler(error.statusCode, error.message);
     }
   } catch (error) {
-    throw new ErrorHandler(401, error.message);
-  }
+    console.error(error);
+    throw new Error(error.message);
+  }  
 }
 
 function validateUser(email, password) {
@@ -140,3 +244,4 @@ async function comparePassword(plainTextPassword, hashedPassword) {
     return await bcrypt.compare(plainTextPassword, hashedPassword);
   }
   
+  module.exports = router;
