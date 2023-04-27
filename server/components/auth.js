@@ -13,7 +13,7 @@ const { OAuth2Client } = require('google-auth-library');
 // app.use(passport.initialize());
 // app.use(passport.session());
 
-async function signUp(req, res) {
+router.post('/signup', async (req, res) => {
     try {
       const { password, email, fullname, username } = req.body;
   
@@ -59,7 +59,7 @@ async function signUp(req, res) {
       console.error(error);
       res.status(error.statusCode || 500).json({ message: error.message });
     }
-  }
+  });
 
 router.post('/googleLogin', async (req, res) => {
     console.log("hi");

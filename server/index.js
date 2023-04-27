@@ -16,25 +16,14 @@ app.use(express.json());
 app.use(express.static('public'));
  
 //Routes
-<<<<<<< HEAD
 const signUp = require('./components/auth');
 router.post('/signup', signUp);
 
-=======
-  
-app.use(require('./components/getProductDetails'));
-app.use(require('./components/getCartIems'));
->>>>>>> bed5e318a1695079480fced26224bfa5a39e19ed
 app.use(require('./components/getProducts'));
 app.use(require('./components/getUsers'));
 app.use(require('./components/addUser'));
 app.use(require('./components/delUser'));
-<<<<<<< HEAD
 app.use(require('./components/auth'));
-=======
-app.use(require('./components/addCart'));
-app.use(require('./components/getCart'));
->>>>>>> bed5e318a1695079480fced26224bfa5a39e19ed
 app.listen(PORT,function(){
     console.log("Listening ");
 })
