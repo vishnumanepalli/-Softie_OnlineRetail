@@ -18,8 +18,10 @@ app.use(express.static('public'));
 //Routes
 const signUp = require('./components/auth');
 router.post('/signup', signUp);
-
+app.use(require('./components/getProductDetails'));
 app.use(require('./components/getProducts'));
+app.use(require('./components/addCart'));
+app.use(require('./components/getCartIems'));
 app.use(require('./components/getUsers'));
 app.use(require('./components/addUser'));
 app.use(require('./components/delUser'));

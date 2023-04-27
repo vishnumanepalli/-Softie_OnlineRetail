@@ -17,8 +17,8 @@ const Viewproduct = () => {
     return <div>Loading...</div>;
   }
 
-  const addToCart = async (productId) => {
-    const response = await axios.post('http://localhost:5000/cart', { product_id: productId });
+  const addToCart = async () => {
+    const response = await axios.post('http://localhost:5000/cart', { cart_id:1 , product_id: id });
     console.log(response.data);
   }
   
