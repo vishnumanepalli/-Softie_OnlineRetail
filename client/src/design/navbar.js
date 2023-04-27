@@ -4,6 +4,8 @@ import Navbar from 'react-bootstrap/Navbar';
 import '../css/App.css';
 import Img1 from '../images/img.png';
 import Img2 from '../images/android-chrome-192x192.png';
+import Img3 from '../images/wishlist.png';
+
 import SearchBar from './searchbar';
 
 function Navb() {
@@ -17,8 +19,11 @@ function Navb() {
         <SearchBar/>
           <Nav.Link href="/Products" className="custom-nav-link">Products</Nav.Link>
           <Nav.Link href="/Login" className="custom-nav-link">Login</Nav.Link>
-          <Nav.Link href="/cart" className="custom-nav-link">
+          <Nav.Link href="/Cart" className="custom-nav-link">
             <img src={Img1} alt="cart" className="shopping-cart-icon" />
+          </Nav.Link>
+          <Nav.Link href="/wishlist" className="custom-nav-link">
+            <img src={Img3} alt="wishlist" className="wishlist-icon" />
           </Nav.Link>
         </Nav>
       </Container>

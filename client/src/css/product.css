@@ -1,0 +1,34 @@
+.product-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 180px;
+    height: 280px; /* Set the desired height */
+    padding: 1em;
+    margin: 0.5em;
+    overflow: hidden;
+  }
+  
+  .product-card h2 {
+    font-size: 0.8em;
+    margin-bottom: 0.5em;
+  }
+  
+  .product-card p {
+    font-size: 0.8em;
+    margin-bottom: 0.5em;
+  }
+  
+  .product-card button {
+    font-size: 0.5em;
+    padding: 0.5em 1em;
+  }
+  
+  .add-to-cart-button{
+    /* font-size: 2px; */
+    font-size: medium;
+    background-color: rgb(106, 217, 186);
+    color: black;
+  }
+  
+  

@@ -4,43 +4,27 @@ var router = express.Router();
 const pool = require("./db");
 
 // to add a user 
-router.post("/user",async function(req,res){
+router.post("/cart",async function(req,res){
     try {
-        // the data we get from request , just printing it 
-        console.log(req.body);
-
-        // running the insert command 
-        // const db_res = await pool.query(" INSERT INTO Users(username, password, email, fullname, roles) VALUES ($1, $2, $3, $4, $5) returning * ",[req.body.username,req.body.password,req.body.email,req.body.fullname,req.body.role]);
+        var str_query = "SELECT quantity from CartItems where cart_id = $1 AND product_id = $2";
+        const db_res= await pool.query(str_query, [req.body.cart_id,req.body.product_id]);
         
-        // // creating a table for this prof:-
-        // if(req.body.admin==2 || req.body.admin==3){
-        //     // first extracting the entry number
-
-        var email = req.body.email;
-        var index = email.indexOf("@")
-        var str_query = "SELECT * from p_";
-        str_query=str_query.concat(email.substring(0,index));
-        str_query= str_query.concat("_cart where product_id = $1",[req.body.product_id]);
-        // str_query=str_query.concat(" (product_id, product_name, quantity) VALUES ($1, $2, $3) returning * ",[req.body.email, req.body.title, req.body.quantity]);
         console.log(str_query);
-        const db_res= await pool.query(str_query)
-
-        //need modification still
-
-            var email = req.body.email;
-            var index = email.indexOf("@")
-            var str_query = "INSERT INTO p_";
-            str_query=str_query.concat(email.substring(0,index));
-            str_query= str_query.concat("_cart");
-            str_query=str_query.concat(" (product_id, product_name, quantity) VALUES ($1, $2, $3) returning * ",[req.body.email, req.body.title, req.body.quantity]);
-            console.log(str_query);
-            const db_res2= await pool.query(str_query)
-        // }        
-
-        var db_res3 = await pool.query("SELECT * from users");
-        //returning all the row that were inserted
-        res.json(db_res3.rows);
-    
+        console.log(db_res.rows)
+        
+        // Add the product to the cart if it doesn't exist
+        if (db_res.rows.length === 0) {
+            var str_query2 = "INSERT INTO CartItems (cart_id, product_id, quantity) VALUES ($1, $2, $3) returning *";
+            const db_res2 = await pool.query(str_query2, [req.body.cart_id, req.body.product_id, 1]);
+            console.log(str_query2);
+            res.json(db_res2.rows);
+        } else {
+            // Otherwise, update the quantity of the existing product
+            var str_query3 = "UPDATE CartItems SET quantity = quantity + 1 WHERE cart_id = $1 AND product_id = $2 returning *";
+            const db_res3 = await pool.query(str_query3, [req.body.cart_id, req.body.product_id]);
+            console.log(str_query3);
+            res.json(db_res3.rows);
+        }
     } catch (error) {
         console.error(error.message);
     }

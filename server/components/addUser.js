@@ -10,7 +10,7 @@ router.post("/user",async function(req,res){
         console.log(req.body);
 
         // running the insert command 
-        const db_res = await pool.query(" INSERT INTO Users(username, password, email, fullname, roles) VALUES ($1, $2, $3, $4, $5) returning * ",[req.body.username,req.body.password,req.body.email,req.body.fullname,req.body.role]);
+        const db_res = await pool.query(" INSERT INTO Users(user_id, password, email, role) VALUES ($1, $2, $3, $4) returning * ",[req.body.username,req.body.password,req.body.email,req.body.role]);
         
         // // creating a table for this prof:-
         // if(req.body.admin==2 || req.body.admin==3){
