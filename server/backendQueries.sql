@@ -39,12 +39,19 @@ INSERT INTO public.products (product_id, name, price, description, image_url) VA
 INSERT INTO public.products (product_id, name, price, description, image_url) VALUES (20, 'Saskatoon Berries - Frozen', 606.2, 'Raw plant-based superfood jam-packed with nutrients to get you through the day! We can keep all of the benefits and flavors of fresh Saskatoon Berries by freeze drying them, making them an easy on-the-go treat! They''re great as a healthy snack or added to cereals, smoothies, salads, and baking. A healthy diet high in vegetables and fruits may lower the risk of certain types of cancer.', 'https://i.ibb.co/ZcPjq1Y/berry.png');
 
 drop table if exists Users;
-CREATE TABLE Users
+CREATE TABLE public.users
 (
     user_id SERIAL NOT NULL,
     password character varying(200),
     email character varying(100) UNIQUE NOT NULL,
-    role integer NOT NULL DEFAULT 0,
+    fullname character varying(100) NOT NULL,
+    username character varying(50) UNIQUE NOT NULL,
+    google_id character varying(100) UNIQUE,
+    roles character varying(10)[] DEFAULT '{customer}'::character varying[] NOT NULL,
+    address character varying(200),
+    city character varying(100),
+    state character varying(100),
+    country character varying(100),
     created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (user_id)
 );

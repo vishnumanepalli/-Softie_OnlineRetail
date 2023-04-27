@@ -21,6 +21,7 @@ const Products = () => {
       headers: { "Content-Type": "application/json", 
       "jwt-token" : localStorage.getItem("token"), },
       body: JSON.stringify({ 
+        cart_id:1,
         product_id:productId,
         title : productname
        }),
