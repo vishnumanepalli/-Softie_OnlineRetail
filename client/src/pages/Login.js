@@ -57,9 +57,12 @@ export default function Home() {
       });
       const data = await response.json();
       console.log(data);
+      
     } catch (error) {
       console.error(error);
     }
+    setOpenSignupDialog(false);
+    alert("Sucessfully Registered");
   };
 
   const handleContinueClick = async () => {
