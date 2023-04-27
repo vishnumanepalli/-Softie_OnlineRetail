@@ -1,5 +1,6 @@
 import React from 'react'
 import  { useState } from "react";
+import  { useEffect } from "react";
 import { Button, IconButton,
   Typography,
   TextField,
@@ -9,30 +10,92 @@ import { Button, IconButton,
   DialogContent,
   DialogActions, } from "@mui/material";
 import { FaGoogle } from "react-icons/fa";
+import { Link } from 'react-router-dom';
+import {gapi} from 'gapi-script';
+import { GoogleLogin } from 'react-google-login';
+
 export default function Home() {
   const [email,setemail]=useState("");
-  const [Passward,setPassward]=useState("");
-  const [otpDialogOpen, setOtpDialogOpen] = useState(false);
-  const [otp, setOtp] = useState("");
-
+  const [password, setPassword] = useState("");
+  
   const handleContinueClick = async () => {
-    setemail("")
+    try {
+      const response = await fetch('http://localhost:5000/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password
+        })
+      });
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const handleGoogleLogin = async (response) => {
+    console.log(response);
+
+    try {
+      // Send the access token to your server to authenticate the user
+      const res = await fetch('http://localhost:5000/googleLogin', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ token: response.tokenId }),
+      });
+      const data = await res.json();
+      console.log(data);
+
+      // if (data.user) {
+      //   setLoggedIn(true);
+      //   setUser(data.user);
+      // }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const handleCloseDialog = () => {
-    setOtp("")
-    setOtpDialogOpen(false);
+  const onSuccess = async (response) => {
+    handleGoogleLogin(response);
   };
 
-  const handleverify = async () => {
-    setOtp("")
-    
+  const onFailure = (response) => {
+    console.log(response);
   };
   
-  const handleOtpChange = (event) => {
-  };
-
- 
+  // const handleGoogleLogin = async () => {
+  //   try {
+  //     // Call the Google Login API endpoint
+  //     const response = await fetch('http://localhost:5000/googleLogin', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json'
+  //       },
+  //       body: JSON.stringify({
+  //         access_token: 'ACCESS_TOKEN_HERE'
+  //       })
+  //     });
+  //     const data = await response.json();
+  //     console.log(data);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+  
+  useEffect(() => {
+    gapi.load('auth2', function() {
+      gapi.auth2.init({
+        clientId: '84294184491-o1l9lief27ng4qak7b5hb0rd180ptr9k.apps.googleusercontent.com'
+      });
+    });
+  }, []);
+  
+    
   return (
     <>
       <div className='homeClass text-center' style={{ minHeight: '150vh'}}>
@@ -50,16 +113,17 @@ export default function Home() {
               }}
               style={{ marginBottom: '10px', width: '100%' }}
             />
-            <TextField
-              id='outlined-basic'
-              label='Passward'
-              variant='outlined'
-              value={Passward}
-              onChange={(event) => {
-                setPassward(event.target.value);
-              }}
-              style={{ marginBottom: '10px', width: '100%' }}
-            />
+           <TextField
+            id='outlined-basic'
+            label='Password'
+            variant='outlined'
+            value={password}
+            onChange={(event) => {
+              setPassword(event.target.value);
+            }}
+            style={{ marginBottom: '10px', width: '100%' }}
+          />
+
             <Button
               variant='contained'
               style={{ backgroundColor: "#00AD83",color: "black", width: "100%" }}
@@ -70,23 +134,30 @@ export default function Home() {
               </Typography>
             </Button>
             <Button
-            variant="contained"
-            style={{ backgroundColor: "#00AD83",color: "black", width: "100%",marginTop: '10px', height:'35px'}}
-            onClick={handleContinueClick}
-          >
-            <IconButton
-              color="inherit"
+              variant="contained"
+              style={{ backgroundColor: "#00AD83",color: "black", width: "100%",marginTop: '10px', height:'35px'}}
+              component={Link}
+              to='/signup'
             >
-              <FaGoogle /> {/* Add Google icon */}
-            </IconButton>
-            <Typography variant="button" style={{ marginLeft: "8px",fontFamily: "Calibri"  }}>
-                Login with Google
+              <Typography variant="button" style={{ marginLeft: "8px",fontFamily: "Calibri"  }}>
+                Signup
               </Typography>
-          </Button>
+            </Button>
+            <GoogleLogin
+   //clientId="84294184491-o1l9lief27ng4qak7b5hb0rd180ptr9k.apps.googleusercontent.com"
+   buttonText="Login with Google"
+   plugin_name="grocery_store"
+   onSuccess={onSuccess}
+   onFailure={onFailure}
+   cookiePolicy={'single_host_origin'}
+   style={{ backgroundColor: "#00AD83", color: "black", width: "100%", marginTop: '10px', height: '35px', fontFamily: "Calibri" }}
+   isSignedIn={true}
+
+ />
+
           </Paper>
         </div>
       </div>
     </>
   );
 }
-
