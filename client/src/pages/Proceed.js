@@ -21,7 +21,11 @@ function Proceed() {
   
     // Handle the "Back" button click
     const handleBackClick = () => {
-      navigate(`/Cart`);
+      if(orderPlaced){
+      navigate(`/Cart`);}
+      else{
+        navigate(`/Checkout`);
+      }
     };
 
     return (
