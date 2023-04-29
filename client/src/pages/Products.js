@@ -25,10 +25,9 @@ const Products = () => {
         title : productname
        }),
     });
-
+    alert("New Item added to your Wishlist");
     const response = await resp.json();
     console.log("Server response", response);
-
   }
 
   const addToCart = async (productId,productname) => {
@@ -45,7 +44,7 @@ const Products = () => {
         title : productname
        }),
     });
-
+    alert("New Item added to your Cart");
     const response = await resp2.json();
     console.log("Server response", response);
 

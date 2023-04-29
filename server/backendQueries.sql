@@ -107,4 +107,3 @@ CREATE TABLE Wishlists
     FOREIGN KEY (user_id) REFERENCES Users(user_id),
     FOREIGN KEY (product_id) REFERENCES Products(product_id)
 );
-
