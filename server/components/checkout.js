@@ -4,7 +4,7 @@ var router = express.Router();
 const pool = require("./db");
 
 // to delete all products from a cart
-router.delete("/emptycart", async function(req, res) {
+router.post("/emptycart", async function(req, res) {
     try {
       const cart_id = req.body.cartId;
       const str_query = "DELETE FROM cartitems WHERE cart_id = $1";

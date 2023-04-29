@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 // import { CartContext } from './CartContext';
 
 // ProceedPage component
@@ -9,7 +10,9 @@ function Proceed() {
   const [orderPlaced, setOrderPlaced] = useState(false);
   const navigate = useNavigate();
   // Handle the "Place Order" button click
-  const handlePlaceOrder = () => {
+  const handlePlaceOrder = async () => {
+        const response = await axios.post('http://localhost:5000/emptycart', { cartId:1});
+        console.log(response.data);
     // Code to place the order would go here
     setOrderPlaced(true);
     // clearCart();
@@ -21,6 +24,7 @@ function Proceed() {
    
     navigate(`/Cart`);
   };
+  
 
   return (
     <div>
