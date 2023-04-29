@@ -8,8 +8,8 @@
   } 
   
   .cart-table {
-    width: 100%;
-    border-collapse: collapse;
+    width:100%;
+    /* border-collapse: collapse; */
     margin-top: 70px;
   }
   
