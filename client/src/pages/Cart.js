@@ -21,6 +21,10 @@ const Cart = () => {
     console.log(productId);
     navigate(`/Products/${productId}`);
   };
+  const navigateToCheckout = () => {
+    console.log("hi");
+    navigate(`/Checkout`);
+  };
   const removeItemFromCart = async (product_id) =>  {
     const response = await axios.delete('http://localhost:5000/delete_from_cart', { 
       data: { 
@@ -30,7 +34,7 @@ const Cart = () => {
     });
     console.log(response.data);
   };
-
+  
   return (
         <div className="cart-container">
       <br />
@@ -65,6 +69,9 @@ const Cart = () => {
           ))}
         </tbody>
       </table>
+      <button onClick={() => navigateToCheckout()}>
+         Checkout
+      </button>
     </div>
 
   );
