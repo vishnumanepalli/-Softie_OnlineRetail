@@ -2,33 +2,42 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    max-width: 180px;
-    height: 280px; /* Set the desired height */
-    padding: 1em;
-    margin: 0.5em;
+    max-width: 200px;
+    height: 300px; /* Set the desired height */
+    padding: 0.5em;
+    margin: 0.3em;
     overflow: hidden;
   }
   
   .product-card h2 {
-    font-size: 0.8em;
+    font-size: 1em;
     margin-bottom: 0.5em;
   }
   
   .product-card p {
-    font-size: 0.8em;
+    font-size: 1em;
     margin-bottom: 0.5em;
   }
   
   .product-card button {
-    font-size: 0.5em;
+    font-size: 0.8em;
     padding: 0.5em 1em;
   }
   
   .add-to-cart-button{
     /* font-size: 2px; */
-    font-size: medium;
+    /* font-size: medium; */
     background-color: rgb(106, 217, 186);
     color: black;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .product-card button.add-to-cart-button {
+    margin-right: 0.8em;
   }
   
   
