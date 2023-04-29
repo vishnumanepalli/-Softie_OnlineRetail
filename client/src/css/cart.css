@@ -4,6 +4,7 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
+   
   }
   
   
@@ -11,6 +12,7 @@
   .cart-table {
     width: 100%;
     border-collapse: collapse;
+    margin-top: 70px;
   }
   
   .cart-table th {
@@ -32,6 +34,7 @@
 
 .cart-container {
     padding: 40px;
+    
   }
   
   .cart-title {

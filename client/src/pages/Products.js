@@ -11,6 +11,25 @@ const Products = () => {
     const response = await axios.post('http://localhost:5000/get_products');
     setProducts(response.data);
   }
+  const addToWishlist= async (productId,productname) =>{
+    console.log(1)
+
+    var server_address = 'http://localhost:5000/add_to_wishlist';
+    const resp = await fetch(server_address, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", 
+      "jwt-token" : localStorage.getItem("token"), },
+      body: JSON.stringify({ 
+        userId:1,
+        productId:productId,
+        title : productname
+       }),
+    });
+
+    const response = await resp.json();
+    console.log("Server response", response);
+
+  }
 
   const addToCart = async (productId,productname) => {
     console.log(1)
@@ -52,6 +71,7 @@ const Products = () => {
             <h2  onClick={() => navigateToProductdetails(product.product_id)}>{product.name}</h2>
             <p  onClick={() => navigateToProductdetails(product.product_id)}>₹{product.price}</p>
             <button className='add-to-cart-button' onClick={() => addToCart(product.product_id,product.name)}>Add to Cart</button>
+            <button className='wishlist-button' onClick={() => addToWishlist(product.product_id)}>❤</button>
           </div>
         ))}
       </div>

@@ -23,6 +23,7 @@ export default function Home() {
   const [fullname, setFullname] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [openSignupDialog, setOpenSignupDialog] = useState(false);
+  const [loggedInUsername, setLoggedInUsername] = useState('');
 
   const handleOpenSignupDialog = () => {
     setOpenSignupDialog(true);
@@ -57,12 +58,9 @@ export default function Home() {
       });
       const data = await response.json();
       console.log(data);
-      
     } catch (error) {
       console.error(error);
     }
-    setOpenSignupDialog(false);
-    alert("Sucessfully Registered");
   };
 
   const handleContinueClick = async () => {
@@ -79,11 +77,19 @@ export default function Home() {
       });
       const data = await response.json();
       console.log(data);
+      console.log(response.ok);
+      if (response.ok) {
+        console.log("hi");
+        setLoggedInUsername(data.user.username);
+      }
     } catch (error) {
       console.error(error);
     }
   };
 
+  const handleLogoutClick = () => {
+    setLoggedInUsername('');
+  };
   const handleGoogleLogin = async (response) => {
     console.log(response);
 
@@ -98,6 +104,9 @@ export default function Home() {
       });
       const data = await res.json();
       console.log(data);
+      if (res.ok) {
+        setLoggedInUsername(data.user.username);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -121,51 +130,77 @@ export default function Home() {
 
   return (
     <>
+     {loggedInUsername ? (
+        <div className='homeClass text-center' style={{ minHeight: '150vh' }}>
+          <div className='homeText dangle' style={{ borderColor:"ABD5AB" }}>
+             <br />
+           <Paper elevation={3} style={{ padding: '24px', maxWidth: '500px', maxHeight: 'auto', margin: '0 auto',marginTop: '70px' }}>
+          <Typography variant='button' style={{ fontFamily: 'Calibri' }}>
+            Hi {loggedInUsername}!
+          </Typography>
+          <Button
+            variant='contained'
+            style={{ backgroundColor: '#00AD83', color: 'black', width: '100%', marginTop: '10px', height: '35px' }}
+            onClick={handleLogoutClick}
+          >
+            <Typography variant='button' style={{ marginLeft: '8px', fontFamily: 'Calibri' }}>
+              Logout
+            </Typography>
+          </Button>
+          </Paper>
+        </div>
+     </div>
+      ) : (
       <div className='homeClass text-center' style={{ minHeight: '150vh'}}>
         <div className='homeText dangle' style={{ borderColor:"ABD5AB" }}>
           
           <br />
           <Paper elevation={3} style={{ padding: '24px', maxWidth: '500px', maxHeight: 'auto', margin: '0 auto',marginTop: '70px' }}>
-            <TextField
-              id='outlined-basic'
-              label='Login with Email'
-              variant='outlined'
-              value={email}
-              onChange={(event) => {
-                setEmail(event.target.value);
-              }}
-              style={{ marginBottom: '10px', width: '100%' }}
-            />
-            <TextField
-              id='outlined-basic'
-              label='Password'
-              variant='outlined'
-              value={password}
-              onChange={(event) => {
-                setPassword(event.target.value);
-              }}
-              style={{ marginBottom: '10px', width: '100%' }}
-            />
-            <div>
-            <Button
-              variant='contained'
-              style={{ backgroundColor: "#00AD83",color: "black", width: "40%",marginBottom: '10px',marginRight: '10px'}}
-              onClick={handleContinueClick}
-            >
-              <Typography variant="button" style={{ fontFamily: "Calibri" }}>
-                Login
-              </Typography>
-            </Button>
+      <TextField
+        id='outlined-basic'
+        label='Login with Email'
+        variant='outlined'
+        value={email}
+        onChange={(event) => {
+          setEmail(event.target.value);
+        }}
+        style={{ marginBottom: '10px', width: '100%' }}
+      />
+      <TextField
+        id='outlined-basic'
+        label='Password'
+        variant='outlined'
+        value={password}
+        onChange={(event) => {
+          setPassword(event.target.value);
+        }}
+        style={{ marginBottom: '10px', width: '100%' }}
+      />
+
+      <Button
+        variant='contained'
+        style={{ backgroundColor: "#00AD83",color: "black", width: "100%" }}
+        onClick={handleContinueClick}
+      >
+        <Typography variant="button" style={{ fontFamily: "Calibri" }}>
+          Login
+        </Typography>
+      </Button>
+
+      {loggedInUsername && (
+        <Typography variant="button" style={{ fontFamily: "Calibri" }}>
+          Hi {loggedInUsername}!
+        </Typography>
+      )}
             <Button
               variant="contained"
-              style={{ backgroundColor: "#00AD83",color: "black", width: "38%",marginBottom: '10px', height:'35px'}}
+              style={{ backgroundColor: "#00AD83",color: "black", width: "100%",marginTop: '10px', height:'35px'}}
               onClick={handleOpenSignupDialog}
             >
               <Typography variant="button" style={{ marginLeft: "8px",fontFamily: "Calibri"  }}>
                 Signup
               </Typography>
             </Button>
-            </div>
             <GoogleLogin
               //clientId="84294184491-o1l9lief27ng4qak7b5hb0rd180ptr9k.apps.googleusercontent.com"
               buttonText="Login with Google"
@@ -173,6 +208,7 @@ export default function Home() {
               onSuccess={onSuccess}
               onFailure={onFailure}
               cookiePolicy={'single_host_origin'}
+              style={{ backgroundColor: "#00AD83", color: "black", width: "100%", marginTop: '10px', height: '35px', fontFamily: "Calibri" }}
               isSignedIn={true}
             />
           </Paper>
@@ -242,6 +278,8 @@ export default function Home() {
               </DialogActions>
               </Dialog>
               </div>
+      )}
               </>
+     
               );}
   
