@@ -24,6 +24,11 @@ const Cart = () => {
     navigate(`/Products/${productId}`);
   };
 
+  
+  const navigateToProducts = () => {
+    navigate(`/Products`);
+  };
+
   const removeItemFromCart = async (product_id) =>  {
     const response = await axios.delete('http://localhost:5000/delete_from_cart', { 
       data: { 
@@ -50,7 +55,7 @@ const Cart = () => {
       {cartItems.length === 0 ? (
         <div className="cart-item">
           <img src="https://hsnbazar.com/images/empty-cart.png" alt="cart is empty" />
-          <button className="continue-shopping-button">Continue Shopping!</button>
+          <button className="continue-shopping-button" onClick={() => navigateToProducts()}>Continue Shopping!</button>
         </div>
       ) : (
         <table className="cart-table">
