@@ -9,6 +9,8 @@ import Wishlist from './pages/wishlist';
 import Home from './pages/Home';
 import Checkout from './pages/Checkout';
 import Proceed from './pages/Proceed';
+import Profile from './pages/Profile';
+import Orders from './pages/Orders';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 
@@ -27,6 +29,8 @@ function App() {
         <Route path="/Cart" element={<Cart/>} />
         <Route path="/Checkout" element={<Checkout/>} />
         <Route path="/Proceed" element={<Proceed/>} />
+        <Route path="/Profile" element={<Profile/>} />
+        <Route path="/Orders" element={<Orders/>} />
         <Route path="*" element={<h1>404 Error Found</h1>}></Route>
       </Routes>
       </BrowserRouter>
