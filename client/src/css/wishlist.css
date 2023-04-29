@@ -1,37 +1,53 @@
 .wishlist-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    max-width: 180px;
-    height: 280px; /* Set the desired height */
-    padding: 1em;
-    margin: 0.5em;
-    overflow: hidden;
-    margin-left: 100px;
-    margin-bottom: 20px;
-    padding: 10px;
-    border: 1px solid #ddd;
-  }
-  .wishlist-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin: 20px;
-    margin-top: 100px;
-  }
-  
-  
-  .wishlist-card h2 {
-    font-size: 0.8em;
-    margin-bottom: 0.5em;
-  }
-  
-  .wishlist-card p {
-    font-size: 0.8em;
-    margin-bottom: 0.5em;
-  }
-  
-  .wishlist-card button {
-    font-size: 0.5em;
-    padding: 0.5em 1em;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 180px;
+  height: 280px;
+  padding: 1em;
+  margin: 0.5em;
+  overflow: hidden;
+  margin-left: 100px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+}
+
+.wishlist-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: 20px;
+  margin-top: 100px;
+}
+
+.wishlist-card h2 {
+  font-size: 0.8em;
+  margin-bottom: 0.5em;
+  cursor: pointer;
+}
+
+.wishlist-card p {
+  font-size: 0.8em;
+  margin-bottom: 0.5em;
+}
+
+.wishlist-card button {
+  font-size: 0.5em;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  background-color: rgb(106, 217, 186);
+  color: black;
+  border: none;
+  margin-top: 10px;
+}
+
+.wishlist-card button:hover {
+  background-color: rgb(92, 190, 162);
+}
+
+.wishlist-image-hp {
+  height: 150px;
+  width: 100%;
+  cursor: pointer;
+}

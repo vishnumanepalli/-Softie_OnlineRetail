@@ -45,10 +45,10 @@ const Wishlist = () => {
     <div className='wishlist-list'>
     {wishlistItems.map(product => (
     <div className='wishlist-card' key={product.product_id}>
-        <button className='delete-wishlist-item-button' onClick={() => removeItemFromWishlist(product.product_id)}>Delete</button>
       <img onClick={() => navigateToProductdetails(product.product_id)} src={product.image_url} alt={product.name} className='wishlist-image-hp'/>
       <h2 onClick={() => navigateToProductdetails(product.product_id)}>{product.name}</h2>
       <p onClick={() => navigateToProductdetails(product.product_id)}>₹{product.price}</p>
+      <button className='delete-wishlist-item-button' onClick={() => removeItemFromWishlist(product.product_id)}>Delete</button>
     </div>
   ))}
 </div>

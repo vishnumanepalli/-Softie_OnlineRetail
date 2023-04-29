@@ -28,17 +28,9 @@ function Proceed() {
         <div>
           <br/>
           <h1 style={{marginTop:'90px'}}>Order Summary</h1>
-      
-      {/* <ul>
-        {items.map((item) => (
-          <li key={item.id}>
-            {item.name} - {item.price}
-          </li>
-        ))}
-      </ul>
-      <p>Total: {total}</p> */}
-      <h2>Payment Options</h2>
-      <label>
+          
+      {!orderPlaced && <h2>Payment Options</h2>}
+      {!orderPlaced && <label>
         <input
           type="radio"
           name="paymentOption"
@@ -46,52 +38,16 @@ function Proceed() {
           onChange={(e) => setPaymentOption(e.target.value)}
         />
         Pay on Delivery
-      </label>
+      </label>}
 
-      <button onClick={handlePlaceOrder} disabled={paymentOption !== "payOnDelivery"}>
+      {!orderPlaced && <button onClick={handlePlaceOrder} disabled={paymentOption !== "payOnDelivery"}>
         Place Order
-      </button>
+      </button>}
 
       {orderPlaced && <p>Order Placed Successfully</p>}
       <button onClick={handleBackClick}>Back</button>
     </div>
   );
 }
-
-// // CartProvider component
-// function CartProvider(props) {
-//   const [items, setItems] = useState([]);
-//   const [total, setTotal] = useState(0);
-
-//   const addItem = (item) => {
-//     setItems((prevItems) => [...prevItems, item]);
-//     setTotal((prevTotal) => prevTotal + item.price);
-//   };
-
-//   const removeItem = (id) => {
-//     const itemToRemove = items.find((item) => item.id === id);
-//     setItems((prevItems) => prevItems.filter((item) => item.id !== id));
-//     setTotal((prevTotal) => prevTotal - itemToRemove.price);
-//   };
-
-//   const clearCart = () => {
-//     setItems([]);
-//     setTotal(0);
-//   };
-
-//   const contextValue = {
-//     items,
-//     total,
-//     addItem,
-//     removeItem,
-//     clearCart,
-//   };
-
-//   return (
-//     <CartContext.Provider value={contextValue}>
-//       {props.children}
-//     </CartContext.Provider>
-//   );
-// }
 
 export default Proceed;
