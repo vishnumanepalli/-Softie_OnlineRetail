@@ -71,6 +71,7 @@ const Cart = () => {
               <th>Image</th>
               <th>Quantity</th>
               <th>Action</th>
+              <th>Total Price</th>
             </tr>
           </thead>
           <tbody>
@@ -98,6 +99,7 @@ const Cart = () => {
                     Delete
                   </button>
                 </td>
+                <td>${(item.price * item.quantity).toFixed(2)}</td>
               </tr>
             ))}
           </tbody>
@@ -109,4 +111,5 @@ const Cart = () => {
     </div>
   );
 }
+
 export default Cart;
