@@ -50,7 +50,8 @@ function CheckoutPage() {
 
   return (
     <div>
-      <h1>Checkout</h1>
+      <br/>
+      <h1 style={{marginTop:'90px'}}>Checkout</h1>
       <h2>Address Details</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">Name:</label>

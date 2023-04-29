@@ -26,6 +26,13 @@ const Wishlist = () => {
       } 
     });
     console.log(response.data);
+    axios.post('http://localhost:5000/get_wishlist', { userId: 1 })
+      .then(res => {
+        setWishlistItems(res.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
   const navigateToProductdetails = (productId) => {
     console.log(productId);

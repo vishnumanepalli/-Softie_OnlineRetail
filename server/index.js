@@ -32,6 +32,7 @@ app.use(require('./components/deletewishlist'));
 app.use(require('./components/deletefromcart'));
 app.use(require('./components/getwhishlistitems'));
 app.use(require('./components/decreasequantitycart'));
+app.use(require('./components/checkout'));
 app.listen(PORT,function(){
     console.log("Listening ");
 })

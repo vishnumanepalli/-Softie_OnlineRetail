@@ -41,17 +41,39 @@ const Cart = () => {
       } 
     });
     console.log(response.data);
+    axios.post('http://localhost:5000/get_cartitems', { cartId: 1 })
+      .then(res => {
+        setCartItems(res.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+      alert("Item deleted")
   };
 
   const updateCartItemQuantityplus=async (productId) =>{
     const response = await axios.post('http://localhost:5000/cart', { cart_id:1 , product_id: productId });
     console.log("Server response", response);
+    axios.post('http://localhost:5000/get_cartitems', { cartId: 1 })
+      .then(res => {
+        setCartItems(res.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
 
   const updateCartItemQuantityminus=async (product_id) =>{
     const response = await axios.post('http://localhost:5000/decrease_cart_item_quantity',{ cartId:1 , productId:product_id } );
     console.log(response.data);
+    axios.post('http://localhost:5000/get_cartitems', { cartId: 1 })
+      .then(res => {
+        setCartItems(res.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
   const calculateTotalPrice = () => {
     let totalPrice = 0;
