@@ -6,7 +6,7 @@
     height: 300px; /* Set the desired height */
     padding: 0.5em;
     margin: 0.3em;
-    overflow: hidden;
+    overflow:auto;
   }
   
   .product-card h2 {
@@ -27,6 +27,7 @@
   .add-to-cart-button{
     /* font-size: 2px; */
     /* font-size: medium; */
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     background-color: rgb(106, 217, 186);
     color: black;
   }
