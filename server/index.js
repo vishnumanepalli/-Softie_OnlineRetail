@@ -27,6 +27,9 @@ app.use(require('./components/addUser'));
 app.use(require('./components/delUser'));
 app.use(require('./components/auth'));
 app.use(require('./components/searchproducts'));
+app.use(require('./components/addwishlist'));
+app.use(require('./components/deletewishlist'));
+app.use(require('./components/getwhishlistitems'));
 app.listen(PORT,function(){
     console.log("Listening ");
 })

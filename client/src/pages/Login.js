@@ -146,10 +146,10 @@ export default function Home() {
               }}
               style={{ marginBottom: '10px', width: '100%' }}
             />
-  
+            <div>
             <Button
               variant='contained'
-              style={{ backgroundColor: "#00AD83",color: "black", width: "100%" }}
+              style={{ backgroundColor: "#00AD83",color: "black", width: "40%",marginBottom: '10px',marginRight: '10px'}}
               onClick={handleContinueClick}
             >
               <Typography variant="button" style={{ fontFamily: "Calibri" }}>
@@ -158,13 +158,14 @@ export default function Home() {
             </Button>
             <Button
               variant="contained"
-              style={{ backgroundColor: "#00AD83",color: "black", width: "100%",marginTop: '10px', height:'35px'}}
+              style={{ backgroundColor: "#00AD83",color: "black", width: "38%",marginBottom: '10px', height:'35px'}}
               onClick={handleOpenSignupDialog}
             >
               <Typography variant="button" style={{ marginLeft: "8px",fontFamily: "Calibri"  }}>
                 Signup
               </Typography>
             </Button>
+            </div>
             <GoogleLogin
               //clientId="84294184491-o1l9lief27ng4qak7b5hb0rd180ptr9k.apps.googleusercontent.com"
               buttonText="Login with Google"
@@ -172,7 +173,6 @@ export default function Home() {
               onSuccess={onSuccess}
               onFailure={onFailure}
               cookiePolicy={'single_host_origin'}
-              style={{ backgroundColor: "#00AD83", color: "black", width: "100%", marginTop: '10px', height: '35px', fontFamily: "Calibri" }}
               isSignedIn={true}
             />
           </Paper>

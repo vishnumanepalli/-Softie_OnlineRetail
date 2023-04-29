@@ -96,3 +96,15 @@ ALTER TABLE CartItems
 ADD CONSTRAINT fk_cartitems_product_id
 FOREIGN KEY (product_id)
 REFERENCES Products (product_id);
+
+CREATE TABLE Wishlists
+(
+    wishlist_id SERIAL NOT NULL,
+    user_id integer NOT NULL,
+    product_id integer NOT NULL,
+    date_added timestamp NOT NULL DEFAULT NOW(),
+    PRIMARY KEY (wishlist_id),
+    FOREIGN KEY (user_id) REFERENCES Users(user_id),
+    FOREIGN KEY (product_id) REFERENCES Products(product_id)
+);
+
