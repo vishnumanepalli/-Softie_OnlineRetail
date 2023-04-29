@@ -53,6 +53,14 @@ const Cart = () => {
     const response = await axios.post('http://localhost:5000/decrease_cart_item_quantity',{ cartId:1 , productId:product_id } );
     console.log(response.data);
   }
+  const calculateTotalPrice = () => {
+    let totalPrice = 0;
+    for (let i = 0; i < cartItems.length; i++) {
+      const item = cartItems[i];
+      totalPrice += item.price * item.quantity;
+    }
+    return totalPrice.toFixed(2);
+  };
 
   return (
     <div className="cart-container">
@@ -63,6 +71,7 @@ const Cart = () => {
           <button className="continue-shopping-button" onClick={() => navigateToProducts()}>Continue Shopping!</button>
         </div>
       ) : (
+        <div>
         <table className="cart-table">
           <thead>
             <tr>
@@ -104,10 +113,13 @@ const Cart = () => {
             ))}
           </tbody>
         </table>
+        <h3>total price: {calculateTotalPrice()}</h3>
+        <button onClick={() => navigateToCheckout()}>
+           Checkout
+        </button>
+        </div>
       )}
-      <button onClick={() => navigateToCheckout()}>
-         Checkout
-      </button>
+      
     </div>
   );
 }
