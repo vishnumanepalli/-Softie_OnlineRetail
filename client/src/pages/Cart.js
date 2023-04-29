@@ -23,6 +23,10 @@ const Cart = () => {
     console.log(productId);
     navigate(`/Products/${productId}`);
   };
+  const navigateToCheckout = () => {
+    console.log("hi");
+    navigate(`/Checkout`);
+  };
 
   
   const navigateToProducts = () => {
@@ -43,6 +47,7 @@ const Cart = () => {
     const response = await axios.post('http://localhost:5000/cart', { cart_id:1 , product_id: productId });
     console.log("Server response", response);
   }
+
 
   const updateCartItemQuantityminus=async (product_id) =>{
     const response = await axios.post('http://localhost:5000/decrease_cart_item_quantity',{ cartId:1 , productId:product_id } );
@@ -100,6 +105,9 @@ const Cart = () => {
           </tbody>
         </table>
       )}
+      <button onClick={() => navigateToCheckout()}>
+         Checkout
+      </button>
     </div>
   );
 }
