@@ -77,8 +77,8 @@ const AddProduct = () => {
             />
             <br />
             <TextField
-            label="Price"
-            name="price"
+            label="quantity"
+            name="quantity"
             type="number"
             value={product.quantity}
             onChange={handleInputChange}
