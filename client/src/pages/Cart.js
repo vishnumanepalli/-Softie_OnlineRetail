@@ -3,14 +3,16 @@ import React, { useState, useEffect } from 'react';
 import '../css/cart.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import {useCookies} from 'react-cookie'
 
 const Cart = () => {
+  const [cookies,setCookie,removeCookie] = useCookies(null);
   const [cartItems, setCartItems] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch the cart items from the server
-    axios.post('http://localhost:5000/get_cartitems', { user_id: 1 })
+    axios.post('http://localhost:5000/get_cartitems', { user_id: cookies.userId  })
       .then(res => {
         setCartItems(res.data);
       })
@@ -36,12 +38,12 @@ const Cart = () => {
   const removeItemFromCart = async (product_id) =>  {
     const response = await axios.delete('http://localhost:5000/delete_from_cart', { 
       data: { 
-        user_id: 1, 
+        user_id: cookies.userId , 
         productId: product_id 
       } 
     });
     console.log(response.data);
-    axios.post('http://localhost:5000/get_cartitems', { user_id: 1 })
+    axios.post('http://localhost:5000/get_cartitems', { user_id: cookies.userId  })
       .then(res => {
         setCartItems(res.data);
       })
@@ -52,7 +54,7 @@ const Cart = () => {
   };
 
   const updateCartItemQuantityplus=async (productId) =>{
-    const response = await axios.post('http://localhost:5000/cart', { user_id:1 , product_id: productId });
+    const response = await axios.post('http://localhost:5000/cart', { user_id:cookies.userId  , product_id: productId });
     console.log("Server response", response);
     axios.post('http://localhost:5000/get_cartitems', { cartId: 1 })
       .then(res => {
@@ -65,7 +67,7 @@ const Cart = () => {
 
 
   const updateCartItemQuantityminus=async (product_id) =>{
-    const response = await axios.post('http://localhost:5000/decrease_cart_item_quantity',{ user_id:1 , productId:product_id } );
+    const response = await axios.post('http://localhost:5000/decrease_cart_item_quantity',{ user_id:cookies.userId  , productId:product_id } );
     console.log(response.data);
     axios.post('http://localhost:5000/get_cartitems', { cartId: 1 })
       .then(res => {

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import {useCookies} from 'react-cookie'
 import {
   Button,
   IconButton,
@@ -10,13 +11,16 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
+  getBottomNavigationActionUtilityClass,
 } from '@mui/material';
 import { FaGoogle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { gapi } from 'gapi-script';
 import { GoogleLogin } from 'react-google-login';
+import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
+  const [cookies,setCookie,removeCookie] = useCookies(null)
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
@@ -24,7 +28,8 @@ export default function Home() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [openSignupDialog, setOpenSignupDialog] = useState(false);
   const [loggedInUsername, setLoggedInUsername] = useState('');
-
+  const navigate = useNavigate();
+ console.log(cookies)
   const handleOpenSignupDialog = () => {
     setOpenSignupDialog(true);
   };
@@ -81,6 +86,9 @@ export default function Home() {
       if (response.ok) {
         console.log("hi");
         setLoggedInUsername(data.user.username);
+        setCookie('userId',data.user.user_id);
+        setCookie('userName',data.user.username);
+        setCookie('token',loggedInUsername);
       }
     } catch (error) {
       console.error(error);
@@ -104,9 +112,14 @@ export default function Home() {
       });
       const data = await res.json();
       console.log(data);
+      console.log(cookies);
       if (res.ok) {
         setLoggedInUsername(data.user.username);
+        setCookie('userId',data.user.user_id);
+        setCookie('userName',data.user.username);
+        setCookie('token',loggedInUsername);
       }
+      console.log(cookies);
     } catch (error) {
       console.log(error);
     }
@@ -128,29 +141,35 @@ export default function Home() {
     });
   }, []);
 
+  const navigateToProductdetails = () => {
+    navigate(`/Products`);
+  };
+
   return (
     <>
-     {loggedInUsername ? (
-        <div className='homeClass text-center' style={{ minHeight: '150vh' }}>
-          <div className='homeText dangle' style={{ borderColor:"ABD5AB" }}>
-             <br />
-           <Paper elevation={3} style={{ padding: '24px', maxWidth: '500px', maxHeight: 'auto', margin: '0 auto',marginTop: '70px' }}>
-          <Typography variant='button' style={{ fontFamily: 'Calibri' }}>
-            Hi {loggedInUsername}!
-          </Typography>
-          <Button
-            variant='contained'
-            style={{ backgroundColor: '#00AD83', color: 'black', width: '100%', marginTop: '10px', height: '35px' }}
-            onClick={handleLogoutClick}
-          >
-            <Typography variant='button' style={{ marginLeft: '8px', fontFamily: 'Calibri' }}>
-              Logout
-            </Typography>
-          </Button>
-          </Paper>
-        </div>
-     </div>
-      ) : (
+     {loggedInUsername ? (navigateToProductdetails())
+    //  (
+    //     <div className='homeClass text-center' style={{ minHeight: '150vh' }}>
+    //       <div className='homeText dangle' style={{ borderColor:"ABD5AB" }}>
+    //          <br />
+    //        <Paper elevation={3} style={{ padding: '24px', maxWidth: '500px', maxHeight: 'auto', margin: '0 auto',marginTop: '70px' }}>
+    //       <Typography variant='button' style={{ fontFamily: 'Calibri' }}>
+    //         Hi {loggedInUsername}!
+    //       </Typography>
+    //       <Button
+    //         variant='contained'
+    //         style={{ backgroundColor: '#00AD83', color: 'black', width: '100%', marginTop: '10px', height: '35px' }}
+    //         onClick={handleLogoutClick}
+    //       >
+    //         <Typography variant='button' style={{ marginLeft: '8px', fontFamily: 'Calibri' }}>
+    //           Logout
+    //         </Typography>
+    //       </Button>
+    //       </Paper>
+    //     </div>
+    //  </div>
+    //   ) 
+      : (
       <div className='homeClass text-center' style={{ minHeight: '150vh'}}>
         <div className='homeText dangle' style={{ borderColor:"ABD5AB" }}>
           
@@ -282,4 +301,3 @@ export default function Home() {
               </>
      
               );}
-  

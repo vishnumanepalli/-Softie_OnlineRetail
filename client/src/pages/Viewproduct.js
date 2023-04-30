@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import '../css/viewproduct.css';
+import {useCookies} from 'react-cookie'
 
 const Viewproduct = () => {
+  const [cookies,setCookie,removeCookie] = useCookies(null);
   const { id } = useParams();
   const [product, setProduct] = useState(null);
 
@@ -18,7 +20,7 @@ const Viewproduct = () => {
   }
 
   const addToCart = async () => {
-    const response = await axios.post('http://localhost:5000/cart', { user_id:1 , product_id: id });
+    const response = await axios.post('http://localhost:5000/cart', { user_id:cookies.userId , product_id: id });
     console.log(response.data);
   }
   

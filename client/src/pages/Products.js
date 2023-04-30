@@ -3,9 +3,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../css/product.css';
 import { useNavigate} from 'react-router-dom';
+import {useCookies} from 'react-cookie'
 
 const Products = () => {
- 
+  const [cookies,setCookie,removeCookie] = useCookies(null);
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
   const fetchProducts = async () => {
@@ -13,7 +14,7 @@ const Products = () => {
     setProducts(response.data);
   }
   const addToWishlist= async (productId,productname) =>{
-    console.log(1)
+    console.log(cookies.userId);
 
     var server_address = 'http://localhost:5000/add_to_wishlist';
     const resp = await fetch(server_address, {
@@ -21,7 +22,7 @@ const Products = () => {
       headers: { "Content-Type": "application/json", 
       "jwt-token" : localStorage.getItem("token"), },
       body: JSON.stringify({ 
-        userId:1,
+        userId:cookies.userId,
         productId:productId,
         title : productname
        }),
@@ -40,7 +41,7 @@ const Products = () => {
       headers: { "Content-Type": "application/json", 
       "jwt-token" : localStorage.getItem("token"), },
       body: JSON.stringify({ 
-        user_id:1,
+        user_id: cookies.userId,
         product_id:productId,
         title : productname
        }),
