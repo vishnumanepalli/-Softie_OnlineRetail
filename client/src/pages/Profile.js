@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
+import '../css/profile.css';
+import TextField from '@material-ui/core/TextField';
 
 const Profile = () => {
   const [cookies, setCookie, removeCookie] = useCookies(null);
@@ -109,96 +111,142 @@ const Profile = () => {
   return (
     <div>
       <br />
-      <h1 style={{ marginTop: "90px" }}>Profile</h1>
       {editMode ? (
-        <div>
-        <p>Full Name: {address.fullName ?? "N/A"}</p>
-        <p>Email: {address.email ?? "N/A"}</p>
-        <p>Username: {address.username ?? "N/A"}</p>
-        <p>Address: {address.address ?? "N/A"}</p>
-        <p>City: {address.city ?? "N/A"}</p>
-        <p>State: {address.state ?? "N/A"}</p>
-        <p>Country: {address.country ?? "N/A"}</p>
-        
-          <h2>Edit fields</h2>
-          <form>
-            <label>
-              Username:
-              <input
-                type="text"
-                name="username"
-                value={eaddress.username}
-                onChange={handleInputChange}
-              />
-            </label>
-            <label>
-              Address:
-              <input
-                type="text"
-                name="address"
-                value={eaddress.address}
-                onChange={handleInputChange}
-              />
-            </label>
-            <label>
-              City:
-              <input
-                type="text"
-                name="city"
-                value={eaddress.city}
-                onChange={handleInputChange}
-              />
-            </label>
-            <label>
-              State:
-              <input
-                type="text"
-                name="state"
-                value={eaddress.state}
-                onChange={handleInputChange}
-              />
-            </label>
-            <label>
-              Country:
-              <input
-                type="text"
-                name="country"
-                value={eaddress.country}
-                onChange={handleInputChange}
-              />
-            </label>
-            <label>
-              Password:
-              <input
-                type="password"
-                name="country"
-                value={password}
-                onChange={handleInputChange}
-              />
-            </label>
-            <label>
-              Confirm Password:
-              <input
-                type="password"
-                name="country"
-                value={cpassword}
-                onChange={handleInputChange}
-              />
-            </label>
-             <button type="button" onClick={handleSaveClick}>
-              Save
-            </button>
-          </form>
-        </div>
+       <div style={{ display: 'flex', flexWrap: 'wrap', marginTop:'100px'}}>
+       <div class="address-box" style={{ flexBasis: '50%' }}>
+         <h1 >Profile</h1>
+         <table class="address-table">
+           <tbody>
+             <tr>
+               <td>Full Name</td>
+               <td>{address.fullName ?? "N/A"}</td>
+             </tr>
+             <tr>
+               <td>Email</td>
+               <td>{address.email ?? "N/A"}</td>
+             </tr>
+             <tr>
+               <td>Username</td>
+               <td>{address.username ?? "N/A"}</td>
+             </tr>
+             <tr>
+               <td>Address</td>
+               <td>{address.address ?? "N/A"}</td>
+             </tr>
+             <tr>
+               <td>City</td>
+               <td>{address.city ?? "N/A"}</td>
+             </tr>
+             <tr>
+               <td>State</td>
+               <td>{address.state ?? "N/A"}</td>
+             </tr>
+             <tr>
+               <td>Country</td>
+               <td>{address.country ?? "N/A"}</td>
+             </tr>
+           </tbody>
+         </table>
+       </div>
+       <div style={{ flexBasis: '50%' }}>
+         <h2>Edit fields</h2>
+         <form>
+           <TextField
+             label="Username"
+             name="Username"
+             value={eaddress.username}
+             onChange={handleInputChange}
+           />
+           <br />
+           <TextField
+             label="address"
+             name="address"
+             value={eaddress.address}
+             onChange={handleInputChange}
+           />
+           <br />
+           <TextField
+             label="City"
+             name="city"
+             value={eaddress.city}
+             onChange={handleInputChange}
+           />
+           <br />
+           <TextField
+             label="State"
+             name="state"
+             value={eaddress.state}
+             onChange={handleInputChange}
+           />
+           <br />
+           <TextField
+             label="Country"
+             name="country"
+             value={eaddress.country}
+             onChange={handleInputChange}
+           />
+           <br />
+           <TextField
+             label="Password"
+             type="password"
+             name="password"
+             value={password}
+             onChange={handleInputChange}
+           />
+           <br />
+           <TextField
+             label="Confirm Password"
+             type="password"
+             name="cpassword"
+             value={cpassword}
+             onChange={handleInputChange}
+           />
+           <br />
+           <button type="button" onClick={handleSaveClick} style={{ marginTop: "10px" }}>
+             Save
+           </button>
+         </form>
+       </div>
+     </div>     
       ) : (
         <div>
-          <p>Full Name: {address.fullName ?? "N/A"}</p>
-          <p>Email: {address.email ?? "N/A"}</p>
-          <p>Username: {address.username ?? "N/A"}</p>
-          <p>Address: {address.address ?? "N/A"}</p>
-          <p>City: {address.city ?? "N/A"}</p>
-          <p>State: {address.state ?? "N/A"}</p>
-          <p>Country: {address.country ?? "N/A"}</p>
+          <h1 style={{ marginTop: "90px" }}>Profile</h1>
+          <div class="address-box">
+          <table class="address-table">
+          
+          <tbody>
+            <tr>
+              <td>Full Name</td>
+              <td>{address.fullName ?? "N/A"}</td>
+            </tr>
+            <tr>
+              <td>Email</td>
+              <td>{address.email ?? "N/A"}</td>
+            </tr>
+            <tr>
+              <td>Username</td>
+              <td>{address.username ?? "N/A"}</td>
+            </tr>
+            <tr>
+              <td>Address</td>
+              <td>{address.address ?? "N/A"}</td>
+            </tr>
+            <tr>
+              <td>City</td>
+              <td>{address.city ?? "N/A"}</td>
+            </tr>
+            <tr>
+              <td>State</td>
+              <td>{address.state ?? "N/A"}</td>
+            </tr>
+            <tr>
+              <td>Country</td>
+              <td>{address.country ?? "N/A"}</td>
+            </tr>
+          </tbody>
+          </table>
+
+          </div>
           <button type="button" onClick={handleEditClick}>
             Edit
           </button>

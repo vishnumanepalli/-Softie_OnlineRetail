@@ -97,16 +97,6 @@ const Cart = () => {
       ) : (
         <div>
         <table className="cart-table">
-          <thead>
-            <tr>
-              <th>Product Name</th>
-              <th>Price</th>
-              <th>Image</th>
-              <th>Quantity</th>
-              <th>Action</th>
-              <th>Total Price</th>
-            </tr>
-          </thead>
           <tbody>
             {cartItems.map(item => (
               <tr key={item.product_id}>
