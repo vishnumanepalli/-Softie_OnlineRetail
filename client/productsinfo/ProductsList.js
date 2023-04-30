@@ -15,8 +15,8 @@ const ProductList = () => {
     window.scrollTo({ behavior: "smooth", top: 0 });
   };
 
-  const handleSearch = (event) => {
-    setSearchText(event.target.value);
+  const handleSearch = (query) => {
+    setSearchText(query);
     setPage(1); // reset page number when search text changes
   };
 
