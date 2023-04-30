@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import TextField from '@material-ui/core/TextField';
+import Paper from '@material-ui/core/Paper';
+import '../css/admin.css';
 
 const AddProduct = () => {
   const [product, setProduct] = useState({
@@ -41,44 +43,47 @@ const AddProduct = () => {
 
   return (
     <div>
-      <form  style={{paddingTop:'80px'}} onSubmit={handleSubmit}>
-        <TextField
-          label="Product ID"
-          name="product_id"
-          value={product.product_id}
-          onChange={handleInputChange}
-        />
-        <br />
-        <TextField
-          label="Product Name"
-          name="name"
-          value={product.name}
-          onChange={handleInputChange}
-        />
-        <br />
-        <TextField
-          label="Image URL"
-          name="image_url"
-          value={product.image_url}
-          onChange={handleInputChange}
-        />
-        <br />
-        <TextField
-          label="Price"
-          name="price"
-          value={product.price}
-          onChange={handleInputChange}
-        />
-        <br />
-        <TextField
-          label="Description"
-          name="description"
-          value={product.description}
-          onChange={handleInputChange}
-        />
-        <br />
-        <button type="submit">Add Product</button>
-      </form>
+        <br/>
+      <Paper  style={{marginTop: '140px', padding: '20px', width: '50%', margin: '0 auto', display: 'flex', justifyContent: 'center' }} elevation={3}>
+        <form onSubmit={handleSubmit}>
+            <TextField
+            label="Product ID"
+            name="product_id"
+            value={product.product_id}
+            onChange={handleInputChange}
+            />
+            <br />
+            <TextField
+            label="Product Name"
+            name="name"
+            value={product.name}
+            onChange={handleInputChange}
+            />
+            <br />
+            <TextField
+            label="Image URL"
+            name="image_url"
+            value={product.image_url}
+            onChange={handleInputChange}
+            />
+            <br />
+            <TextField
+            label="Price"
+            name="price"
+            value={product.price}
+            onChange={handleInputChange}
+            />
+            <br />
+            <TextField
+            label="Description"
+            name="description"
+            value={product.description}
+            onChange={handleInputChange}
+            />
+            <br />
+            <button type="submit" style={{marginTop:'20px'}}>Add Product</button>
+        </form>
+        </Paper>
     </div>
   );
 };
