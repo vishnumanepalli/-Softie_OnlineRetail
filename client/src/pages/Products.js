@@ -2,9 +2,10 @@ import Filters from '../design/filters';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../css/product.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 
 const Products = () => {
+ 
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
   const fetchProducts = async () => {
@@ -39,7 +40,7 @@ const Products = () => {
       headers: { "Content-Type": "application/json", 
       "jwt-token" : localStorage.getItem("token"), },
       body: JSON.stringify({ 
-        cart_id:1,
+        user_id:1,
         product_id:productId,
         title : productname
        }),

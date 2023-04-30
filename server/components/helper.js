@@ -20,40 +20,29 @@ async function createUserGoogleDb({ sub, defaultUsername, email, name }) {
     }
     
     async function getUserByUsernameDb(username) {
-    const { rows: user } = await pool.query(
-    'select users.*, cart.id as cart_id from users left join cart on cart.user_id = users.user_id where lower(users.username) = lower($1)',
-    [username]
-    );
-    return user[0];
-    }
+      const { rows: user } = await pool.query(
+        'SELECT * FROM users WHERE lower(username) = lower($1)',
+        [username]
+      );
+      return user[0];
+    }    
     
-    async function createCartDb(userId) {
-    const { rows: cart } = await pool.query(
-    "insert into cart (user_id) values ($1) returning cart.id",
-    [userId]
-    );
-    
-    return cart[0];
-    }
 
     async function getUserByEmailDb(email) {
-        const query = 'SELECT users.*, cart.id AS cart_id FROM users LEFT JOIN cart ON cart.user_id = users.user_id WHERE LOWER(email) = LOWER($1)';
-        const values = [email];
-      
-        try {
-          const { rows: user } = await pool.query(query, values);
-          console.log("check");
-          return user[0];
-        } catch (error) {
-          console.error(error);
-          throw new Error("Failed to get user by email");
-        }
+      const query = 'SELECT * FROM users WHERE LOWER(email) = LOWER($1)';
+      const values = [email];
+    
+      try {
+        const { rows: user } = await pool.query(query, values);
+        console.log("check");
+        return user[0];
+      } catch (error) {
+        console.error(error);
+        throw new Error("Failed to get user by email");
       }
-      
-
-
+    }
   module.exports = {
-    createUserDb, getUserByEmailDb, getUserByUsernameDb, createCartDb, createUserGoogleDb
+    createUserDb, getUserByEmailDb, getUserByUsernameDb, createUserGoogleDb
   };
   
 

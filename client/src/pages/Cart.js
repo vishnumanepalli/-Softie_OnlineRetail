@@ -10,7 +10,7 @@ const Cart = () => {
 
   useEffect(() => {
     // Fetch the cart items from the server
-    axios.post('http://localhost:5000/get_cartitems', { cartId: 1 })
+    axios.post('http://localhost:5000/get_cartitems', { user_id: 1 })
       .then(res => {
         setCartItems(res.data);
       })
@@ -36,12 +36,12 @@ const Cart = () => {
   const removeItemFromCart = async (product_id) =>  {
     const response = await axios.delete('http://localhost:5000/delete_from_cart', { 
       data: { 
-        cartId: 1, 
+        user_id: 1, 
         productId: product_id 
       } 
     });
     console.log(response.data);
-    axios.post('http://localhost:5000/get_cartitems', { cartId: 1 })
+    axios.post('http://localhost:5000/get_cartitems', { user_id: 1 })
       .then(res => {
         setCartItems(res.data);
       })
@@ -52,7 +52,7 @@ const Cart = () => {
   };
 
   const updateCartItemQuantityplus=async (productId) =>{
-    const response = await axios.post('http://localhost:5000/cart', { cart_id:1 , product_id: productId });
+    const response = await axios.post('http://localhost:5000/cart', { user_id:1 , product_id: productId });
     console.log("Server response", response);
     axios.post('http://localhost:5000/get_cartitems', { cartId: 1 })
       .then(res => {
@@ -65,7 +65,7 @@ const Cart = () => {
 
 
   const updateCartItemQuantityminus=async (product_id) =>{
-    const response = await axios.post('http://localhost:5000/decrease_cart_item_quantity',{ cartId:1 , productId:product_id } );
+    const response = await axios.post('http://localhost:5000/decrease_cart_item_quantity',{ user_id:1 , productId:product_id } );
     console.log(response.data);
     axios.post('http://localhost:5000/get_cartitems', { cartId: 1 })
       .then(res => {
