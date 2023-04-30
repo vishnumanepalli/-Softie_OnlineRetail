@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../css/orders.css';
 import { useCookies } from 'react-cookie';
+import { useNavigate} from 'react-router-dom';
 
 const Orders = () => {
   const [cookies, setCookie, removeCookie] = useCookies(null);
   const [orders, setOrders] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [orderItems, setOrderItems] = useState([]);
-
+  const navigate = useNavigate();
   useEffect(() => {
     // Fetch the orders from the server
     axios
@@ -29,6 +30,9 @@ const Orders = () => {
     // Set the selected order
     setSelectedOrder(order_id);
   };
+  const handleClick = (productId) => {
+    navigate(`/Products/${productId}`);
+  };
 
   const renderOrderItems = () => {
     if (!selectedOrder) {
@@ -44,7 +48,7 @@ const Orders = () => {
     return (
       <div>
         <h2>Order Items ({selectedOrder})</h2>
-        <table className="table">
+        <table className="table" >
           <thead>
             <tr>
               <th>Product Name</th>
@@ -55,7 +59,7 @@ const Orders = () => {
           </thead>
           <tbody>
             {orderItems.map(item => (
-              <tr key={item.product_id}>
+              <tr key={item.product_id} onClick={() => handleClick(item.product_id)}>
                 <td>{item.name}</td>
                 <td>{item.quantity}</td>
                 <td>₹{item.price}</td>
@@ -75,7 +79,7 @@ const Orders = () => {
     <div>
       <br />
       <h1 style={{ marginTop: '80px' }}>Orders</h1>
-      <table className="table">
+      <table className="table table-hover">
         <thead>
           <tr>
             <th>Order ID</th>
