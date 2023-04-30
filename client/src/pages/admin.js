@@ -77,6 +77,14 @@ const AddProduct = () => {
             />
             <br />
             <TextField
+            label="Price"
+            name="price"
+            type="number"
+            value={product.quantity}
+            onChange={handleInputChange}
+            />
+            <br />
+            <TextField
             label="Description"
             name="description"
             value={product.description}
