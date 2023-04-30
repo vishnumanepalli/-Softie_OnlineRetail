@@ -51,10 +51,16 @@ const Profile = () => {
   }, []);
 
   const handleInputChange = (e) => {
-    seteAddress({
-      ...eaddress,
-      [e.target.name]: e.target.value,
-    });
+    if (e.target.name === "password") {
+      setPassword(e.target.value);
+    } else if (e.target.name === "cpassword") {
+      setCpassword(e.target.value);
+    } else {
+      seteAddress({
+        ...eaddress,
+        [e.target.name]: e.target.value,
+      });
+    }
   };
 
   const handleEditClick = () => {
