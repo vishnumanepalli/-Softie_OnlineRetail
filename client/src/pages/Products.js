@@ -87,7 +87,7 @@ const Products = () => {
   }
 
   const toggleWishlist = (productId) => {
-    if (wishlistItems.includes(productId)) {
+    if (wishlistItems.some(item => item.product_id === productId)) {
       removeFromWishlist(productId);
     } else {
       addToWishlist(productId);
@@ -112,7 +112,7 @@ const Products = () => {
             <div className='button-container'>
               <button className='add-to-cart-button' onClick={() => addToCart(product.product_id,product.name)}>Add to Cart</button>
               <button className='wishlist-button' onClick={() => toggleWishlist(product.product_id)}>
-                {wishlistItems.includes(product.product_id) ? '❤️' : '🤍'}
+                {wishlistItems.some(item => item.product_id === product.product_id) ? '❤️' : '🤍'}
               </button>
 
             </div>
