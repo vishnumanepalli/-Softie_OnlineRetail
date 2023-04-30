@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import {useCookies} from 'react-cookie'
 import {
   Button,
   IconButton,
@@ -10,6 +11,7 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
+  getBottomNavigationActionUtilityClass,
 } from '@mui/material';
 import { FaGoogle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
@@ -17,6 +19,7 @@ import { gapi } from 'gapi-script';
 import { GoogleLogin } from 'react-google-login';
 
 export default function Home() {
+  const [cookies,setCookie,removeCookie] = useCookies(null)
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
@@ -24,7 +27,7 @@ export default function Home() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [openSignupDialog, setOpenSignupDialog] = useState(false);
   const [loggedInUsername, setLoggedInUsername] = useState('');
-
+ console.log(cookies)
   const handleOpenSignupDialog = () => {
     setOpenSignupDialog(true);
   };
@@ -81,6 +84,9 @@ export default function Home() {
       if (response.ok) {
         console.log("hi");
         setLoggedInUsername(data.user.username);
+        setCookie('userId',data.user.user_id);
+        setCookie('userName',data.user.username);
+        setCookie('token',loggedInUsername);
       }
     } catch (error) {
       console.error(error);
@@ -104,9 +110,14 @@ export default function Home() {
       });
       const data = await res.json();
       console.log(data);
+      console.log(cookies);
       if (res.ok) {
         setLoggedInUsername(data.user.username);
+        setCookie('userId',data.user.user_id);
+        setCookie('userName',data.user.username);
+        setCookie('token',loggedInUsername);
       }
+      console.log(cookies);
     } catch (error) {
       console.log(error);
     }
