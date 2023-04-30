@@ -76,3 +76,24 @@ CREATE TABLE Wishlists
     FOREIGN KEY (user_id) REFERENCES Users(user_id),
     FOREIGN KEY (product_id) REFERENCES Products(product_id)
 );
+
+CREATE TABLE orders
+(
+    order_id SERIAL NOT NULL,
+    user_id integer NOT NULL,
+    date timestamp without time zone DEFAULT CURRENT_DATE NOT NULL,
+    PRIMARY KEY (order_id),
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+
+);
+
+CREATE TABLE order_item
+(
+    id SERIAL NOT NULL,
+    order_id integer NOT NULL,
+    product_id integer NOT NULL,
+    quantity integer NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (order_id) REFERENCES orders(order_id),
+    FOREIGN KEY (product_id) REFERENCES products(product_id)
+);

@@ -52,8 +52,8 @@ const Wishlist = () => {
       <p onClick={() => navigateToProductdetails(product.product_id)}>₹{product.price}</p>
       <button className='delete-wishlist-item-button' onClick={() => removeItemFromWishlist(product.product_id)}>Delete</button>
     </div>
-  ))}
-</div>
+      ))}
+    </div>
 
     </div>
   );
