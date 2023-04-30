@@ -8,12 +8,21 @@ import {useCookies} from 'react-cookie'
 const Products = () => {
   const [cookies,setCookie,removeCookie] = useCookies(null);
   const [products, setProducts] = useState([]);
+  const [wishlistItems, setWishlistItems] = useState([]);
   const navigate = useNavigate();
   const fetchProducts = async () => {
     const response = await axios.post('http://localhost:5000/get_products');
     setProducts(response.data);
+    axios.post('http://localhost:5000/get_wishlist', { userId:  cookies.userId })
+      .then(res => {
+        setWishlistItems(res.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
-  const addToWishlist= async (productId,productname) =>{
+  
+  const addToWishlist= async (productId) =>{
     console.log(cookies.userId);
 
     var server_address = 'http://localhost:5000/add_to_wishlist';
@@ -23,16 +32,22 @@ const Products = () => {
       "jwt-token" : localStorage.getItem("token"), },
       body: JSON.stringify({ 
         userId:cookies.userId,
-        productId:productId,
-        title : productname
+        productId:productId
        }),
     });
     
     const response = await resp.json();
     console.log("Server response", response);
+    axios.post('http://localhost:5000/get_wishlist', { userId:  cookies.userId })
+      .then(res => {
+        setWishlistItems(res.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
-  const addToCart = async (productId,productname) => {
+  const addToCart = async (productId) => {
     console.log(1)
 
     var server_address = 'http://localhost:5000/cart';
@@ -42,8 +57,7 @@ const Products = () => {
       "jwt-token" : localStorage.getItem("token"), },
       body: JSON.stringify({ 
         user_id: cookies.userId,
-        product_id:productId,
-        title : productname
+        product_id:productId
        }),
     });
    
@@ -56,6 +70,30 @@ const Products = () => {
     navigate(`/Products/${productId}`);
   };
 
+  const removeFromWishlist = async (product_id) => {
+    const response = await axios.delete('http://localhost:5000/delete_from_wishlist', { 
+      data: { 
+        userId:  cookies.userId, 
+        productId: product_id 
+      } 
+    });
+    axios.post('http://localhost:5000/get_wishlist', { userId:  cookies.userId })
+      .then(res => {
+        setWishlistItems(res.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  const toggleWishlist = (productId) => {
+    if (wishlistItems.includes(productId)) {
+      removeFromWishlist(productId);
+    } else {
+      addToWishlist(productId);
+    }
+  }
+  
 
   useEffect(() => {
     fetchProducts();
@@ -73,7 +111,10 @@ const Products = () => {
             <p  onClick={() => navigateToProductdetails(product.product_id)}>₹{product.price}</p>
             <div className='button-container'>
               <button className='add-to-cart-button' onClick={() => addToCart(product.product_id,product.name)}>Add to Cart</button>
-              <button className='wishlist-button' onClick={() => addToWishlist(product.product_id)}>❤</button>
+              <button className='wishlist-button' onClick={() => toggleWishlist(product.product_id)}>
+                {wishlistItems.includes(product.product_id) ? '❤️' : '🤍'}
+              </button>
+
             </div>
           </div>
         ))}

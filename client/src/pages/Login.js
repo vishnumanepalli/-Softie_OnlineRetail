@@ -142,34 +142,12 @@ export default function Home() {
   }, []);
 
   const navigateToProductdetails = () => {
-    // navigate(`/Products`);
-    console.log(loggedInUsername);
+    navigate(`/Products`);
   };
 
   return (
     <>
      {loggedInUsername ? (navigateToProductdetails())
-    //  (
-    //     <div className='homeClass text-center' style={{ minHeight: '150vh' }}>
-    //       <div className='homeText dangle' style={{ borderColor:"ABD5AB" }}>
-    //          <br />
-    //        <Paper elevation={3} style={{ padding: '24px', maxWidth: '500px', maxHeight: 'auto', margin: '0 auto',marginTop: '70px' }}>
-    //       <Typography variant='button' style={{ fontFamily: 'Calibri' }}>
-    //         Hi {loggedInUsername}!
-    //       </Typography>
-    //       <Button
-    //         variant='contained'
-    //         style={{ backgroundColor: '#00AD83', color: 'black', width: '100%', marginTop: '10px', height: '35px' }}
-    //         onClick={handleLogoutClick}
-    //       >
-    //         <Typography variant='button' style={{ marginLeft: '8px', fontFamily: 'Calibri' }}>
-    //           Logout
-    //         </Typography>
-    //       </Button>
-    //       </Paper>
-    //     </div>
-    //  </div>
-    //   ) 
       : (
       <div className='homeClass text-center' style={{ minHeight: '150vh'}}>
         <div className='homeText dangle' style={{ borderColor:"ABD5AB" }}>

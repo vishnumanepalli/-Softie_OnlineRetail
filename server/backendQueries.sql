@@ -66,14 +66,6 @@ CREATE TABLE CartItems
     UNIQUE (user_id, product_id)
 );
 
-
-
-INSERT INTO Users (password, email, fullname, username, google_id, roles, address, city, state, country) VALUES ('password123', 'example@gmail.com', 'John Doe', 'johndoe', NULL, '{customer}', '123 Main St', 'New York City', 'NY', 'USA');
-INSERT INTO Cart (user_id) VALUES (1);
-INSERT INTO CartItems (cart_id, product_id, quantity)VALUES (1, 2, 3);
-INSERT INTO CartItems (cart_id, product_id, quantity)VALUES (1, 1, 3);
-INSERT INTO CartItems (cart_id, product_id, quantity)VALUES (1, 3, 3);
-
 CREATE TABLE Wishlists
 (
     wishlist_id SERIAL NOT NULL,
