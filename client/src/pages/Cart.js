@@ -135,7 +135,7 @@ const Cart = () => {
             ))}
           </tbody>
         </table>
-        <h3>total price: {calculateTotalPrice()}</h3>
+        <h3>Total Price: {calculateTotalPrice()}</h3>
         <button onClick={() => navigateToCheckout()}>
            Checkout
         </button>

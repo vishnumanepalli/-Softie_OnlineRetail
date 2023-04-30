@@ -8,8 +8,8 @@
   } 
   
   .cart-table {
-    width: 100%;
-    border-collapse: collapse;
+    width:100%;
+    /* border-collapse: collapse; */
     margin-top: 70px;
   }
   
@@ -208,6 +208,19 @@ font-size: 1.2em;
   .continue-shopping-button:hover {
   background-color: #3E8E41;
   }
+
+  .quantity-control{
+    display: flex;
+  }
+
+  .quantity-control button {
+    margin: 0 0.5em; /* add margin to both sides of the button */
+  }
+  
+  .quantity-control span {
+    margin: 0 0.5em; /* add margin to both sides of the span */
+  }
+  
   
   .cart-table {
   width: 100%;
