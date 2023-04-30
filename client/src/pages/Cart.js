@@ -50,13 +50,12 @@ const Cart = () => {
       .catch(error => {
         console.log(error);
       });
-      alert("Item deleted")
   };
 
   const updateCartItemQuantityplus=async (productId) =>{
     const response = await axios.post('http://localhost:5000/cart', { user_id:cookies.userId  , product_id: productId });
     console.log("Server response", response);
-    axios.post('http://localhost:5000/get_cartitems', { cartId: 1 })
+    axios.post('http://localhost:5000/get_cartitems', { user_id: cookies.userId  })
       .then(res => {
         setCartItems(res.data);
       })
@@ -69,7 +68,7 @@ const Cart = () => {
   const updateCartItemQuantityminus=async (product_id) =>{
     const response = await axios.post('http://localhost:5000/decrease_cart_item_quantity',{ user_id:cookies.userId  , productId:product_id } );
     console.log(response.data);
-    axios.post('http://localhost:5000/get_cartitems', { cartId: 1 })
+    axios.post('http://localhost:5000/get_cartitems', { user_id: cookies.userId  })
       .then(res => {
         setCartItems(res.data);
       })

@@ -8,7 +8,8 @@ const AddProduct = () => {
     name: "",
     image_url: "",
     price: "",
-    description: ""
+    description: "",
+    quantity: 0,
   });
 
   const handleInputChange = (e) => {
@@ -30,6 +31,7 @@ const AddProduct = () => {
           name: "",
           image_url: "",
           price: "",
+          quantity: 0,
           description: ""
         });
       })
@@ -67,6 +69,14 @@ const AddProduct = () => {
           label="Price"
           name="price"
           value={product.price}
+          onChange={handleInputChange}
+        />
+        <br />
+        <TextField
+          label="Quantity"
+          name="quantity"
+          type="number"
+          value={product.quantity}
           onChange={handleInputChange}
         />
         <br />
