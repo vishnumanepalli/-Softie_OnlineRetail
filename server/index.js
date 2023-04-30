@@ -37,6 +37,7 @@ app.use(require('./components/getSUser'));
 app.use(require('./components/updateUser'));
 app.use(require('./components/getorders'));
 app.use(require('./components/getorderitems'));
+app.use(require('./components/addProduct'));
 app.listen(PORT,function(){
     console.log("Listening ");
 })
