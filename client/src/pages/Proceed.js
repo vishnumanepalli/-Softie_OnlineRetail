@@ -2,10 +2,11 @@ import { useContext, useState } from 'react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-// import { CartContext } from './CartContext';
+import {useCookies} from 'react-cookie'
   
 // ProceedPage component
 function Proceed() {
+    const [cookies,setCookie,removeCookie] = useCookies(null);
     const [orderPlaced, setOrderPlaced] = useState(false);
     const [paymentOption, setPaymentOption] = useState("");
     const navigate = useNavigate();
@@ -13,7 +14,7 @@ function Proceed() {
     // Handle the "Place Order" button click
     const handlePlaceOrder = async () => {
       if (paymentOption === "payOnDelivery") {
-        const response = await axios.post('http://localhost:5000/emptycart', { cartId:1});
+        const response = await axios.post('http://localhost:5000/emptycart', { user_id :cookies.userId});
         console.log(response.data);
         setOrderPlaced(true);
       }
