@@ -1,12 +1,25 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useCookies } from "react-cookie";
 
-function Profile() {
+const Profile = () => {
+  const [cookies, setCookie, removeCookie] = useCookies(null);
   const [user, setUser] = useState({});
+  const [password, setPassword] = useState("");
+  const [cpassword, setCpassword] = useState("");
   const [address, setAddress] = useState({
-    fullname: "",
-    email:"",
-    username:"",
+    fullName: "",
+    email: "",
+    username: "",
+    address: "",
+    city: "",
+    state: "",
+    country: "",
+  });
+  const [eaddress, seteAddress] = useState({
+    fullName: "",
+    email: "",
+    username: "",
     address: "",
     city: "",
     state: "",
@@ -15,77 +28,106 @@ function Profile() {
   const [editMode, setEditMode] = useState(false);
 
   useEffect(() => {
-    async function getUser() {
-      try {
-        const response = await axios.get("/api/users/me");
-        setUser(response.data.user);
-        setAddress(response.data.user.address);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
-    getUser();
+    // Fetch the user data from the server
+    axios
+      .post("http://localhost:5000/get_s_user", { user_id: cookies.userId })
+      .then((res) => {
+        setUser(res.data[0]);
+        setAddress({
+          fullName: res.data[0].fullname,
+          email: res.data[0].email,
+          username: res.data[0].username,
+          address: res.data[0].address,
+          city: res.data[0].city,
+          state: res.data[0].state,
+          country: res.data[0].country,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   const handleInputChange = (e) => {
-    setAddress({
-      ...address,
+    seteAddress({
+      ...eaddress,
       [e.target.name]: e.target.value,
     });
   };
 
   const handleEditClick = () => {
+    seteAddress(address);
     setEditMode(true);
   };
-
-  const handleSaveClick = async () => {
-    try {
-      const response = await axios.patch("/api/users/me", { address });
-      setUser(response.data.user);
-      setAddress(response.data.user.address);
-      setEditMode(false);
-    } catch (error) {
-      console.error(error);
+  
+  const handleSaveClick = () => {
+    // Validate password
+    if (password !== cpassword) {
+      alert("Passwords do not match");
+      return;
     }
+  
+    // Prepare the updated user object
+    const updatedUser = {
+      user_id: cookies.userId,
+      username: eaddress.username,
+      address: eaddress.address,
+      city: eaddress.city,
+      state: eaddress.state,
+      country: eaddress.country,
+      password: password,
+    };
+  
+    // Send the updated user data to the server
+    axios
+      .post("http://localhost:5000/update_user", updatedUser)
+      .then((res) => {
+        // Update the user state with the new data
+        setUser(res.data[0]);
+        setAddress({
+          fullName: res.data[0].fullname,
+          email: res.data[0].email,
+          username: res.data[0].username,
+          address: res.data[0].address,
+          city: res.data[0].city,
+          state: res.data[0].state,
+          country: res.data[0].country,
+        });
+  
+        // Exit edit mode
+        setEditMode(false);
+  
+        // Show alert message
+        alert("Updated Successfully");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
+  
 
   return (
     <div>
-      <br/>
-      <h1 style={{marginTop:'90px'}}>Profile</h1>
-      {/* <p>Full Name: {user.fullName}</p>
-      <p>Email: {user.email}</p>
-      <p>Username: {user.username}</p> */}
-
+      <br />
+      <h1 style={{ marginTop: "90px" }}>Profile</h1>
       {editMode ? (
         <div>
+        <p>Full Name: {address.fullName ?? "N/A"}</p>
+        <p>Email: {address.email ?? "N/A"}</p>
+        <p>Username: {address.username ?? "N/A"}</p>
+        <p>Address: {address.address ?? "N/A"}</p>
+        <p>City: {address.city ?? "N/A"}</p>
+        <p>State: {address.state ?? "N/A"}</p>
+        <p>Country: {address.country ?? "N/A"}</p>
+        
           <h2>Edit fields</h2>
           <form>
-          <label>
-              Full Name:
-              <input
-                type="text"
-                name="address"
-                value={address.address}
-                onChange={handleInputChange}
-              />
-            </label>
-          <label>
-              Email:
-              <input
-                type="text"
-                name="address"
-                value={address.address}
-                onChange={handleInputChange}
-              />
-            </label>
-          <label>
+            <label>
               Username:
               <input
                 type="text"
-                name="address"
-                value={address.address}
+                name="username"
+                value={eaddress.username}
                 onChange={handleInputChange}
               />
             </label>
@@ -94,7 +136,7 @@ function Profile() {
               <input
                 type="text"
                 name="address"
-                value={address.address}
+                value={eaddress.address}
                 onChange={handleInputChange}
               />
             </label>
@@ -103,7 +145,7 @@ function Profile() {
               <input
                 type="text"
                 name="city"
-                value={address.city}
+                value={eaddress.city}
                 onChange={handleInputChange}
               />
             </label>
@@ -112,7 +154,7 @@ function Profile() {
               <input
                 type="text"
                 name="state"
-                value={address.state}
+                value={eaddress.state}
                 onChange={handleInputChange}
               />
             </label>
@@ -121,24 +163,42 @@ function Profile() {
               <input
                 type="text"
                 name="country"
-                value={address.country}
+                value={eaddress.country}
                 onChange={handleInputChange}
               />
             </label>
-            <button type="button" onClick={handleSaveClick}>
+            <label>
+              Password:
+              <input
+                type="password"
+                name="country"
+                value={password}
+                onChange={handleInputChange}
+              />
+            </label>
+            <label>
+              Confirm Password:
+              <input
+                type="password"
+                name="country"
+                value={cpassword}
+                onChange={handleInputChange}
+              />
+            </label>
+             <button type="button" onClick={handleSaveClick}>
               Save
             </button>
           </form>
         </div>
       ) : (
         <div>
-          <p>Full Name: {address.address}</p>
-          <p>Email: {address.address}</p>
-          <p>Username: {address.address}</p>
-          <p>Address: {address.address}</p>
-          <p>City: {address.city}</p>
-          <p>State: {address.state}</p>
-          <p>Country: {address.country}</p>
+          <p>Full Name: {address.fullName ?? "N/A"}</p>
+          <p>Email: {address.email ?? "N/A"}</p>
+          <p>Username: {address.username ?? "N/A"}</p>
+          <p>Address: {address.address ?? "N/A"}</p>
+          <p>City: {address.city ?? "N/A"}</p>
+          <p>State: {address.state ?? "N/A"}</p>
+          <p>Country: {address.country ?? "N/A"}</p>
           <button type="button" onClick={handleEditClick}>
             Edit
           </button>
