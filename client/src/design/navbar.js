@@ -8,10 +8,17 @@ import Img3 from '../images/wishlist.png';
 import {useCookies} from 'react-cookie';
 import SearchBar from './searchbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { Alert } from 'react-bootstrap';
+import React, { useState }  from 'react';
+
 
 function Navb() {
   const [cookies, setCookie, removeCookie] = useCookies(null);
   console.log(cookies);
+  const [searchResults, setSearchResults] = useState([]);
+  const handleSearch = (results) => {
+    setSearchResults(results);
+  }
   return (
     <>
       <Navbar className="custom-navbar">
@@ -19,7 +26,12 @@ function Navb() {
           <img src={Img2} alt="cart" style={{ width: "50px", height: "auto" }} />
           <Navbar.Brand href="/">GroceryStore</Navbar.Brand>
           <Nav className="me-auto custom-nav-links">
-            <SearchBar />
+          <SearchBar onSearch={handleSearch} />
+            <div>
+              {searchResults.map(result => (
+                <p>{result.name}</p>
+              ))}
+            </div>
             <Nav.Link href="/Products" className="custom-nav-link">Products</Nav.Link>
             {cookies.userId ? (
               <>
