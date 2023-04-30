@@ -2,10 +2,10 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    max-width: 190px;
+    max-width: 200px;
     height: 295px; /* Set the desired height */
     padding: 0.5em;
-    margin: 0.5em;
+    margin: 0.3em;
     overflow:auto;
   }
   
@@ -40,5 +40,12 @@
   .product-card button.add-to-cart-button {
     margin-right: 0.8em;
   }
+
+  .wishlist-button{
+    background-color: rgb(255, 255, 255);
+  }
   
+  .wishlist-button :hover{
+    
+  }
   
