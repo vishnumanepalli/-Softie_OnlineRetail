@@ -66,7 +66,6 @@ const Products = () => {
 
   }
   const navigateToProductdetails = (productId) => {
-    console.log(productId);
     navigate(`/Products/${productId}`);
   };
 

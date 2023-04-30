@@ -11,3 +11,7 @@
 .selected-row {
     background-color: #a4dabe;
 }
+.table tbody tr:hover {
+    background-color: #caf0d8;
+    cursor: pointer;
+  }
