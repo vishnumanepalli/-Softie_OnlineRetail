@@ -17,6 +17,7 @@ import { FaGoogle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { gapi } from 'gapi-script';
 import { GoogleLogin } from 'react-google-login';
+import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
   const [cookies,setCookie,removeCookie] = useCookies(null)
@@ -27,6 +28,7 @@ export default function Home() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [openSignupDialog, setOpenSignupDialog] = useState(false);
   const [loggedInUsername, setLoggedInUsername] = useState('');
+  const navigate = useNavigate();
  console.log(cookies)
   const handleOpenSignupDialog = () => {
     setOpenSignupDialog(true);
@@ -139,29 +141,36 @@ export default function Home() {
     });
   }, []);
 
+  const navigateToProductdetails = () => {
+    // console.log(productId);
+    navigate(`/Products`);
+  };
+
   return (
     <>
-     {loggedInUsername ? (
-        <div className='homeClass text-center' style={{ minHeight: '150vh' }}>
-          <div className='homeText dangle' style={{ borderColor:"ABD5AB" }}>
-             <br />
-           <Paper elevation={3} style={{ padding: '24px', maxWidth: '500px', maxHeight: 'auto', margin: '0 auto',marginTop: '70px' }}>
-          <Typography variant='button' style={{ fontFamily: 'Calibri' }}>
-            Hi {loggedInUsername}!
-          </Typography>
-          <Button
-            variant='contained'
-            style={{ backgroundColor: '#00AD83', color: 'black', width: '100%', marginTop: '10px', height: '35px' }}
-            onClick={handleLogoutClick}
-          >
-            <Typography variant='button' style={{ marginLeft: '8px', fontFamily: 'Calibri' }}>
-              Logout
-            </Typography>
-          </Button>
-          </Paper>
-        </div>
-     </div>
-      ) : (
+     {loggedInUsername ? (navigateToProductdetails())
+    //  (
+    //     <div className='homeClass text-center' style={{ minHeight: '150vh' }}>
+    //       <div className='homeText dangle' style={{ borderColor:"ABD5AB" }}>
+    //          <br />
+    //        <Paper elevation={3} style={{ padding: '24px', maxWidth: '500px', maxHeight: 'auto', margin: '0 auto',marginTop: '70px' }}>
+    //       <Typography variant='button' style={{ fontFamily: 'Calibri' }}>
+    //         Hi {loggedInUsername}!
+    //       </Typography>
+    //       <Button
+    //         variant='contained'
+    //         style={{ backgroundColor: '#00AD83', color: 'black', width: '100%', marginTop: '10px', height: '35px' }}
+    //         onClick={handleLogoutClick}
+    //       >
+    //         <Typography variant='button' style={{ marginLeft: '8px', fontFamily: 'Calibri' }}>
+    //           Logout
+    //         </Typography>
+    //       </Button>
+    //       </Paper>
+    //     </div>
+    //  </div>
+    //   ) 
+      : (
       <div className='homeClass text-center' style={{ minHeight: '150vh'}}>
         <div className='homeText dangle' style={{ borderColor:"ABD5AB" }}>
           

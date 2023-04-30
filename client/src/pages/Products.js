@@ -17,6 +17,7 @@ const Products = () => {
     console.log(1)
 
     var server_address = 'http://localhost:5000/add_to_wishlist';
+    console.log(cookies.userId);
     const resp = await fetch(server_address, {
       method: "POST",
       headers: { "Content-Type": "application/json", 
@@ -41,7 +42,7 @@ const Products = () => {
       headers: { "Content-Type": "application/json", 
       "jwt-token" : localStorage.getItem("token"), },
       body: JSON.stringify({ 
-        cart_id:1,
+        cart_id:cookies.userId,
         product_id:productId,
         title : productname
        }),

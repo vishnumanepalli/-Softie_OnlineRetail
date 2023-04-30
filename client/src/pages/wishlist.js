@@ -3,13 +3,15 @@ import axios from 'axios';
 import {Paper} from '@mui/material';
 import '../css/wishlist.css';
 import { useNavigate } from 'react-router-dom';
+import {useCookies} from 'react-cookie'
 
 const Wishlist = () => {
+  const [cookies,setCookie,removeCookie] = useCookies(null);
   const [wishlistItems, setWishlistItems] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
     // Fetch the wishlist items from the server
-    axios.post('http://localhost:5000/get_wishlist', { userId: 1 })
+    axios.post('http://localhost:5000/get_wishlist', { userId: cookies.userId })
       .then(res => {
         setWishlistItems(res.data);
       })
