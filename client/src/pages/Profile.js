@@ -220,7 +220,7 @@ const Profile = () => {
           </table>
 
           </div>
-          <button type="button" onClick={handleEditClick}>
+          <button className="button" type="button" onClick={handleEditClick}>
             Edit
           </button>
         </div>
