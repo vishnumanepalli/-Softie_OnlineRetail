@@ -1,15 +1,23 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import '../css/searchbar.css';
+import axios from 'axios';
 
 const SearchBar = ({ onSearch }) => {
   const [query, setQuery] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onSearch(query);
+    axios.post('http://localhost:5000/search_product', { searchText: query })
+      .then(response => {
+        console.log(response.data.results);
+        onSearch(response.data.results);
+      })
+      .catch(error => console.error(error));
+      console.log('SearchBar rendered');
   };
-
+  
+  
   return (
     <Form onSubmit={handleSubmit} className="search-bar-container">
       <Form.Control
@@ -23,6 +31,7 @@ const SearchBar = ({ onSearch }) => {
         Search
       </Button>
     </Form>
+
   );
 };
 
