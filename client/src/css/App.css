@@ -139,8 +139,7 @@
   background-color: #ff9900;
   color: #fff;
   font-size: 1rem;
-  font-weight: bold;
-  text-transform: uppercase;
+  font-family: Comic Sans MS;
   letter-spacing: 0.1rem;
   border-radius: 0.5rem;
   text-align: center;
@@ -149,11 +148,11 @@
 }
 
 .add-to-cart-button:hover {
-  background-color: #e68a00;
+  background-color: #0b94e9;
 }
 
 button {
-  background-color: #47a6ff;
+  background-color: #35bf98;
   color: #fff;
   border: none;
   border-radius: 20px;

@@ -111,13 +111,13 @@ const Cart = () => {
                 </td>
                 <td>
                   <div className="quantity-control">
-                    <button onClick={() => updateCartItemQuantityminus(item.product_id)}>-</button>
+                    <button  className="quantity-button" onClick={() => updateCartItemQuantityminus(item.product_id)}>-</button>
                     <span>{item.quantity}</span>
-                    <button onClick={() => updateCartItemQuantityplus(item.product_id,item.name)}>+</button>
+                    <button className="quantity-button"onClick={() => updateCartItemQuantityplus(item.product_id,item.name)}>+</button>
                   </div>
                 </td>
                 <td>
-                  <button onClick={() => removeItemFromCart(item.product_id)}>
+                  <button className="deletebutton" onClick={() => removeItemFromCart(item.product_id)}>
                     Delete
                   </button>
                 </td>
@@ -127,7 +127,7 @@ const Cart = () => {
           </tbody>
         </table>
         <h3>Total Price: {calculateTotalPrice()}</h3>
-        <button onClick={() => navigateToCheckout()}>
+        <button className="checkoutbutton" onClick={() => navigateToCheckout()}>
            Checkout
         </button>
         </div>
