@@ -142,7 +142,6 @@ export default function Home() {
   }, []);
 
   const navigateToProductdetails = () => {
-    // console.log(productId);
     navigate(`/Products`);
   };
 

@@ -14,7 +14,7 @@ const Products = () => {
     setProducts(response.data);
   }
   const addToWishlist= async (productId,productname) =>{
-    console.log(1)
+    // console.log(1)
 
     var server_address = 'http://localhost:5000/add_to_wishlist';
     console.log(cookies.userId);

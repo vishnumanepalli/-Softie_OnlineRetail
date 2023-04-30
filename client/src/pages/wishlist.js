@@ -23,7 +23,7 @@ const Wishlist = () => {
   const removeItemFromWishlist = async (product_id) => {
     const response = await axios.delete('http://localhost:5000/delete_from_wishlist', { 
       data: { 
-        userId: 1, 
+        userId: cookies.userId, 
         productId: product_id 
       } 
     });
