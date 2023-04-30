@@ -29,7 +29,7 @@ export default function Home() {
   const [openSignupDialog, setOpenSignupDialog] = useState(false);
   const [loggedInUsername, setLoggedInUsername] = useState('');
   const navigate = useNavigate();
- console.log(cookies)
+ console.log(cookies);
   const handleOpenSignupDialog = () => {
     setOpenSignupDialog(true);
   };
@@ -142,7 +142,8 @@ export default function Home() {
   }, []);
 
   const navigateToProductdetails = () => {
-    navigate(`/Products`);
+    // navigate(`/Products`);
+    console.log(loggedInUsername);
   };
 
   return (
