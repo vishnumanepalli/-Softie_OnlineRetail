@@ -118,44 +118,11 @@ const Profile = () => {
     <div>
       <br />
       {editMode ? (
-       <div style={{ display: 'flex', flexWrap: 'wrap', marginTop:'100px'}}>
-       <div class="address-box" style={{ flexBasis: '50%' }}>
-         <h1 >Profile</h1>
-         <table class="address-table">
-           <tbody>
-             <tr>
-               <td>Full Name</td>
-               <td>{address.fullName ?? "N/A"}</td>
-             </tr>
-             <tr>
-               <td>Email</td>
-               <td>{address.email ?? "N/A"}</td>
-             </tr>
-             <tr>
-               <td>Username</td>
-               <td>{address.username ?? "N/A"}</td>
-             </tr>
-             <tr>
-               <td>Address</td>
-               <td>{address.address ?? "N/A"}</td>
-             </tr>
-             <tr>
-               <td>City</td>
-               <td>{address.city ?? "N/A"}</td>
-             </tr>
-             <tr>
-               <td>State</td>
-               <td>{address.state ?? "N/A"}</td>
-             </tr>
-             <tr>
-               <td>Country</td>
-               <td>{address.country ?? "N/A"}</td>
-             </tr>
-           </tbody>
-         </table>
-       </div>
-       <div style={{ flexBasis: '50%' }}>
-         <h2>Edit fields</h2>
+       <div style={{ marginTop:'80px'}}>
+        <div className="edit-box">
+            Edit Feilds
+        </div>
+       <div >
          <form>
            <TextField
              label="Username"
@@ -208,7 +175,7 @@ const Profile = () => {
              onChange={handleInputChange}
            />
            <br />
-           <button type="button" onClick={handleSaveClick} style={{ marginTop: "10px" }}>
+           <button className="button" type="button" onClick={handleSaveClick} >
              Save
            </button>
          </form>
