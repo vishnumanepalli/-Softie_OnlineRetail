@@ -10,6 +10,7 @@ import Home from './pages/Home';
 import Checkout from './pages/Checkout';
 import Proceed from './pages/Proceed';
 import Profile from './pages/Profile';
+import Admin from './pages/admin';
 import Orders from './pages/Orders';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
@@ -23,6 +24,7 @@ function App() {
       <Routes>
         <Route index element={<Home/>} />
         <Route exact path="/Products" element={<Products/>} />
+        <Route exact path="/Admin" element={<Admin/>} />
         <Route exact path="/Products/:id" element={<Viewproduct/>} />
         <Route exact path="/wishlist" element={<Wishlist/>} />
         <Route path="/Login" element={<Login/>} />
