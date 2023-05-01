@@ -19,6 +19,7 @@ const Viewproduct = () => {
     return <div>Loading...</div>;
   }
 
+
   const addToCart = async () => {
     const response = await axios.post('http://localhost:5000/cart', { user_id:cookies.userId , product_id: id });
     console.log(response.data);
@@ -38,3 +39,31 @@ const Viewproduct = () => {
 };
 
 export default Viewproduct;
+export function displaySearchResults(searchResults) {
+  const searchResultsDiv = document.getElementById('searchResults');
+  searchResultsDiv.innerHTML = '';
+
+  for (let i = 0; i < searchResults.length; i++) {
+    const result = searchResults[i];
+    const resultDiv = document.createElement('div');
+    resultDiv.innerHTML = `<h3>${result.name}</h3>
+                            <p>${result.description}</p>
+                            <p>${result.price}</p>`;
+    resultDiv.onclick = () => {
+      displayProductDetails(result.id);
+    };
+    searchResultsDiv.appendChild(resultDiv);
+  }
+}
+
+export function displayProductDetails(productId) {
+  axios.get(`/get_productdetails?id=${productId}`)
+    .then(response => {
+      const productDetailsDiv = document.getElementById('productDetails');
+      productDetailsDiv.innerHTML = `<h3>${response.data.name}</h3>
+                                      <p>${response.data.description}</p>
+                                      <p>${response.data.price}</p>`;
+    })
+    .catch(error => console.error(error));
+}
+
