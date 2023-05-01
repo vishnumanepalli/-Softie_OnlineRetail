@@ -1,9 +1,12 @@
-.search-bar-container {
+  .search-bar-container {
     display: flex;
     align-items: center;
-    margin-right: 10px;
+    justify-content: center;
+    margin: 20px auto;
+    position: relative;
+    top: 40px;
   }
-  
+
   .search-bar-input {
     display: flex;
     align-items: center;
