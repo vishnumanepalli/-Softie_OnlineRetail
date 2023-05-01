@@ -132,24 +132,28 @@ const Products = (props) => {
       <SearchBar onFiltersChange={handleFiltersChange}/>
       <div id="productDetails"></div>
       <div className='product-list'>
-        {products.map(product => (
-          <div className='product-card' key={product.product_id}>
-            <img src={product.image_url} alt={product.name} className='product-image-hp'  onClick={() => navigateToProductdetails(product.product_id)} />
-            <h2  onClick={() => navigateToProductdetails(product.product_id)}>{product.name}</h2>
-            <p  onClick={() => navigateToProductdetails(product.product_id)}>₹{product.price}</p>
-            <div className='button-container'>
-                {cookies.role == 'customer' && (
-                  <>
-                    <button className='add-to-cart-button' onClick={() => addToCart(product.product_id,product.name)}>Add to Cart</button>
-                    <button className='wishlist-button' onClick={() => toggleWishlist(product.product_id)}>
-                      {wishlistItems.some(item => item.product_id === product.product_id) ? '❤️' : '🤍'}
-                    </button>
-                  </>
-                )}
+          {products.length > 0 ? (
+            products.map(product => (
+              <div className='product-card' key={product.product_id}>
+                <img src={product.image_url} alt={product.name} className='product-image-hp'  onClick={() => navigateToProductdetails(product.product_id)} />
+                <h2  onClick={() => navigateToProductdetails(product.product_id)}>{product.name}</h2>
+                <p  onClick={() => navigateToProductdetails(product.product_id)}>₹{product.price}</p>
+                <div className='button-container'>
+                  {cookies.role == 'customer' && (
+                    <>
+                      <button className='add-to-cart-button' onClick={() => addToCart(product.product_id,product.name)}>Add to Cart</button>
+                      <button className='wishlist-button' onClick={() => toggleWishlist(product.product_id)}>
+                        {wishlistItems.some(item => item.product_id === product.product_id) ? '❤️' : '🤍'}
+                      </button>
+                    </>
+                  )}
+                </div>
               </div>
-          </div>
-        ))}
-      </div>
+            ))
+          ) : (
+            <h4 style={{marginTop:'90px'}}>We don't have any products to display.</h4>
+          )}
+        </div>
     </div>
   );
 };
