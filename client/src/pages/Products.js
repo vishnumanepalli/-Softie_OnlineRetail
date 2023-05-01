@@ -18,6 +18,7 @@ const Products = () => {
     if (searchText !== '') {
       payload = { searchText:searchText};
     }
+    console.log("fetch");
     console.log(searchText);
     const response = await axios.post('http://localhost:5000/get_products', payload);
     setProducts(response.data);
@@ -102,20 +103,14 @@ const Products = () => {
       addToWishlist(productId);
     }
   }
-  const handleSearch = (text) => {
-    setSearchText("pears");
-    console.log("hello");
-  };
   
   const handleFiltersChange = (text) => {
     setSearchText(text);
-    console.log(text);
-    fetchProducts();
   };
 
   useEffect(() => {
     fetchProducts();
-  }, []);
+  }, [searchText]);
 
   return (
     <div>
