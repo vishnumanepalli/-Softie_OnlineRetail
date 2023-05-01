@@ -26,7 +26,6 @@ function App() {
   return (
     <div className="App">
       <Navb />
-      <SearchBar onSearch={handleSearch} />
       <div>
         {searchResults.map(result => (
           <p>{result.name}</p>
