@@ -6,12 +6,13 @@ import { useNavigate} from 'react-router-dom';
 import {useCookies} from 'react-cookie'
 import SearchBar from '../design/searchbar';
 
-const Products = () => {
+const Products = (props) => {
   const [cookies,setCookie,removeCookie] = useCookies(null);
   const [products, setProducts] = useState([]);
   const [wishlistItems, setWishlistItems] = useState([]);
   const navigate = useNavigate();
   const [searchText, setSearchText] = useState('');
+  const [cartItems, setCartItems] = useState([]);
 
   const fetchProducts = async () => {
     let payload = {searchText:''};
@@ -70,11 +71,18 @@ const Products = () => {
         user_id: cookies.userId,
         product_id:productId
        }),
+       
     });
    
     const response = await resp2.json();
     console.log("Server response", response);
-
+    axios.post('http://localhost:5000/get_cartitems', { user_id: cookies.userId  })
+      .then(res => {
+        setCartItems(res.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
   const navigateToProductdetails = (productId) => {
     navigate(`/Products/${productId}`);
@@ -111,6 +119,12 @@ const Products = () => {
   useEffect(() => {
     fetchProducts();
   }, [searchText]);
+
+  useEffect(() => {
+    const numItems = cartItems.length;
+    console.log(`Number of items in cart: ${numItems}`);
+    props.onAddToCart(numItems);
+  }, [cartItems]);
 
   return (
     <div>

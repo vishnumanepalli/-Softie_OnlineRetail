@@ -12,7 +12,7 @@ import { Alert } from 'react-bootstrap';
 import React, { useState }  from 'react';
 
 
-function Navb() {
+function Navb(props) {
   const [cookies, setCookie, removeCookie] = useCookies(null);
   console.log(cookies);
   // const [searchResults, setSearchResults] = useState([]);
@@ -42,6 +42,9 @@ function Navb() {
                 <NavDropdown.Item href="/" onClick={() => removeCookie(cookies)}>Logout</NavDropdown.Item>
                 </NavDropdown>
                 <Nav.Link href="/Cart" className="custom-nav-link">
+                    {props.cartCount > 0 && (
+                     <span className="cart-count">{props.cartCount}</span>
+                    )}
                   <img src={Img1} alt="cart" className="shopping-cart-icon" />
                 </Nav.Link>
                 <Nav.Link href="/wishlist" className="custom-nav-link">

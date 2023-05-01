@@ -17,24 +17,19 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 
 function App() {
+  const [cartItemCount, setCartItemCount] = useState(0);
 
-  // const handleSearch = (results) => {
-  //   setSearchResults(results);
-  // };
+  const handleAddToCart = (text) => {
+    setCartItemCount(text);
+  };
 
   return (
     <div className="App">
-      <Navb />
-      {/* <SearchBar onSearch={handleSearch} />
-      <div>
-        {searchResults.map(result => (
-          <p>{result.name}</p>
-        ))}
-      </div> */}
+      <Navb cartCount={cartItemCount}/>
       <BrowserRouter>
       <Routes>
         <Route index element={<Home/>} />
-        <Route exact path="/Products" element={<Products/>} />
+        <Route exact path="/Products" element={<Products onAddToCart={handleAddToCart}/>} />
         <Route exact path="/Admin" element={<Admin/>} />
         <Route exact path="/Products/:id" element={<Viewproduct/>} />
         <Route exact path="/wishlist" element={<Wishlist/>} />

@@ -84,12 +84,13 @@ function Proceed() {
         Pay on Delivery
       </label>}
       <br/>
-      {!orderPlaced && <button onClick={handlePlaceOrder} disabled={paymentOption !== "payOnDelivery"} style={{marginRight:"10px"}}>
+      {orderPlaced && <p>Order Placed Successfully</p>}
+      <button onClick={handleBackClick} style={{marginRight:"10px"}}>Back</button>
+      {!orderPlaced && <button onClick={handlePlaceOrder} disabled={paymentOption !== "payOnDelivery"} >
         Place Order
       </button>}
 
-      {orderPlaced && <p>Order Placed Successfully</p>}
-      <button onClick={handleBackClick}>Back</button>
+      
     </div>
   );
 }
