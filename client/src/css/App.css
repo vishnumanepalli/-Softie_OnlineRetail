@@ -18,7 +18,7 @@
   left: 0;
   right: 0;  */
   background: linear-gradient(135deg, 		#00AD83 47%, 	#a8d7c6 70%);
-  height: 50px;
+  height: 70px;
   width: 100%;
   font-size: 18px;
   /* border-bottom: 2px solid #090909; */
@@ -34,11 +34,11 @@
   color: #212A3E;
   font-size: 40px;
   font-family:Lucida Handwriting ;
-  margin-right: 200px;
+  margin-right: 490px;
 }
 .custom-navbar .nav-link {
   color: #212A3E;
-  margin-left: 3px;
+  margin-left: 4px;
 }
 .custom-nav-links {
   display: flex;
