@@ -6,7 +6,7 @@ import Img1 from '../images/img.png';
 import Img2 from '../images/android-chrome-192x192.png';
 import Img3 from '../images/wishlist.png';
 import {useCookies} from 'react-cookie';
-import SearchBar from './searchbar';
+// import SearchBar from './searchbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Alert } from 'react-bootstrap';
 import React, { useState }  from 'react';
@@ -15,10 +15,10 @@ import React, { useState }  from 'react';
 function Navb() {
   const [cookies, setCookie, removeCookie] = useCookies(null);
   console.log(cookies);
-  const [searchResults, setSearchResults] = useState([]);
-  const handleSearch = (results) => {
-    setSearchResults(results);
-  }
+  // const [searchResults, setSearchResults] = useState([]);
+  // const handleSearch = (results) => {
+  //   setSearchResults(results);
+  // }
   return (
     <>
       <Navbar className="custom-navbar">
@@ -26,12 +26,12 @@ function Navb() {
           <img src={Img2} alt="cart" style={{ width: "50px", height: "auto" }} />
           <Navbar.Brand href="/">GroceryStore</Navbar.Brand>
           <Nav className="me-auto custom-nav-links">
-          <SearchBar onSearch={handleSearch} />
+          {/* <SearchBar onSearch={handleSearch} />
             <div>
               {searchResults.map(result => (
                 <p>{result.name}</p>
               ))}
-            </div>
+            </div> */}
             <Nav.Link href="/Products" className="custom-nav-link">Products</Nav.Link>
             {cookies.userId ? (
               <>
