@@ -3,10 +3,10 @@
     flex-direction: column;
     justify-content: space-between;
     max-width: 200px;
-    height: 295px; /* Set the desired height */
+    height: 315px; /* Set the desired height */
     padding: 0.5em;
     margin: 0.3em;
-    overflow:auto;
+    overflow:hidden;
   }
   
   .product-card h2 {

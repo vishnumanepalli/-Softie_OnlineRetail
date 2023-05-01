@@ -7,11 +7,12 @@ import '../css/admin.css';
 const AddProduct = () => {
   const [product, setProduct] = useState({
     product_id: "",
+    category: "",
     name: "",
     image_url: "",
     price: "",
     description: "",
-    quantity: 0,
+    quantity: 1,
   });
 
   const handleInputChange = (e) => {
@@ -30,10 +31,11 @@ const AddProduct = () => {
         alert("Product added successfully!");
         setProduct({
           product_id: "",
+          category:"",
           name: "",
           image_url: "",
           price: "",
-          quantity: 0,
+          quantity: 1,
           description: ""
         });
       })
@@ -53,6 +55,7 @@ const AddProduct = () => {
             name="product_id"
             value={product.product_id}
             onChange={handleInputChange}
+            required
             />
             <br />
             <TextField
@@ -60,6 +63,7 @@ const AddProduct = () => {
             name="name"
             value={product.name}
             onChange={handleInputChange}
+            required
             />
             <br />
             <TextField
@@ -67,6 +71,7 @@ const AddProduct = () => {
             name="image_url"
             value={product.image_url}
             onChange={handleInputChange}
+            required
             />
             <br />
             <TextField
@@ -74,6 +79,15 @@ const AddProduct = () => {
             name="price"
             value={product.price}
             onChange={handleInputChange}
+            required
+            />
+            <br/>
+            <TextField
+            label="Category"
+            name="category"
+            value={product.category}
+            onChange={handleInputChange}
+            required
             />
             <br />
             <TextField
@@ -82,6 +96,7 @@ const AddProduct = () => {
             type="number"
             value={product.quantity}
             onChange={handleInputChange}
+            required
             />
             <br />
             <TextField
@@ -89,6 +104,7 @@ const AddProduct = () => {
             name="description"
             value={product.description}
             onChange={handleInputChange}
+            required
             />
             <br />
             <button type="submit" style={{marginTop:'20px'}}>Add Product</button>
