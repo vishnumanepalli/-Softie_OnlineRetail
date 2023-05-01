@@ -6,7 +6,7 @@ import Products from './pages/Products';
 import Viewproduct from './pages/Viewproduct';
 import Cart from './pages/Cart';
 import Wishlist from './pages/wishlist';
-import SearchBar from './design/searchbar';
+// import SearchBar from './design/searchbar';
 import Home from './pages/Home';
 import Admin from './pages/admin';
 import Checkout from './pages/Checkout';
@@ -19,18 +19,19 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 function App() {
   const [searchResults, setSearchResults] = useState([]);
 
-  const handleSearch = (results) => {
-    setSearchResults(results);
-  };
+  // const handleSearch = (results) => {
+  //   setSearchResults(results);
+  // };
 
   return (
     <div className="App">
       <Navb />
+      {/* <SearchBar onSearch={handleSearch} />
       <div>
         {searchResults.map(result => (
           <p>{result.name}</p>
         ))}
-      </div>
+      </div> */}
       <BrowserRouter>
       <Routes>
         <Route index element={<Home/>} />
