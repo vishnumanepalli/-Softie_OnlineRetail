@@ -11,10 +11,18 @@ const Products = () => {
   const [products, setProducts] = useState([]);
   const [wishlistItems, setWishlistItems] = useState([]);
   const navigate = useNavigate();
+  const [searchText, setSearchText] = useState('');
+
   const fetchProducts = async () => {
-    const response = await axios.post('http://localhost:5000/get_products');
+    let payload = {searchText:''};
+    if (searchText !== '') {
+      payload = { searchText:searchText};
+    }
+    console.log(searchText);
+    const response = await axios.post('http://localhost:5000/get_products', payload);
     setProducts(response.data);
-    axios.post('http://localhost:5000/get_wishlist', { userId:  cookies.userId })
+      
+    axios.post('http://localhost:5000/get_wishlist', { userId: cookies.userId })
       .then(res => {
         setWishlistItems(res.data);
       })
@@ -22,6 +30,7 @@ const Products = () => {
         console.log(error);
       });
   }
+  
   
   const addToWishlist= async (productId) =>{
     console.log(cookies.userId);
@@ -46,10 +55,6 @@ const Products = () => {
       .catch(error => {
         console.log(error);
       });
-  }
-  const [searchResults, setSearchResults] = useState([]);
-  const handleSearch = (results) => {
-    setSearchResults(results);
   }
 
   const addToCart = async (productId) => {
@@ -97,7 +102,16 @@ const Products = () => {
       addToWishlist(productId);
     }
   }
+  const handleSearch = (text) => {
+    setSearchText("pears");
+    console.log("hello");
+  };
   
+  const handleFiltersChange = (text) => {
+    setSearchText(text);
+    console.log("hi");
+    fetchProducts();
+  };
 
   useEffect(() => {
     fetchProducts();
@@ -105,14 +119,9 @@ const Products = () => {
 
   return (
     <div>
-      <Filters />
+      <Filters onFiltersChange={handleFiltersChange}/>
       <br/>
-      <SearchBar onSearch={handleSearch} />
-      <div>
-        {searchResults.map(result => (
-          <p>{result.name}</p>
-        ))}
-      </div>
+      <SearchBar onFiltersChange={handleFiltersChange}/>
       <div id="productDetails"></div>
       <div className='product-list'>
         {products.map(product => (

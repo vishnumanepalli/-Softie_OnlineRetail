@@ -1,25 +1,18 @@
 import React, { useState } from 'react';
 import '../css/filters.css';
+import { Form, Button } from 'react-bootstrap';
 
-const Filters = ({ products, setFilteredProducts }) => {
+const Filters = (props) => {
   const [priceRange, setPriceRange] = useState([0, 10000]);
+  const [query, setQuery] = useState('');
 
   const handlePriceChange = (event) => {
     setPriceRange(event.target.value.split(',').map(Number));
-    filterProducts();
+    // filterProducts();
   };
-
-  const filterProducts = (category) => {
-    if (products) {
-      const filtered = products.filter((product) => product.category === category);
-      setFilteredProducts(filtered);
-    }
-  };
-
 
   const handleCategoryClick = (category) => {
-    const filtered = products.filter((product) => product.category === category);
-    setFilteredProducts(filtered);
+    props.onFiltersChange(category);
   };
 
   return (
@@ -28,8 +21,8 @@ const Filters = ({ products, setFilteredProducts }) => {
       <div className="category-container">
         <h6>Categories</h6>
         <ul className="category-list">
-          <li><span onClick={() => handleCategoryClick('Clothing')}>Clothing</span></li>
-          <li><span onClick={() => handleCategoryClick('Electronics')}>Electronics</span></li>
+          <li><span onClick={() => handleCategoryClick('vegetables')}>Vegetables</span></li>
+          <li><span onClick={() => handleCategoryClick('Fruits')}>Fruits</span></li>
           <li><span onClick={() => handleCategoryClick('Sports,Toys & Luggage')}>Sports,Toys & Luggage</span></li>
           <li><span onClick={() => handleCategoryClick('Grocery')}>Grocery</span></li>
           <li><span onClick={() => handleCategoryClick('Beauty')}>Beauty</span></li>

@@ -17,7 +17,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 
 function App() {
-  const [searchResults, setSearchResults] = useState([]);
 
   // const handleSearch = (results) => {
   //   setSearchResults(results);
