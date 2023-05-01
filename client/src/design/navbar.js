@@ -6,19 +6,16 @@ import Img1 from '../images/img.png';
 import Img2 from '../images/android-chrome-192x192.png';
 import Img3 from '../images/wishlist.png';
 import {useCookies} from 'react-cookie';
-// import SearchBar from './searchbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Alert } from 'react-bootstrap';
 import React, { useState }  from 'react';
 
-
 function Navb(props) {
   const [cookies, setCookie, removeCookie] = useCookies(null);
   console.log(cookies);
-  // const [searchResults, setSearchResults] = useState([]);
-  // const handleSearch = (results) => {
-  //   setSearchResults(results);
-  // }
+  const isAdmin = cookies.role == 'admin'; // check if user is admin
+  console.log(cookies.role);
+  console.log(isAdmin);
   return (
     <>
       <Navbar className="custom-navbar">
@@ -26,33 +23,37 @@ function Navb(props) {
           <img src={Img2} alt="cart" style={{ width: "50px", height: "auto" }} />
           <Navbar.Brand href="/">GroceryStore</Navbar.Brand>
           <Nav className="me-auto custom-nav-links">
-          {/* <SearchBar onSearch={handleSearch} />
-            <div>
-              {searchResults.map(result => (
-                <p>{result.name}</p>
-              ))}
-            </div> */}
             <Nav.Link href="/Products" className="custom-nav-link">Products</Nav.Link>
-            {cookies.userId ? (
+            {isAdmin ? ( // show different options based on user role
               <>
-                <NavDropdown title="Account" id="basic-nav-dropdown" className="custom-nav-link">
-                <NavDropdown.Item href="/Profile">Profile</NavDropdown.Item>
-                <NavDropdown.Item href="/Orders">Orders</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="/" onClick={() => removeCookie(cookies)}>Logout</NavDropdown.Item>
+                <NavDropdown title="Admin" id="basic-nav-dropdown" className="custom-nav-link">
+                  <NavDropdown.Item href="/addproducts">Add Products</NavDropdown.Item>
                 </NavDropdown>
-                <Nav.Link href="/Cart" className="custom-nav-link">
-                    {props.cartCount > 0 && (
-                     <span className="cart-count">{props.cartCount}</span>
-                    )}
-                  <img src={Img1} alt="cart" className="shopping-cart-icon" />
-                </Nav.Link>
-                <Nav.Link href="/wishlist" className="custom-nav-link">
-                  <img src={Img3} alt="wishlist" className="wishlist-icon" />
-                </Nav.Link>
               </>
             ) : (
-              <Nav.Link href="/Login" className="custom-nav-link">Login</Nav.Link>
+              <>
+                {cookies.userId ? (
+                  <>
+                    <NavDropdown title="Account" id="basic-nav-dropdown" className="custom-nav-link">
+                      <NavDropdown.Item href="/Profile">Profile</NavDropdown.Item>
+                      <NavDropdown.Item href="/Orders">Orders</NavDropdown.Item>
+                      <NavDropdown.Divider />
+                      <NavDropdown.Item href="/" onClick={() => removeCookie(cookies)}>Logout</NavDropdown.Item>
+                    </NavDropdown>
+                    <Nav.Link href="/Cart" className="custom-nav-link">
+                      {props.cartCount > 0 && (
+                        <span className="cart-count">{props.cartCount}</span>
+                      )}
+                      <img src={Img1} alt="cart" className="shopping-cart-icon" />
+                    </Nav.Link>
+                    <Nav.Link href="/wishlist" className="custom-nav-link">
+                      <img src={Img3} alt="wishlist" className="wishlist-icon" />
+                    </Nav.Link>
+                  </>
+                ) : (
+                  <Nav.Link href="/Login" className="custom-nav-link">Login</Nav.Link>
+                )}
+              </>
             )}
           </Nav>
         </Container>
@@ -62,3 +63,4 @@ function Navb(props) {
 }
 
 export default Navb;
+

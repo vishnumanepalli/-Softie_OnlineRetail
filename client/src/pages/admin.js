@@ -47,8 +47,9 @@ const AddProduct = () => {
 
   return (
     <div>
-        <br/>
-      <Paper  style={{marginTop: '140px', padding: '20px', width: '50%', margin: '0 auto', display: 'flex', justifyContent: 'center' }} elevation={3}>
+      <br/>
+      <div style={{marginTop: '90px'}} >
+      <Paper  style={{ padding: '20px', width: '50%', margin: '0 auto', display: 'flex', justifyContent: 'center' }} elevation={3}>
         <form onSubmit={handleSubmit}>
             <TextField
             label="Product ID"
@@ -110,6 +111,7 @@ const AddProduct = () => {
             <button type="submit" style={{marginTop:'20px'}}>Add Product</button>
         </form>
         </Paper>
+        </div>
     </div>
   );
 };

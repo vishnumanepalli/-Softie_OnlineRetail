@@ -30,7 +30,7 @@ function App() {
       <Routes>
         <Route index element={<Home/>} />
         <Route exact path="/Products" element={<Products onAddToCart={handleAddToCart}/>} />
-        <Route exact path="/Admin" element={<Admin/>} />
+        <Route exact path="/addproducts" element={<Admin/>} />
         <Route exact path="/Products/:id" element={<Viewproduct/>} />
         <Route exact path="/wishlist" element={<Wishlist/>} />
         <Route path="/Login" element={<Login/>} />

@@ -89,6 +89,7 @@ export default function Home() {
         setCookie('userId',data.user.user_id);
         setCookie('userName',data.user.username);
         setCookie('token',loggedInUsername);
+        setCookie('role',data.user.roles);
       }
     } catch (error) {
       console.error(error);
@@ -118,6 +119,7 @@ export default function Home() {
         setCookie('userId',data.user.user_id);
         setCookie('userName',data.user.username);
         setCookie('token',loggedInUsername);
+        setCookie('role',data.user.roles);
       }
       console.log(cookies);
     } catch (error) {
