@@ -2,19 +2,32 @@ import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import '../css/searchbar.css';
 import axios from 'axios';
+import { displaySearchResults, Viewproduct } from '../pages/Viewproduct.js';
 
 const SearchBar = ({ onSearch }) => {
   const [query, setQuery] = useState('');
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    axios.post('http://localhost:5000/search_product', { searchText: query })
-      .then(response => {
-        console.log(response.data.results);
-        onSearch(response.data.results);
-      })
-      .catch(error => console.error(error));
-      console.log('SearchBar rendered');
+    // event.preventDefault();
+    // axios.post('http://localhost:5000/search_product', { searchText: query })
+    //   .then(response => {
+    //     console.log(response.data.results);
+    //     onSearch(response.data.results);
+    //   })
+    //   .catch(error => console.error(error));
+    //   console.log('SearchBar rendered');
+        const searchText = document.getElementById('searchText').value;
+
+        axios.post('/search_product', {
+          searchText: searchText
+        })
+        .then(function (response) {
+          // call displaySearchResults on successful response
+          displaySearchResults(response.data);
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
   };
   
   
