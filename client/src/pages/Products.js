@@ -124,7 +124,6 @@ const Products = () => {
             <img src={product.image_url} alt={product.name} className='product-image-hp'  onClick={() => navigateToProductdetails(product.product_id)} />
             <h2  onClick={() => navigateToProductdetails(product.product_id)}>{product.name}</h2>
             <p  onClick={() => navigateToProductdetails(product.product_id)}>₹{product.price}</p>
-            <p  onClick={() => navigateToProductdetails(product.product_id)}>Category : {product.category}</p>
             <div className='button-container'>
               <button className='add-to-cart-button' onClick={() => addToCart(product.product_id,product.name)}>Add to Cart</button>
               <button className='wishlist-button' onClick={() => toggleWishlist(product.product_id)}>

@@ -11,7 +11,7 @@ router.post("/get_products",async function(req,res){
         
         let db_res3;
         if (searchText !== '') {
-            db_res3 = await pool.query("SELECT * FROM Products WHERE name ILIKE '%' || $1 || '%' OR description ILIKE '%' || $1 || '%'", [`%${searchText}%`]);
+            db_res3 = await pool.query("SELECT * FROM Products WHERE name ILIKE '%' || $1 || '%' OR description ILIKE '%' || $1 || '%' OR category ILIKE '%' || $1 || '%'", [`%${searchText}%`]);
         } else {
             db_res3 = await pool.query("SELECT * from Products");
         }
