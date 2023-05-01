@@ -12,7 +12,7 @@ router.post('/search_product', (req, res) => {
     } else {
       if (results.rows.length>0){
         res.json({ results: results.rows });
-      }
+        }
       else{
           res.status(404).json({ error: "Product not found" });
       }
