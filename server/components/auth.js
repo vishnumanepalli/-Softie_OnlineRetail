@@ -150,9 +150,9 @@ router.post('/login', async (req, res) => {
       if (!validateUser(email, password)) {
         throw new ErrorHandler(403, "Invalid login");
       }
-  
+    
       const user = await getUserByEmailDb(email);
-  
+     console.log(user);
       if (!user) {
         throw new ErrorHandler(403, "Email or password incorrect.");
       }
@@ -160,7 +160,9 @@ router.post('/login', async (req, res) => {
       if (user.google_id && !user.password) {
         throw new ErrorHandler(403, "Login in with Google");
       }
-  
+
+      // roles=user.roles;
+    // console.log(roles);
       const {
         password: dbPassword,
         user_id,
@@ -180,6 +182,7 @@ router.post('/login', async (req, res) => {
           user_id,
           fullname,
           username,
+          roles
         },
       });
     } catch (error) {
@@ -191,41 +194,41 @@ router.post('/login', async (req, res) => {
   });
   
 
-async function googleLogin(code) {
-  try {
-    const ticket = await this.verifyGoogleIdToken(code);
-    const { name, email, sub } = ticket.getPayload();
-    const defaultUsername = name.replace(/ /g, "").toLowerCase();
+// async function googleLogin(code) {
+//   try {
+//     const ticket = await this.verifyGoogleIdToken(code);
+//     const { name, email, sub } = ticket.getPayload();
+//     const defaultUsername = name.replace(/ /g, "").toLowerCase();
 
-    try {
-      const user = await getUserByEmailDb(email);
-      if (!user?.google_id) {
-        const newUser = await createUserGoogleDb({
-          sub,
-          defaultUsername,
-          email,
-          name,
-        });
-        await mail.signupMail(newUser.email, newUser.fullname.split(" ")[0]);
-      }
-      const { user_id, roles, fullname, username } =
-        await getUserByEmailDb(email);
+//     try {
+//       const user = await getUserByEmailDb(email);
+//       if (!user?.google_id) {
+//         const newUser = await createUserGoogleDb({
+//           sub,
+//           defaultUsername,
+//           email,
+//           name,
+//         });
+//         await mail.signupMail(newUser.email, newUser.fullname.split(" ")[0]);
+//       }
+      // const { user_id, roles, fullname, username } =
+      //   await getUserByEmailDb(email);
 
-      return {
-        user: {
-          user_id,
-          fullname,
-          username,
-        },
-      };
-    } catch (error) {
-      throw new ErrorHandler(error.statusCode, error.message);
-    }
-  } catch (error) {
-    console.error(error);
-    throw new Error(error.message);
-  }  
-}
+//       return {
+//         user: {
+//           user_id,
+//           fullname,
+//           username,
+//         },
+//       };
+//     } catch (error) {
+//       throw new ErrorHandler(error.statusCode, error.message);
+//     }
+//   } catch (error) {
+//     console.error(error);
+//     throw new Error(error.message);
+//   }  
+// }
 
 function validateUser(email, password) {
   // validate email and password format
