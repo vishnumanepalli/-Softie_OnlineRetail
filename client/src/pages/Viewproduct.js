@@ -32,7 +32,7 @@ const Viewproduct = () => {
         <h1 className="product-title">{product.name}</h1>
         <p className="product-description">{product.description}</p>
         <p className="product-price">Price: ₹{product.price}</p>
-        {cookies.role == 'customer' && (
+        {cookies.role != 'admin' && (
           <button className="add-to-cart" onClick={() => addToCart(product.product_id,product.name)}>
             Add to Cart
           </button>

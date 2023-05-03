@@ -37,6 +37,7 @@ function Navb(props) {
               <>
                 <NavDropdown title="Admin" id="basic-nav-dropdown" className="custom-nav-link">
                   <NavDropdown.Item href="/addproducts">Add Products</NavDropdown.Item>
+                  <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
                 </NavDropdown>
               </>
             ) : (
