@@ -9,6 +9,7 @@ import {useCookies} from 'react-cookie';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Alert } from 'react-bootstrap';
 import React, { useState }  from 'react';
+import { Link } from 'react-router-dom';
 
 function Navb(props) {
   const [cookies, setCookie, removeCookie] = useCookies(null);
@@ -16,6 +17,14 @@ function Navb(props) {
   const isAdmin = cookies.role == 'admin'; // check if user is admin
   console.log(cookies.role);
   console.log(isAdmin);
+  const handleLogout = () => {
+    removeCookie('userId');
+    removeCookie('userName');
+    removeCookie('token');
+    removeCookie('role');
+    window.location.href = '/';
+  };
+
   return (
     <>
       <Navbar className="custom-navbar">
@@ -38,7 +47,7 @@ function Navb(props) {
                       <NavDropdown.Item href="/Profile">Profile</NavDropdown.Item>
                       <NavDropdown.Item href="/Orders">Orders</NavDropdown.Item>
                       <NavDropdown.Divider />
-                      <NavDropdown.Item href="/" onClick={() => removeCookie(cookies)}>Logout</NavDropdown.Item>
+                      <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
                     </NavDropdown>
                     <Nav.Link href="/Cart" className="custom-nav-link">
                       {props.cartCount > 0 && (
