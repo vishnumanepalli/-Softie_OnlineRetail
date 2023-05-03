@@ -6,7 +6,7 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 //const { getUserByEmailDb, createUserDb } = require('./helper');
 
-const { createUserDb, getUserByEmailDb, getUserByUsernameDb, createCartDb, createUserGoogleDb } = require('./helper');
+const { createUserDb, getUserByEmailDb, getUserByUsernameDb, createUserGoogleDb } = require('./helper');
 const { OAuth2Client } = require('google-auth-library');
 
 //const { getUserByEmailDb} = require('./helper');
@@ -42,7 +42,6 @@ router.post('/signup', async (req, res) => {
           username,
         });
   
-        const { id: cart_id } = await createCartDb(newUser.user_id);
   
         res.status(201).json({
           user: {
@@ -166,7 +165,6 @@ router.post('/login', async (req, res) => {
         password: dbPassword,
         user_id,
         roles,
-        cart_id,
         fullname,
         username,
       } = user;
@@ -208,10 +206,9 @@ async function googleLogin(code) {
           email,
           name,
         });
-        await createCartDb(newUser.user_id);
         await mail.signupMail(newUser.email, newUser.fullname.split(" ")[0]);
       }
-      const { user_id, cart_id, roles, fullname, username } =
+      const { user_id, roles, fullname, username } =
         await getUserByEmailDb(email);
 
       return {

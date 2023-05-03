@@ -2,19 +2,52 @@ import Filters from '../design/filters';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../css/product.css';
+<<<<<<< HEAD
 import { useNavigate } from 'react-router-dom';
 import {useCookies} from 'react-cookie'
 
 const Products = () => {
+=======
+import { useNavigate} from 'react-router-dom';
+import {useCookies} from 'react-cookie'
+import SearchBar from '../design/searchbar';
+
+const Products = (props) => {
+>>>>>>> 06411f24a28d4c2590aea773e1ed0a965fcc13f3
   const [cookies,setCookie,removeCookie] = useCookies(null);
   const [products, setProducts] = useState([]);
+  const [wishlistItems, setWishlistItems] = useState([]);
   const navigate = useNavigate();
+  const [searchText, setSearchText] = useState('');
+  const [cartItems, setCartItems] = useState([]);
+
   const fetchProducts = async () => {
-    const response = await axios.post('http://localhost:5000/get_products');
+    let payload = {searchText:''};
+    if (searchText !== '') {
+      payload = { searchText:searchText};
+    }
+    console.log("fetch");
+    console.log(searchText);
+    const response = await axios.post('http://localhost:5000/get_products', payload);
     setProducts(response.data);
+      
+    axios.post('http://localhost:5000/get_wishlist', { userId: cookies.userId })
+      .then(res => {
+        setWishlistItems(res.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
+<<<<<<< HEAD
   const addToWishlist= async (productId,productname) =>{
     // console.log(1)
+=======
+  
+  
+  const addToWishlist= async (productId) =>{
+    console.log(cookies.userId);
+>>>>>>> 06411f24a28d4c2590aea773e1ed0a965fcc13f3
 
     var server_address = 'http://localhost:5000/add_to_wishlist';
     console.log(cookies.userId);
@@ -24,16 +57,27 @@ const Products = () => {
       "jwt-token" : localStorage.getItem("token"), },
       body: JSON.stringify({ 
         userId:cookies.userId,
+<<<<<<< HEAD
         productId:productId,
         title : productname
+=======
+        productId:productId
+>>>>>>> 06411f24a28d4c2590aea773e1ed0a965fcc13f3
        }),
     });
-    alert("New Item added to your Wishlist");
+    
     const response = await resp.json();
     console.log("Server response", response);
+    axios.post('http://localhost:5000/get_wishlist', { userId:  cookies.userId })
+      .then(res => {
+        setWishlistItems(res.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
-  const addToCart = async (productId,productname) => {
+  const addToCart = async (productId) => {
     console.log(1)
 
     var server_address = 'http://localhost:5000/cart';
@@ -42,43 +86,98 @@ const Products = () => {
       headers: { "Content-Type": "application/json", 
       "jwt-token" : localStorage.getItem("token"), },
       body: JSON.stringify({ 
+<<<<<<< HEAD
         cart_id:cookies.userId,
         product_id:productId,
         title : productname
+=======
+        user_id: cookies.userId,
+        product_id:productId
+>>>>>>> 06411f24a28d4c2590aea773e1ed0a965fcc13f3
        }),
+       
     });
-    alert("New Item added to your Cart");
+   
     const response = await resp2.json();
     console.log("Server response", response);
-
+    axios.post('http://localhost:5000/get_cartitems', { user_id: cookies.userId  })
+      .then(res => {
+        setCartItems(res.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
   const navigateToProductdetails = (productId) => {
-    console.log(productId);
     navigate(`/Products/${productId}`);
   };
 
+  const removeFromWishlist = async (product_id) => {
+    const response = await axios.delete('http://localhost:5000/delete_from_wishlist', { 
+      data: { 
+        userId:  cookies.userId, 
+        productId: product_id 
+      } 
+    });
+    axios.post('http://localhost:5000/get_wishlist', { userId:  cookies.userId })
+      .then(res => {
+        setWishlistItems(res.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+  const toggleWishlist = (productId) => {
+    if (wishlistItems.some(item => item.product_id === productId)) {
+      removeFromWishlist(productId);
+    } else {
+      addToWishlist(productId);
+    }
+  }
+  
+  const handleFiltersChange = (text) => {
+    setSearchText(text);
+  };
 
   useEffect(() => {
     fetchProducts();
-  }, []);
+  }, [searchText]);
+
+  useEffect(() => {
+    const numItems = cartItems.length;
+    console.log(`Number of items in cart: ${numItems}`);
+    props.onAddToCart(numItems);
+  }, [cartItems]);
 
   return (
     <div>
-      <Filters />
+      <Filters onFiltersChange={handleFiltersChange}/>
       <br/>
+      <SearchBar onFiltersChange={handleFiltersChange}/>
+      <div id="productDetails"></div>
       <div className='product-list'>
-        {products.map(product => (
-          <div className='product-card' key={product.product_id}>
-            <img src={product.image_url} alt={product.name} className='product-image-hp'  onClick={() => navigateToProductdetails(product.product_id)} />
-            <h2  onClick={() => navigateToProductdetails(product.product_id)}>{product.name}</h2>
-            <p  onClick={() => navigateToProductdetails(product.product_id)}>₹{product.price}</p>
-            <div className='button-container'>
-              <button className='add-to-cart-button' onClick={() => addToCart(product.product_id,product.name)}>Add to Cart</button>
-              <button className='wishlist-button' onClick={() => addToWishlist(product.product_id)}>❤</button>
-            </div>
-          </div>
-        ))}
-      </div>
+          {products.length > 0 ? (
+            products.map(product => (
+              <div className='product-card' key={product.product_id}>
+                <img src={product.image_url} alt={product.name} className='product-image-hp'  onClick={() => navigateToProductdetails(product.product_id)} />
+                <h2  onClick={() => navigateToProductdetails(product.product_id)}>{product.name}</h2>
+                <p  onClick={() => navigateToProductdetails(product.product_id)}>₹{product.price}</p>
+                <div className='button-container'>
+                  {cookies.role == 'customer' && (
+                    <>
+                      <button className='add-to-cart-button' onClick={() => addToCart(product.product_id,product.name)}>Add to Cart</button>
+                      <button className='wishlist-button' onClick={() => toggleWishlist(product.product_id)}>
+                        {wishlistItems.some(item => item.product_id === product.product_id) ? '❤️' : '🤍'}
+                      </button>
+                    </>
+                  )}
+                </div>
+              </div>
+            ))
+          ) : (
+            <h4 style={{marginTop:'90px'}}>We don't have any products to display.</h4>
+          )}
+        </div>
     </div>
   );
 };

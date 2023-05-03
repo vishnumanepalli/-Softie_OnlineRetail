@@ -3,10 +3,10 @@
     flex-direction: column;
     justify-content: space-between;
     max-width: 200px;
-    height: 300px; /* Set the desired height */
+    height: 315px; /* Set the desired height */
     padding: 0.5em;
     margin: 0.3em;
-    overflow:auto;
+    overflow:hidden;
   }
   
   .product-card h2 {
@@ -21,7 +21,7 @@
   
   .product-card button {
     font-size: 0.8em;
-    padding: 0.5em 1em;
+    padding: 0.4em 0.8em;
   }
   
   .add-to-cart-button{
@@ -40,5 +40,13 @@
   .product-card button.add-to-cart-button {
     margin-right: 0.8em;
   }
+
+  .wishlist-button{
+    background-color: rgb(135, 221, 178);
+    font-size: 40px;
+  }
   
-  
+  .wishlist-button:hover {
+    background-color: rgb(18, 137, 211);
+    cursor: pointer;
+  }

@@ -6,11 +6,11 @@ const pool = require("./db");
 router.post("/get_cartitems", async function(req, res) {
     try {
       // Get the cart ID from the request body
-      const cartId = req.body.cartId;
+      const user_id = req.body.user_id;
       // Query the database for the items in the specified cart
       const db_res = await pool.query(
-        "SELECT c.quantity, p.* FROM CartItems c JOIN Products p ON c.product_id = p.product_id WHERE c.cart_id = $1",
-        [cartId]
+        "SELECT c.quantity, p.* FROM CartItems c JOIN Products p ON c.product_id = p.product_id WHERE c.user_id = $1",
+        [user_id]
       );
   
       // If the cart contains items, return their details

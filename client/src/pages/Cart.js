@@ -3,14 +3,16 @@ import React, { useState, useEffect } from 'react';
 import '../css/cart.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import {useCookies} from 'react-cookie'
 
 const Cart = () => {
+  const [cookies,setCookie,removeCookie] = useCookies(null);
   const [cartItems, setCartItems] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch the cart items from the server
-    axios.post('http://localhost:5000/get_cartitems', { cartId: 1 })
+    axios.post('http://localhost:5000/get_cartitems', { user_id: cookies.userId  })
       .then(res => {
         setCartItems(res.data);
       })
@@ -36,25 +38,24 @@ const Cart = () => {
   const removeItemFromCart = async (product_id) =>  {
     const response = await axios.delete('http://localhost:5000/delete_from_cart', { 
       data: { 
-        cartId: 1, 
+        user_id: cookies.userId , 
         productId: product_id 
       } 
     });
     console.log(response.data);
-    axios.post('http://localhost:5000/get_cartitems', { cartId: 1 })
+    axios.post('http://localhost:5000/get_cartitems', { user_id: cookies.userId  })
       .then(res => {
         setCartItems(res.data);
       })
       .catch(error => {
         console.log(error);
       });
-      alert("Item deleted")
   };
 
   const updateCartItemQuantityplus=async (productId) =>{
-    const response = await axios.post('http://localhost:5000/cart', { cart_id:1 , product_id: productId });
+    const response = await axios.post('http://localhost:5000/cart', { user_id:cookies.userId  , product_id: productId });
     console.log("Server response", response);
-    axios.post('http://localhost:5000/get_cartitems', { cartId: 1 })
+    axios.post('http://localhost:5000/get_cartitems', { user_id: cookies.userId  })
       .then(res => {
         setCartItems(res.data);
       })
@@ -65,9 +66,9 @@ const Cart = () => {
 
 
   const updateCartItemQuantityminus=async (product_id) =>{
-    const response = await axios.post('http://localhost:5000/decrease_cart_item_quantity',{ cartId:1 , productId:product_id } );
+    const response = await axios.post('http://localhost:5000/decrease_cart_item_quantity',{ user_id:cookies.userId  , productId:product_id } );
     console.log(response.data);
-    axios.post('http://localhost:5000/get_cartitems', { cartId: 1 })
+    axios.post('http://localhost:5000/get_cartitems', { user_id: cookies.userId  })
       .then(res => {
         setCartItems(res.data);
       })
@@ -95,16 +96,6 @@ const Cart = () => {
       ) : (
         <div>
         <table className="cart-table">
-          <thead>
-            <tr>
-              <th>Product Name</th>
-              <th>Price</th>
-              <th>Image</th>
-              <th>Quantity</th>
-              <th>Action</th>
-              <th>Total Price</th>
-            </tr>
-          </thead>
           <tbody>
             {cartItems.map(item => (
               <tr key={item.product_id}>
@@ -120,13 +111,13 @@ const Cart = () => {
                 </td>
                 <td>
                   <div className="quantity-control">
-                    <button onClick={() => updateCartItemQuantityminus(item.product_id)}>-</button>
+                    <button  className="quantity-button" onClick={() => updateCartItemQuantityminus(item.product_id)}>-</button>
                     <span>{item.quantity}</span>
-                    <button onClick={() => updateCartItemQuantityplus(item.product_id,item.name)}>+</button>
+                    <button className="quantity-button"onClick={() => updateCartItemQuantityplus(item.product_id,item.name)}>+</button>
                   </div>
                 </td>
                 <td>
-                  <button onClick={() => removeItemFromCart(item.product_id)}>
+                  <button className="deletebutton" onClick={() => removeItemFromCart(item.product_id)}>
                     Delete
                   </button>
                 </td>
@@ -136,7 +127,7 @@ const Cart = () => {
           </tbody>
         </table>
         <h3>Total Price: {calculateTotalPrice()}</h3>
-        <button onClick={() => navigateToCheckout()}>
+        <button className="checkoutbutton" onClick={() => navigateToCheckout()}>
            Checkout
         </button>
         </div>

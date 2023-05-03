@@ -1,0 +1,9 @@
+.button{
+    background-color:#00AD83;
+    padding: 5px;
+    width:150px;
+    height: auto;
+    margin-top: 18px;
+    font-size: 0.8em; 
+    margin-left: 10px;/* or 1.2em, adjust as needed */
+}

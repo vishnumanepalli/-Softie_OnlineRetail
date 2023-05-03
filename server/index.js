@@ -1,6 +1,10 @@
 var express = require("express");
 var app = express();
 const router = express.Router();
+const bodyParser = require('body-parser');
+
+
+app.use(bodyParser.json());
 
 // cors allows communication from differnt domains(requests to our server) 
 const cors = require("cors");
@@ -31,8 +35,14 @@ app.use(require('./components/addwishlist'));
 app.use(require('./components/deletewishlist'));
 app.use(require('./components/deletefromcart'));
 app.use(require('./components/getwhishlistitems'));
+app.use(require('./components/getSUser'));
+app.use(require('./components/updateUser'));
+app.use(require('./components/getorders'));
+app.use(require('./components/getorderitems'));
+app.use(require('./components/addProduct'));
+app.use(require('./components/deleteproduct'));
 app.use(require('./components/decreasequantitycart'));
 app.use(require('./components/checkout'));
 app.listen(PORT,function(){
-    console.log("Listening ");
+    console.log("Listening on port "+PORT);
 })

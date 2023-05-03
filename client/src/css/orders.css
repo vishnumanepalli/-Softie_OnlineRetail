@@ -1,0 +1,17 @@
+.table{
+    border: 1px solid #a9a9a9;
+    padding: 10px;
+    margin-bottom: 10px;
+    width:50%;
+    height:70%;
+    border-collapse: collapse;
+    align-items:start;
+    margin: 0 auto;
+}
+.selected-row {
+    background-color: #a4dabe;
+}
+.table tbody tr:hover {
+    background-color: #caf0d8;
+    cursor: pointer;
+  }

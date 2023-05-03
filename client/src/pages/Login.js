@@ -29,7 +29,11 @@ export default function Home() {
   const [openSignupDialog, setOpenSignupDialog] = useState(false);
   const [loggedInUsername, setLoggedInUsername] = useState('');
   const navigate = useNavigate();
+<<<<<<< HEAD
  console.log(cookies)
+=======
+ console.log(cookies);
+>>>>>>> 06411f24a28d4c2590aea773e1ed0a965fcc13f3
   const handleOpenSignupDialog = () => {
     setOpenSignupDialog(true);
   };
@@ -89,6 +93,10 @@ export default function Home() {
         setCookie('userId',data.user.user_id);
         setCookie('userName',data.user.username);
         setCookie('token',loggedInUsername);
+<<<<<<< HEAD
+=======
+        setCookie('role',data.user.roles);
+>>>>>>> 06411f24a28d4c2590aea773e1ed0a965fcc13f3
       }
     } catch (error) {
       console.error(error);
@@ -118,6 +126,10 @@ export default function Home() {
         setCookie('userId',data.user.user_id);
         setCookie('userName',data.user.username);
         setCookie('token',loggedInUsername);
+<<<<<<< HEAD
+=======
+        setCookie('role',data.user.roles);
+>>>>>>> 06411f24a28d4c2590aea773e1ed0a965fcc13f3
       }
       console.log(cookies);
     } catch (error) {
@@ -148,6 +160,7 @@ export default function Home() {
   return (
     <>
      {loggedInUsername ? (navigateToProductdetails())
+<<<<<<< HEAD
     //  (
     //     <div className='homeClass text-center' style={{ minHeight: '150vh' }}>
     //       <div className='homeText dangle' style={{ borderColor:"ABD5AB" }}>
@@ -169,6 +182,8 @@ export default function Home() {
     //     </div>
     //  </div>
     //   ) 
+=======
+>>>>>>> 06411f24a28d4c2590aea773e1ed0a965fcc13f3
       : (
       <div className='homeClass text-center' style={{ minHeight: '150vh'}}>
         <div className='homeText dangle' style={{ borderColor:"ABD5AB" }}>
@@ -301,4 +316,3 @@ export default function Home() {
               </>
      
               );}
-  
