@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {useCookies} from 'react-cookie'
 import {
   Button,
@@ -29,11 +29,7 @@ export default function Home() {
   const [openSignupDialog, setOpenSignupDialog] = useState(false);
   const [loggedInUsername, setLoggedInUsername] = useState('');
   const navigate = useNavigate();
-<<<<<<< HEAD
- console.log(cookies)
-=======
  console.log(cookies);
->>>>>>> 06411f24a28d4c2590aea773e1ed0a965fcc13f3
   const handleOpenSignupDialog = () => {
     setOpenSignupDialog(true);
   };
@@ -93,10 +89,7 @@ export default function Home() {
         setCookie('userId',data.user.user_id);
         setCookie('userName',data.user.username);
         setCookie('token',loggedInUsername);
-<<<<<<< HEAD
-=======
         setCookie('role',data.user.roles);
->>>>>>> 06411f24a28d4c2590aea773e1ed0a965fcc13f3
       }
     } catch (error) {
       console.error(error);
@@ -111,6 +104,12 @@ export default function Home() {
 
     try {
       // Send the access token to your server to authenticate the user
+    //   const isSignedIn = gapi.auth2.getAuthInstance().isSignedIn.get();
+
+    // if (isSignedIn) {
+    //   console.log('User is already signed in');
+    //   return;
+    // }
       const res = await fetch('http://localhost:5000/googleLogin', {
         method: 'POST',
         headers: {
@@ -126,16 +125,18 @@ export default function Home() {
         setCookie('userId',data.user.user_id);
         setCookie('userName',data.user.username);
         setCookie('token',loggedInUsername);
-<<<<<<< HEAD
-=======
         setCookie('role',data.user.roles);
->>>>>>> 06411f24a28d4c2590aea773e1ed0a965fcc13f3
       }
       console.log(cookies);
     } catch (error) {
       console.log(error);
     }
   };
+  const googleLoginRef = useRef(null);
+
+  const signInWithGoogle = () => {
+    googleLoginRef.current.signIn();
+  }
 
   const onSuccess = async (response) => {
     handleGoogleLogin(response);
@@ -160,30 +161,6 @@ export default function Home() {
   return (
     <>
      {loggedInUsername ? (navigateToProductdetails())
-<<<<<<< HEAD
-    //  (
-    //     <div className='homeClass text-center' style={{ minHeight: '150vh' }}>
-    //       <div className='homeText dangle' style={{ borderColor:"ABD5AB" }}>
-    //          <br />
-    //        <Paper elevation={3} style={{ padding: '24px', maxWidth: '500px', maxHeight: 'auto', margin: '0 auto',marginTop: '70px' }}>
-    //       <Typography variant='button' style={{ fontFamily: 'Calibri' }}>
-    //         Hi {loggedInUsername}!
-    //       </Typography>
-    //       <Button
-    //         variant='contained'
-    //         style={{ backgroundColor: '#00AD83', color: 'black', width: '100%', marginTop: '10px', height: '35px' }}
-    //         onClick={handleLogoutClick}
-    //       >
-    //         <Typography variant='button' style={{ marginLeft: '8px', fontFamily: 'Calibri' }}>
-    //           Logout
-    //         </Typography>
-    //       </Button>
-    //       </Paper>
-    //     </div>
-    //  </div>
-    //   ) 
-=======
->>>>>>> 06411f24a28d4c2590aea773e1ed0a965fcc13f3
       : (
       <div className='homeClass text-center' style={{ minHeight: '150vh'}}>
         <div className='homeText dangle' style={{ borderColor:"ABD5AB" }}>
@@ -235,6 +212,7 @@ export default function Home() {
                 Signup
               </Typography>
             </Button>
+            {/* <button onClick={signInWithGoogle}>Sign in with Google</button> */}
             <GoogleLogin
               //clientId="84294184491-o1l9lief27ng4qak7b5hb0rd180ptr9k.apps.googleusercontent.com"
               buttonText="Login with Google"
@@ -243,7 +221,8 @@ export default function Home() {
               onFailure={onFailure}
               cookiePolicy={'single_host_origin'}
               style={{ backgroundColor: "#00AD83", color: "black", width: "100%", marginTop: '10px', height: '35px', fontFamily: "Calibri" }}
-              isSignedIn={true}
+              isSignedIn={false}
+             ref={googleLoginRef}
             />
           </Paper>
         </div>

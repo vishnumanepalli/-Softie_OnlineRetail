@@ -2,18 +2,11 @@ import Filters from '../design/filters';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../css/product.css';
-<<<<<<< HEAD
-import { useNavigate } from 'react-router-dom';
-import {useCookies} from 'react-cookie'
-
-const Products = () => {
-=======
 import { useNavigate} from 'react-router-dom';
 import {useCookies} from 'react-cookie'
 import SearchBar from '../design/searchbar';
 
 const Products = (props) => {
->>>>>>> 06411f24a28d4c2590aea773e1ed0a965fcc13f3
   const [cookies,setCookie,removeCookie] = useCookies(null);
   const [products, setProducts] = useState([]);
   const [wishlistItems, setWishlistItems] = useState([]);
@@ -39,15 +32,10 @@ const Products = (props) => {
         console.log(error);
       });
   }
-<<<<<<< HEAD
-  const addToWishlist= async (productId,productname) =>{
-    // console.log(1)
-=======
   
   
   const addToWishlist= async (productId) =>{
     console.log(cookies.userId);
->>>>>>> 06411f24a28d4c2590aea773e1ed0a965fcc13f3
 
     var server_address = 'http://localhost:5000/add_to_wishlist';
     console.log(cookies.userId);
@@ -57,12 +45,7 @@ const Products = (props) => {
       "jwt-token" : localStorage.getItem("token"), },
       body: JSON.stringify({ 
         userId:cookies.userId,
-<<<<<<< HEAD
-        productId:productId,
-        title : productname
-=======
         productId:productId
->>>>>>> 06411f24a28d4c2590aea773e1ed0a965fcc13f3
        }),
     });
     
@@ -86,14 +69,8 @@ const Products = (props) => {
       headers: { "Content-Type": "application/json", 
       "jwt-token" : localStorage.getItem("token"), },
       body: JSON.stringify({ 
-<<<<<<< HEAD
-        cart_id:cookies.userId,
-        product_id:productId,
-        title : productname
-=======
         user_id: cookies.userId,
         product_id:productId
->>>>>>> 06411f24a28d4c2590aea773e1ed0a965fcc13f3
        }),
        
     });

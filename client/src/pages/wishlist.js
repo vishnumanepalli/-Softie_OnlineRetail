@@ -11,11 +11,7 @@ const Wishlist = () => {
   const navigate = useNavigate();
   useEffect(() => {
     // Fetch the wishlist items from the server
-<<<<<<< HEAD
-    axios.post('http://localhost:5000/get_wishlist', { userId: cookies.userId })
-=======
     axios.post('http://localhost:5000/get_wishlist', { userId:  cookies.userId })
->>>>>>> 06411f24a28d4c2590aea773e1ed0a965fcc13f3
       .then(res => {
         setWishlistItems(res.data);
       })
@@ -27,11 +23,7 @@ const Wishlist = () => {
   const removeItemFromWishlist = async (product_id) => {
     const response = await axios.delete('http://localhost:5000/delete_from_wishlist', { 
       data: { 
-<<<<<<< HEAD
-        userId: cookies.userId, 
-=======
         userId:  cookies.userId, 
->>>>>>> 06411f24a28d4c2590aea773e1ed0a965fcc13f3
         productId: product_id 
       } 
     });
