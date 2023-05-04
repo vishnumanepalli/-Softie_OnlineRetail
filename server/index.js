@@ -21,7 +21,7 @@ app.use(express.static('public'));
  
 //Routes
 const signUp = require('./components/auth');
-router.post('/signup', signUp);
+//router.post('/signup', signUp);
 app.use(require('./components/getProductDetails'));
 app.use(require('./components/getProducts'));
 app.use(require('./components/addCart'));
@@ -46,3 +46,5 @@ app.use(require('./components/checkout'));
 app.listen(PORT,function(){
     console.log("Listening on port "+PORT);
 })
+
+module.exports= app;
