@@ -13,9 +13,7 @@ router.post("/get_s_user",async function(req,res){
         res.json(db_res3.rows);
         console.log(db_res3.rows)
     
-    } catch (error) {
-        console.error(error.message);
-    }
+    } catch (error) {console.error(error.message);}
 })
 
 module.exports = router;

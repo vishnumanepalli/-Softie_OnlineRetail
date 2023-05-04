@@ -2,13 +2,6 @@ var express = require('express');
 var router = express.Router();
 
 const pool = require("./db");
-async function createUserGoogleDb({ sub, defaultUsername, email, name }) {
-    const { rows } = await pool.query(
-    'insert into users (google_id, username, email, fullname) values ($1, $2, $3, $4) on conflict (email) do update set google_id = $1, fullname = $4 returning *',
-    [sub, defaultUsername, email, name]
-    );
-    return rows[0];
-    }
     
     async function createUserDb({ username, password, email, fullname }) {
         console.log("11");
@@ -42,7 +35,7 @@ async function createUserGoogleDb({ sub, defaultUsername, email, name }) {
       }
     }
   module.exports = {
-    createUserDb, getUserByEmailDb, getUserByUsernameDb, createUserGoogleDb
+    createUserDb, getUserByEmailDb, getUserByUsernameDb
   };
   
 

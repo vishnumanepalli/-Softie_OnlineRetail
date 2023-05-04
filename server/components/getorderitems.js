@@ -18,10 +18,7 @@ router.post("/get_order_items", async function(req, res) {
       } else {
         res.status(404).json({ error: "No order items found for this order" });
       }
-    } catch (error) {
-      console.error(error.message);
-      res.status(500).json({ error: "Internal server error" });
-    }
+    } catch (error) {console.error(error.message);res.status(500).json({ error: "Internal server error" });}
   });
 
 module.exports = router;

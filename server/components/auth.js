@@ -6,7 +6,7 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 //const { getUserByEmailDb, createUserDb } = require('./helper');
 
-const { createUserDb, getUserByEmailDb, getUserByUsernameDb, createUserGoogleDb } = require('./helper');
+const { createUserDb, getUserByEmailDb, getUserByUsernameDb } = require('./helper');
 const { OAuth2Client } = require('google-auth-library');
 
 //const { getUserByEmailDb} = require('./helper');

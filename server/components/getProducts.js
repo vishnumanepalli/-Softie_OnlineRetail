@@ -17,7 +17,7 @@ router.post("/get_products",async function(req,res){
         }
         //returning all the row that were inserted
         res.json(db_res3.rows);
-        console.log(db_res3.rows)
+        // console.log(db_res3.rows)
     
     } catch (error) {
         console.error(error.message);

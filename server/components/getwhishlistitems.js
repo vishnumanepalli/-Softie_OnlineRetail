@@ -14,14 +14,10 @@ router.post("/get_wishlist", async function(req, res) {
       );
   
       // If the wishlist contains items, return their details
-      if (db_res.rows.length >= 0) {
         const wishlistItems = db_res.rows;
         res.json(wishlistItems);
         console.log(wishlistItems);
-      } else {
-        // Otherwise, return a 404 error
-        res.status(404).json({ error: "Wishlist not found" });
-      }
+        
     } catch (error) {
       console.error(error.message);
       res.status(500).json({ error: "Internal server error" });

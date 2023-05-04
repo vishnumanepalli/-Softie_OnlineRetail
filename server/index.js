@@ -26,11 +26,7 @@ app.use(require('./components/getProductDetails'));
 app.use(require('./components/getProducts'));
 app.use(require('./components/addCart'));
 app.use(require('./components/getCartIems'));
-app.use(require('./components/getUsers'));
-app.use(require('./components/addUser'));
-app.use(require('./components/delUser'));
 app.use(require('./components/auth'));
-app.use(require('./components/searchproducts'));
 app.use(require('./components/addwishlist'));
 app.use(require('./components/deletewishlist'));
 app.use(require('./components/deletefromcart'));
@@ -40,11 +36,8 @@ app.use(require('./components/updateUser'));
 app.use(require('./components/getorders'));
 app.use(require('./components/getorderitems'));
 app.use(require('./components/addProduct'));
-app.use(require('./components/deleteproduct'));
 app.use(require('./components/decreasequantitycart'));
 app.use(require('./components/checkout'));
-app.listen(PORT,function(){
-    console.log("Listening on port "+PORT);
-})
+
 
 module.exports= app;

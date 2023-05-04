@@ -31,11 +31,7 @@ router.post("/decrease_cart_item_quantity", async function(req, res) {
       } else {
         res.status(404).json({ error: "Product not found in cart" });
       }
-    } catch (error) {
-      console.error(error.message);
-      res.status(500).json({ error: "Internal server error" });
-    }
+    } catch (error) {console.error(error.message);res.status(500).json({ error: "Internal server error" });}
   });
-  
   
 module.exports = router;
