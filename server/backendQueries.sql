@@ -101,22 +101,3 @@ CREATE TABLE order_item
     FOREIGN KEY (order_id) REFERENCES orders(order_id),
     FOREIGN KEY (product_id) REFERENCES products(product_id)
 );
-
-ALTER TABLE cartitems
-DROP CONSTRAINT cartitems_user_id_fkey;
-
-ALTER TABLE cartitems
-ADD CONSTRAINT cartitems_user_id_fkey
-FOREIGN KEY (user_id)
-REFERENCES users(user_id)
-ON DELETE CASCADE
-ON UPDATE CASCADE
-DEFERRABLE INITIALLY DEFERRED
-;
-
-INSERT INTO users (user_id, password, email, fullname, username, google_id, roles, address, city, state, country, created_at) VALUES (1,'password123', 'johndoe@example.com', 'John Doe', 'johndoe', 'johndoe_g','{customer}', '123 Main St', 'Anytown', 'CA', 'USA', '2023-05-04 17:35:18.260281');
-INSERT INTO cartitems (id, user_id, product_id, quantity) VALUES (1,1,1,1);
-  
-
-
-
