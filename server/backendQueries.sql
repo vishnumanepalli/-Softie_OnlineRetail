@@ -1,5 +1,3 @@
-CREATE DATABASE Softie;
-
 DROP SCHEMA public CASCADE;
 CREATE SCHEMA public;
 
@@ -29,7 +27,7 @@ INSERT INTO public.products (product_id, qt, category, name, price, description,
 INSERT INTO public.products (product_id, qt, category, name, price, description, image_url) VALUES (10, 10, 'Clothing', 'Bacardi Breezer', 890.29, 'The Bacardi Breezer is an excellent way to enjoy the world''s most popular rum – Bacardi. Bacardi Breezer Cranberry is a refreshing drink made from Bacardi rum, real cranberry juice, and carbonated water.', 'https://i.ibb.co/4f81wgz/bacardi.png');
 INSERT INTO public.products (product_id, qt, category, name, price, description, image_url) VALUES (11, 10, 'Clothing', 'Pita Bread', 935.72, 'A versatile flat bread that is soft and slightly chewy on the inside and often has a pocket inside as a result of baking the bread in a hot oven. Pita bread is frequently mistakenly thought to be unleavened, but it is usually leavened with yeast. The bread can be eaten plain or with a drizzle of olive oil.', 'https://i.ibb.co/G21ZsqY/Original-Pita-Bread-Front-1200x1200.jpg');
 INSERT INTO public.products (product_id, qt, category, name, price, description, image_url) VALUES (13, 10, 'Clothing', 'Mince - Meat FIlling', 611.56, 'Mincemeat is a combination of chopped dried fruit, distilled spirits, and spices, as well as occasionally beef suet, beef, or venison. Usually used as filling for mince pies during Christmas, but it tastes great mixed with vanilla ice cream, as well', 'https://i.ibb.co/mCMhF9N/meat-filling.jpg');
-INSERT INTO public.products (product_id, qt, category, name, price, description, image_url) VALUES (14, 10, 'Clothing', 'Pate - Cognac', 787.14, 'Pâté made with pork liver and meat that has been infused with cognac. The spirits complement the pâté''s rich, smooth flavor, which is sure to appeal to foodies.', 'https://i.ibb.co/8j9ghkk/Pate-Cognac.jpg');
+-- INSERT INTO public.products (product_id, qt, category, name, price, description, image_url) VALUES (14, 10, 'Clothing', 'Pate - Cognac', 787.14, 'Pâté made with pork liver and meat that has been infused with cognac. The spirits complement the pâté''s rich, smooth flavor, which is sure to appeal to foodies.', 'https://i.ibb.co/8j9ghkk/Pate-Cognac.jpg');
 INSERT INTO public.products (product_id, qt, category, name, price, description, image_url) VALUES (15, 10, 'Clothing', 'Lamb Shoulder (Boneless)', 605, 'Great for roasts, stews or any lamb recipe that has a marinade or a long slow cooking time and temperature.', 'https://i.ibb.co/h9Bm7nP/lamb-shoulder.png');
 INSERT INTO public.products (product_id, qt, category, name, price, description, image_url) VALUES (16, 10, 'Clothing', 'Icecream - Dark Super Cone', 867.05, 'Natural flavors, colors, and fragrances Contains no peanuts or nuts. 4 cones of French Vanilla ice cream and 4 cones of Dark Chocolate ice cream with a thick dark chocolate core These Super Cones are made with 100% Canadian dairy and are wrapped in dark chocolate sugar cones with a chocolate topping. A fantastic flavor offering in a great family package.
 Delectables for a single serving
@@ -103,4 +101,17 @@ CREATE TABLE order_item
     FOREIGN KEY (order_id) REFERENCES orders(order_id),
     FOREIGN KEY (product_id) REFERENCES products(product_id)
 );
+ALTER TABLE cartitems
+DROP CONSTRAINT cartitems_user_id_fkey;
 
+ALTER TABLE cartitems
+ADD CONSTRAINT cartitems_user_id_fkey
+FOREIGN KEY (user_id)
+REFERENCES users(user_id)
+ON DELETE CASCADE
+ON UPDATE CASCADE
+DEFERRABLE INITIALLY DEFERRED
+;
+
+INSERT INTO users (user_id, password, email, fullname, username, google_id, roles, address, city, state, country, created_at) VALUES (1,'password123', 'johndoe@example.com', 'John Doe', 'johndoe', 'johndoe_g','{customer}', '123 Main St', 'Anytown', 'CA', 'USA', '2023-05-04 17:35:18.260281');
+INSERT INTO cartitems (id, user_id, product_id, quantity) VALUES (1,1,1,1);
