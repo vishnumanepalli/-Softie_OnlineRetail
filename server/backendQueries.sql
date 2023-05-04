@@ -58,6 +58,10 @@ CREATE TABLE public.users
     PRIMARY KEY (user_id)
 );
 
+
+INSERT INTO public.users ( password, email, fullname, username, roles)
+VALUES ('$2b$10$Cxohhy5tcqnelKd/if72De5zMaGyXROWkfjkG68xAsYQstYb0OWKm', 'admin@iitrpr.ac.in', 'admin', 'mainadmin', '{admin}');
+
 CREATE TABLE CartItems
 (
     id SERIAL NOT NULL,
@@ -99,3 +103,4 @@ CREATE TABLE order_item
     FOREIGN KEY (order_id) REFERENCES orders(order_id),
     FOREIGN KEY (product_id) REFERENCES products(product_id)
 );
+
