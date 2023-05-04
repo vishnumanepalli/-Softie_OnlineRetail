@@ -56,6 +56,10 @@ CREATE TABLE public.users
     PRIMARY KEY (user_id)
 );
 
+
+INSERT INTO public.users ( password, email, fullname, username, roles)
+VALUES ('$2b$10$Cxohhy5tcqnelKd/if72De5zMaGyXROWkfjkG68xAsYQstYb0OWKm', 'admin@iitrpr.ac.in', 'admin', 'mainadmin', '{admin}');
+
 CREATE TABLE CartItems
 (
     id SERIAL NOT NULL,
@@ -113,4 +117,6 @@ DEFERRABLE INITIALLY DEFERRED
 INSERT INTO users (user_id, password, email, fullname, username, google_id, roles, address, city, state, country, created_at) VALUES (1,'password123', 'johndoe@example.com', 'John Doe', 'johndoe', 'johndoe_g','{customer}', '123 Main St', 'Anytown', 'CA', 'USA', '2023-05-04 17:35:18.260281');
 INSERT INTO cartitems (id, user_id, product_id, quantity) VALUES (1,1,1,1);
   
+
+
 
