@@ -9,12 +9,14 @@ class ErrorHandler extends Error {
 }
 
 const handleError = (err, req, res, next) => {
-  const { statusCode, message } = err;
+  const { statusCode } = err;
   //logger.error(err);
+  const message = err.message || "An error occurred";
   res.status(statusCode || 500).json({
     status: "error",
     statusCode: statusCode || 500,
-    message: statusCode === 500 ? "An error occurred" : message,
+    // message: statusCode === 500 ? "An error occurred" : 
+    message,
   });
   next();
 };

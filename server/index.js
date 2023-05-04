@@ -1,5 +1,5 @@
-var express = require("express");
-var app = express();
+const express = require("express");
+const app = express();
 const router = express.Router();
 const bodyParser = require('body-parser');
 
@@ -46,3 +46,4 @@ app.use(require('./components/checkout'));
 app.listen(PORT,function(){
     console.log("Listening on port "+PORT);
 })
+module.exports = app;

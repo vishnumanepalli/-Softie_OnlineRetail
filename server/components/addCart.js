@@ -20,15 +20,16 @@ router.post("/cart",async function(req,res){
         }
         console.log(quantity_in_cart)
         // Add the product to the cart if there is enough quantity available
-        if (quantity_available > quantity_in_cart) {
+        const quantity_to_add = req.body.quantity;
+        if (quantity_available >= quantity_to_add) {
             if (db_res2.rows.length === 0) {
                 var str_query3 = "INSERT INTO CartItems (user_id, product_id, quantity) VALUES ($1, $2, $3) returning *";
-                const db_res3 = await pool.query(str_query3, [req.body.user_id, req.body.product_id, 1]);
+                const db_res3 = await pool.query(str_query3, [req.body.user_id, req.body.product_id, quantity_to_add]);
                 console.log(str_query3);
-                res.json(db_res3.rows);
+                res.status(201).json(db_res3.rows);
             } else {
-                var str_query4 = "UPDATE CartItems SET quantity = quantity + 1 WHERE user_id = $1 AND product_id = $2 returning *";
-                const db_res4 = await pool.query(str_query4, [req.body.user_id, req.body.product_id]);
+                var str_query4 = "UPDATE CartItems SET quantity = quantity + $3 WHERE user_id = $1 AND product_id = $2 returning *";
+                const db_res4 = await pool.query(str_query4, [req.body.user_id, req.body.product_id, quantity_to_add]);
                 console.log(str_query4);
                 res.json(db_res4.rows);
             }
