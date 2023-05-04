@@ -140,7 +140,7 @@ const Products = (props) => {
                 <h2  onClick={() => navigateToProductdetails(product.product_id)}>{product.name}</h2>
                 <p  onClick={() => navigateToProductdetails(product.product_id)}>₹{product.price}</p>
                 <div className='button-container'>
-                  {cookies.role == 'customer' && (
+                  {cookies.role != 'admin' && (
                     <>
                       <button className='add-to-cart-button' onClick={() => addToCart(product.product_id,product.name)}>Add to Cart</button>
                       <button className='wishlist-button' onClick={() => toggleWishlist(product.product_id)}>

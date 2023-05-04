@@ -28,7 +28,7 @@ const Filters = (props) => {
           <li><span onClick={() => handleCategoryClick('Toys')}>Toys </span></li>
           <li><span onClick={() => handleCategoryClick('Stationary')}>Stationary</span></li>
           <li><span onClick={() => handleCategoryClick('Grocery')}>Grocery</span></li>
-          <li><span onClick={() => handleCategoryClick('home')}>home</span></li>
+          <li><span onClick={() => handleCategoryClick('homedecor')}>Home Decor </span></li>
           <li><span onClick={() => handleCategoryClick('Beauty')}>Beauty</span></li>
         </ul>
       </div>

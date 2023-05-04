@@ -30,13 +30,14 @@ function Navb(props) {
       <Navbar className="custom-navbar">
         <Container>
           <img src={Img2} alt="cart" style={{ width: "50px", height: "auto" }} />
-          <Navbar.Brand href="/">GroceryStore</Navbar.Brand>
+          <Navbar.Brand href="/">SmartStore</Navbar.Brand>
           <Nav className="me-auto custom-nav-links">
             <Nav.Link href="/Products" className="custom-nav-link">Products</Nav.Link>
             {isAdmin ? ( // show different options based on user role
               <>
                 <NavDropdown title="Admin" id="basic-nav-dropdown" className="custom-nav-link">
                   <NavDropdown.Item href="/addproducts">Add Products</NavDropdown.Item>
+                  <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
                 </NavDropdown>
               </>
             ) : (
