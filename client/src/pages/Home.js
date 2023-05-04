@@ -9,7 +9,7 @@ const Home = () => {
 
 
         <p style={{ fontSize: '18px', fontFamily: 'Lucida Sans Typewriter' }}>Shop now from anywhere with best discounts.</p>
-        <p style={{ fontSize: '28px', fontFamily: 'Lucida Sans Typewriter' }}>Fresh Grocery </p>
+        <p style={{ fontSize: '28px', fontFamily: 'Lucida Sans Typewriter' }}> Find Latest Trends</p>
         <p style={{ fontSize: '28px', fontFamily: 'Lucida Sans Typewriter' }}>Fastest Delivery </p>
       </div>
       <div style={{ flex: 1, marginTop:'60px'}}>
