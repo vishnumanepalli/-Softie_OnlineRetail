@@ -25,7 +25,7 @@ const signUp = require('./components/auth');
 app.use(require('./components/getProductDetails'));
 app.use(require('./components/getProducts'));
 app.use(require('./components/addCart'));
-app.use(require('./components/getCartIems'));
+app.use(require('./components/getCart'));
 app.use(require('./components/getUsers'));
 app.use(require('./components/addUser'));
 app.use(require('./components/delUser'));
