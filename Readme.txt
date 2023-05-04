@@ -69,4 +69,5 @@ website Login:
 . you have already opened the website, if not open it on http://localhost:3000/ (make sure both frontend and backend are running)
 . you can login as 1.admin 2.customer
 . default you will always login as customer.
+. to Login as admin use emailid: admin@iitrpr.ac.in and password: admin123.
 
