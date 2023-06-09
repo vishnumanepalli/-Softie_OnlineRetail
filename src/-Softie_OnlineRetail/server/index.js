@@ -1,5 +1,5 @@
-const express = require("express");
-const app = express();
+var express = require("express");
+var app = express();
 const router = express.Router();
 const bodyParser = require('body-parser');
 
@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 // cors allows communication from differnt domains(requests to our server) 
 const cors = require("cors");
 
-const PORT = process.env.PORT|| 5000
+
 
 //creating middleware
 app.use(cors());
@@ -39,5 +39,8 @@ app.use(require('./components/addProduct'));
 app.use(require('./components/decreasequantitycart'));
 app.use(require('./components/checkout'));
 
-
+// const PORT = process.env.PORT|| 5000
+// app.listen(PORT,function(){
+//     console.log("Listening on port "+PORT);
+// })
 module.exports= app;
