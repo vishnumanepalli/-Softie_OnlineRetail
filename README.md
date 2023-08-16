@@ -51,30 +51,30 @@ The following Features will be provided by our website: -
 
 •	A web-based Admin Portal will be implemented where Admin will be able to add new products.
 
-# 3.	UML class diagram
+# 2.	UML class diagram
 
 ![image](https://github.com/sreya0603/SmartStore_web_application/assets/92143540/04c85055-ba90-4d64-87f9-7a350d56bdbc)
 
-# 4. UML use case diagram
+# 3. UML use case diagram
 
  ![image](https://github.com/sreya0603/SmartStore_web_application/assets/92143540/34965c8d-bf22-46e6-8bac-2eb6ab705f66)
 
-# 5. Database ER Diagram
+# 4. Database ER Diagram
 ![image](https://github.com/sreya0603/SmartStore_web_application/assets/92143540/9f497bbc-da64-4cfd-96b2-ccd54ef7a640)
 
-# 6. Logical Architecture of the system
+# 5. Logical Architecture of the system
 
 ![image](https://github.com/sreya0603/SmartStore_web_application/assets/92143540/dbba48fa-f6fc-4d3b-924a-c4662d2377aa)
 
-# 7. Technology Architecture of the system.
+# 6. Technology Architecture of the system.
 
 ![image](https://github.com/sreya0603/SmartStore_web_application/assets/92143540/bd0beb44-ef3f-4b04-b691-e16921ffb043)
 
-# 8. Block Diagram
+# 7. Block Diagram
  
 ![image](https://github.com/sreya0603/SmartStore_web_application/assets/92143540/9d0b42ad-22ef-471c-8088-1b929c6311fc)
 
-# 9. Design and Implementation Constraints:
+# 8. Design and Implementation Constraints:
 
 This application is provisioned to be built using React, Express, NodeJS and PostgreSQL along with an admin to be built using the same tech stack.
 
