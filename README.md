@@ -1,4 +1,5 @@
 # SmartStore
+![image](https://github.com/sreya0603/SmartStore_web_application/assets/92143540/34fd905b-6802-4292-baad-5ff89db9e2c9)
 
 SmartStore is an e-commerce Online Retail Management website built using React, Node, Express, and PostgreSQL. It allows users to browse products and buy them online.
 
